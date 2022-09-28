@@ -1,4 +1,6 @@
 import styles from '../../styles/Invite.module.scss';
+import { AiOutlineSearch } from 'react-icons/ai';
+import { Dropdown } from 'react-bootstrap';
 
 const InviteOverview = () => {
   return (
@@ -32,12 +34,43 @@ const InviteOverview = () => {
         </div>
       </section>
       <section>
-        <div className="d-flex">
-          <h2 className="mb-3">Detailed</h2>
-          <div>
-            <input type="text" className={styles.input} />
+        <div className="w-100 d-flex justify-content-between align-items-center">
+          <h2 className="w-100">Detailed</h2>
+          <div className="w-100 d-flex justify-content-end position-relative">
+            <input type="text" className={styles['detail-input']} />
+            <AiOutlineSearch className={styles['search-icon']} />
           </div>
         </div>
+        <Dropdown>
+          <Dropdown.Toggle
+            style={{
+              width: '100%',
+              height: '40px',
+              backgroundColor: 'transparent',
+              borderRadius: '0',
+              border: 'none',
+              borderBottom: '1px solid #f1eacf',
+            }}
+          ></Dropdown.Toggle>
+          <Dropdown.Menu
+            style={{
+              marginTop: '-30px',
+              borderRadius: '15px',
+              width: '100%',
+              backgroundColor: '#f1eacf',
+            }}
+          >
+            <Dropdown.Item className={styles['dropdown-menu-item']} href="/#">
+              Time
+            </Dropdown.Item>
+            <Dropdown.Item className={styles['dropdown-menu-item']} href="/#">
+              Address
+            </Dropdown.Item>
+            <Dropdown.Item className={styles['dropdown-menu-item']} href="/#">
+              MFB commission income
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
       </section>
     </div>
   );

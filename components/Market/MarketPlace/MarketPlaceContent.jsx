@@ -66,6 +66,7 @@ const MarketPlaceContent = () => {
                     style={{
                       margin: 0,
                       borderRadius: '15px',
+                      transformY: '-40px',
                       width: '100%',
                       backgroundColor: 'black',
                     }}

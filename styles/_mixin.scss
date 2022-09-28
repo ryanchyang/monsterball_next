@@ -98,6 +98,9 @@
   padding: 5px 20px;
   border: 1px solid $borderColor;
   background-color: transparent;
+  &:focus {
+    border: 1px solid $borderColor;
+  }
 }
 
 @mixin bgcolor($color) {

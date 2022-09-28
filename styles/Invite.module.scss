@@ -192,6 +192,15 @@
   padding: 15px 60px;
 }
 
+.dropdown-menu-item {
+  color: $dark-bluegreen-button;
+  font-size: 1.6rem;
+  padding: 10px 15px;
+  font-family: 'BoldenVan';
+  &:hover {
+    color: #14141f;
+  }
+}
 // icon
 
 .copy {
@@ -200,8 +209,17 @@
   height: 20px;
 }
 
+.search-icon {
+  position: absolute;
+  top: 4px;
+  right: 7px;
+  color: $font-primary;
+  font-size: 2rem;
+}
+
 // input
-.input {
-  @include input(100%, 25px, black, white);
-  padding-right: 50px;
+.detail-input {
+  @include outlineInput(100%, 30px, black, $font-primary);
+  color: $font-primary;
+  padding-right: 35px;
 }

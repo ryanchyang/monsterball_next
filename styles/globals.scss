@@ -225,6 +225,15 @@ p {
   cursor: pointer;
 }
 
+// overrides
+.dropdown-toggle::after {
+  display: none;
+}
+.show > .btn-primary.dropdown-toggle,
+.btn-primary:focus {
+  box-shadow: none !important;
+}
+
 // loader
 
 .lds-ring {
