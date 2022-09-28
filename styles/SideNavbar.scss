@@ -1,0 +1,50 @@
+@use './_variables' as *;
+@use './mixin' as *;
+@import './globals.scss';
+
+.mask {
+  z-index: 9997;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(0, 0, 0);
+  display: block;
+}
+
+.side-navbar-area {
+  z-index: 9999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 80%;
+  height: 100%;
+  background-color: $home-bg;
+  display: block;
+  border-right: 1px solid #29705f;
+}
+
+.sidebar-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  font-size: 1.6rem;
+  font-family: 'BoldenVan';
+  color: $green-button;
+  li {
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+    span {
+      cursor: pointer;
+    }
+  }
+}
+
+.sidebar-connect-btn {
+  @include btn($green-button);
+  margin: 0 auto;
+}

@@ -1,0 +1,207 @@
+@use './_variables' as *;
+@use './_mixin' as *;
+
+.invite-banner {
+  @include md {
+    height: 60vw !important;
+  }
+  @include lg {
+    height: 50vw !important;
+    background-size: 100% 100%;
+  }
+  @include xxl {
+    height: 35vw !important;
+    background-size: 100% auto;
+  }
+}
+
+.subtitle {
+  display: none;
+  @include xl {
+    display: block;
+  }
+}
+.invite-friend-area {
+  position: relative;
+  background: url('../public/assets/images/home/home_collection_bk.png')
+    no-repeat;
+  background-size: 100% 100%;
+  @include xl {
+    width: 32%;
+    height: 400px;
+    position: absolute;
+    top: 5%;
+    right: 9%;
+    background: url('../public/assets/images/invite/monsterball_invite_frame.png')
+      no-repeat;
+    background-size: 100% 100%;
+  }
+  @include xxl {
+    width: 28%;
+    right: 12%;
+    height: 490px;
+  }
+}
+.invite-friend-block {
+  width: 100%;
+  max-width: 520px;
+  background-color: $bluegreen-button;
+  border-radius: 10px;
+  border: 5px solid $dark-green;
+  padding: 5%;
+  margin: 0 auto;
+  font-family: 'BoldenVan';
+  @include xl {
+    background-color: transparent;
+    border: none;
+  }
+
+  .content-block.content-bg {
+    @include xl {
+      position: absolute;
+      width: 80%;
+      top: 15%;
+      left: 9%;
+      background: url('../public/assets/images/invite/invite_btn_bk.png')
+        no-repeat;
+      background-size: 100% 90%;
+    }
+    @include xxl {
+      top: 100px;
+    }
+  }
+  .content-block.content-second {
+    @include xl {
+      margin-top: 100px;
+    }
+    @include xxl {
+      margin-top: 150px;
+    }
+  }
+  .content-block {
+    position: relative;
+    background-color: $dark-green;
+    border-radius: 8px;
+    color: $darker-green;
+    padding: 8px;
+    margin-bottom: 15px;
+    @include xl {
+      margin-bottom: 0;
+      color: black;
+      background-color: transparent;
+    }
+    @include xxl {
+      margin-bottom: 4%;
+      color: black;
+      background-color: transparent;
+    }
+  }
+  .text-block {
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    p {
+      padding: 0 8px;
+      font-size: 16px;
+      width: 100%;
+    }
+  }
+  .invite-btn {
+    display: flex;
+    justify-content: center;
+    font-size: 2.2rem;
+    @include xl {
+      white-space: nowrap;
+      width: 80%;
+      color: white;
+      padding: 12px;
+      border-radius: 10px;
+      background-color: #295c5c;
+    }
+  }
+}
+
+.content-block.qrcode-btn {
+  padding-top: 10px;
+  @include xl {
+    width: 53px;
+    height: 53px;
+    margin: 8px 0 8px 0;
+    padding: 12px 0 0 9px;
+    border-radius: 10px;
+    background-color: #295c5c;
+  }
+}
+.btn-mt {
+  @include xl {
+    margin-top: 5%;
+  }
+  @include xxl {
+    margin-top: 10%;
+  }
+}
+.nowrap {
+  @include sm {
+    white-space: nowrap;
+  }
+}
+.overview-area {
+  background-color: #295c5c;
+  @include xl {
+    background: url('../public/assets/images/home/home_collection_bk.png')
+      no-repeat;
+    background-size: 100% 100%;
+    padding: 40px 15%;
+  }
+}
+.overview-content-block {
+  width: 100%;
+  display: column;
+  background-color: $bluegreen-button;
+  border-radius: 10px;
+  padding: 12px;
+  font-family: 'BoldenVan';
+  @include xl {
+    border: 5px solid $dark-green;
+  }
+}
+.overview-text-block {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  p {
+    font-size: 1.8rem;
+    color: $font-primary;
+  }
+  span,
+  small {
+    color: white;
+  }
+  span {
+    font-size: 20px;
+  }
+  small {
+    font-size: 14px;
+  }
+}
+
+.claim-btn {
+  @include btn($bluegreen-button);
+  color: white;
+  margin-left: auto;
+  padding: 15px 60px;
+}
+
+// icon
+
+.copy {
+  color: white;
+  width: 20px;
+  height: 20px;
+}
+
+// input
+.input {
+  @include input(100%, 25px, black, white);
+  padding-right: 50px;
+}

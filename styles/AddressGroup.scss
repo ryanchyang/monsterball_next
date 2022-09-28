@@ -1,0 +1,56 @@
+@use './_variables' as *;
+@use './mixin' as *;
+@import './globals.scss';
+
+.address-group-area {
+  background-color: #295c5c;
+
+  .mfb-address {
+    position: relative;
+    @include lg {
+      font-size: 1.8rem;
+    }
+    &::before {
+      display: block;
+      content: '';
+      background: url('../public/assets/images/coin_mfb.png');
+      background-size: 100% 100%;
+      width: 20px;
+      height: 20px;
+    }
+    &::after {
+      display: block;
+      content: '';
+      background: url('../public/assets/images/coin_mfb.png');
+      background-size: 100% 100%;
+      top: 0;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .gold-address {
+    position: relative;
+    @include lg {
+      font-size: 1.8rem;
+    }
+    &::before {
+      display: block;
+      content: '';
+      background: url('../public/assets/images/coin_gold.png');
+      background-size: 100% 100%;
+      width: 20px;
+      height: 20px;
+    }
+    &::after {
+      display: block;
+      content: '';
+      background: url('../public/assets/images/coin_gold.png');
+      background-size: 100% 100%;
+      top: 0;
+      right: 15%;
+      width: 20px;
+      height: 20px;
+    }
+  }
+}

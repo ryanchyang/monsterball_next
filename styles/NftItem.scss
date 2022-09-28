@@ -1,0 +1,82 @@
+@use './_variables' as *;
+@use './mixin' as *;
+@import './globals.scss';
+
+.nft-item-area {
+  margin-top: -1px;
+  position: relative;
+  background-color: $home-bg;
+  @include lg {
+    background: url('../public/assets/images/home/bg_nft_item.png'),
+      linear-gradient(180deg, #1a515f 0, #228378);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+  @include xl {
+    padding: 3%;
+  }
+  .nft-item-btn {
+    @include btn($green-button);
+    width: fit-content;
+    height: 45px;
+    padding: 20px 35px;
+    font-family: 'LufgaBold';
+    color: white;
+  }
+  .nft-item-monster-block {
+    margin: 30px -40px;
+    // max-width: 140rem;
+    max-width: 100vw;
+    white-space: nowrap;
+    overflow: hidden;
+    @include xl {
+      margin: 50px 0;
+    }
+  }
+  .nft-item-monster-list {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    animation: infiniteSlide 30s linear 0s infinite;
+    li {
+      flex: 0 0 auto;
+      display: block;
+    }
+  }
+
+  .nft-item-card {
+    width: 45vw;
+    height: 45vw;
+    margin: 0 15px;
+    border-radius: 3vw;
+    @include lg {
+      width: 15vw;
+      height: 15vw;
+      border-radius: 2vw;
+    }
+    background-color: #1a515f;
+
+    .nft-item-card-img {
+      width: 100%;
+      height: 100%;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  h2 {
+    color: $green-button;
+  }
+  p {
+    font-family: 'LufgaBold';
+    color: $font-primary;
+    line-height: 1.5;
+    text-align: center;
+    @include lg {
+      color: white;
+    }
+  }
+}

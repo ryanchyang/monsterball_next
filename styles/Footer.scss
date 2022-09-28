@@ -1,0 +1,51 @@
+@use './_variables' as *;
+@use './mixin' as *;
+@import './globals.scss';
+
+.my-footer {
+  padding: 37.5px 40px;
+  background-color: $home-bg;
+  @include lg {
+    background-image: url('../public/assets/images/home/bg_footer.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    padding: 10% 15% 5% 20%;
+    margin-top: -15px;
+  }
+  h2 {
+    display: none;
+    @include lg {
+      display: block;
+      color: white;
+    }
+  }
+  .email-input {
+    @include input(190px, 45px, black, white);
+    @include lg {
+      width: 200px;
+    }
+  }
+  .footer-subscribe-btn {
+    font-family: 'LufgaBold';
+    @include btn(#006f73);
+    width: 190px;
+    @include lg {
+      width: 150px;
+    }
+  }
+  .footer-navbar {
+    display: none;
+    @include lg {
+      display: block;
+      width: 100%;
+      li {
+        width: 100%;
+        padding: 12px;
+        text-align: center;
+        span {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

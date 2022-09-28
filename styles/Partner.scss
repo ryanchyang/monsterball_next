@@ -1,0 +1,46 @@
+@use './_variables' as *;
+@use './mixin' as *;
+@import './globals.scss';
+
+.partner-area {
+  position: relative;
+  background-color: $home-bg;
+  padding: 30px;
+  padding-top: 0;
+  @include lg {
+    padding: 7% 3%;
+    background-color: #228378;
+    background-image: url('../public/assets/images/home/home_bk_investors.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+  h2 {
+    color: $green-button;
+  }
+  .partner-grid {
+    display: grid;
+    grid-template-columns: 0.33fr 0.33fr 0.33fr;
+    @include lg {
+      width: 75%;
+      margin: 0 auto;
+      grid-template-columns: 0.25fr 0.25fr 0.25fr 0.25fr;
+    }
+  }
+  .partner-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3vw;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    @include lg {
+      padding: 1vw 5vw;
+    }
+    img {
+      width: 80%;
+      max-width: 100px;
+      object-fit: cover;
+    }
+  }
+}

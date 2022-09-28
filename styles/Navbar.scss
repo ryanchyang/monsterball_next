@@ -1,0 +1,200 @@
+@use './_variables' as *;
+@use './mixin' as *;
+@import './globals.scss';
+
+.my-navbar {
+  position: fixed;
+  padding: 0;
+  width: 100%;
+  z-index: 9;
+}
+.navbar-content {
+  position: relative;
+  line-height: 1.5;
+  z-index: 5;
+  padding: 15px 30px;
+  @include lg {
+    padding: 15px 50px;
+  }
+}
+.navbar-pc {
+  display: none;
+  color: #084a4c;
+
+  @include lg {
+    display: block;
+    width: 60%;
+    li {
+      width: 100%;
+      display: flex;
+      padding: 5px 12px;
+      font-size: 2rem;
+      justify-content: center;
+      @include xxl {
+        height: 55px;
+        align-items: center;
+      }
+      span,
+      a {
+        margin: 0;
+        @include xxl {
+          margin: 0 0;
+          align-items: center;
+        }
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        color: #084a4c;
+        cursor: pointer;
+      }
+    }
+  }
+}
+.navbar-img {
+  display: block;
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  width: 100%;
+  height: 8vh;
+  img {
+    width: 100%;
+    height: 8vh;
+    transition: ease all 0.5s;
+    @include lg {
+      width: 100%;
+      height: 200px;
+    }
+  }
+}
+
+.navbar-logo-mb {
+  width: 170px;
+  display: block;
+  img {
+    width: 100%;
+  }
+  @include lg {
+    display: none;
+  }
+}
+.navbar-logo-pc {
+  width: 170px;
+  display: none;
+  img {
+    width: 100%;
+  }
+  @include lg {
+    margin-right: 15px;
+    width: 50px;
+    display: block;
+  }
+}
+.icon-hamburger {
+  display: block;
+  font-size: 2.4rem;
+  color: $font-primary;
+  cursor: pointer;
+  @include lg {
+    display: none;
+  }
+}
+.navbar-wallet {
+  padding-top: 10px;
+  display: none;
+  width: 4rem;
+  height: auto;
+  img {
+    width: 100%;
+  }
+  @include lg {
+    display: block;
+  }
+}
+
+// navbar2
+
+.my-navbar2 {
+  position: fixed;
+  padding: 0;
+  width: 100%;
+  z-index: 9;
+  background-color: black;
+}
+
+.navbar2-pc {
+  display: flex;
+  color: white;
+  @include lg {
+    display: flex;
+    width: 30%;
+    li {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 5px 8px;
+      font-size: 2rem;
+      text-align: center;
+      span {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.navbar2-title {
+  height: 55px;
+  a {
+    color: white;
+    &:hover {
+      color: white;
+    }
+  }
+}
+
+.connect-wallet-metamask-btn {
+  position: relative;
+  @include btn(rgb(244, 244, 244));
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+  width: 100%;
+  height: auto;
+  div {
+    width: 50%;
+    height: 100%;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.connected-wallet-btn {
+  @include btn($bluegreen-button);
+}
+
+.disconnect-wallet-btn {
+  @include btn($dark-bluegreen-button);
+  width: 60%;
+}
+
+.switch-network-btn {
+  position: relative;
+  @include btn($bluegreen-button);
+  width: 60%;
+
+  .spinner-container {
+    top: -10px;
+    right: 0px;
+    transform: scale(0.3);
+  }
+}
+
+.spinner-container {
+  width: auto;
+  position: absolute;
+  top: -3px;
+  right: -70px;
+  transform: scale(0.5);
+}

@@ -1,0 +1,10 @@
+@use './_variables' as *;
+@import './globals.scss';
+
+.blind-box-area {
+  padding: 100px 40px 0 40px;
+
+  h2 {
+    color: black;
+  }
+}

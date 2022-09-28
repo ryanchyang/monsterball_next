@@ -1,0 +1,295 @@
+@use './_variables' as *;
+@use './mixin' as *;
+@import '~bootstrap/scss/bootstrap';
+
+// @import './marketTemplate.scss';
+@font-face {
+  font-family: 'LufgaBold';
+  src: url(../public/assets/fonts/LufgaBold.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'BoldenVan';
+  src: url(../public/assets/fonts/BoldenVan.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'bahnschrift';
+  src: url(../public/assets/fonts/bahnschrift.ttf) format('truetype');
+}
+
+// reset browser
+
+// 共用class 開始
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  font-family: inherit;
+  font-size: 100%;
+  font-style: inherit;
+  font-weight: inherit;
+}
+li {
+  list-style: none;
+}
+input {
+  border: none;
+  box-shadow: none;
+}
+
+input:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+// html {
+//   scroll-behavior: smooth;
+// }
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+section {
+  padding: 37.5px 40px;
+}
+
+a {
+  text-decoration: none;
+}
+h2 {
+  font-size: 3rem;
+  letter-spacing: 2px;
+  color: $font-primary;
+  font-family: 'BoldenVan';
+  font-weight: bold;
+  @include xl {
+    font-size: 3.6rem;
+    letter-spacing: 3px;
+  }
+}
+h3 {
+  font-size: 2.8rem;
+  @include xl {
+    font-size: 3rem;
+  }
+}
+h4 {
+  font-size: 2.4rem;
+  @include xl {
+    font-size: 2.8rem;
+  }
+}
+h5 {
+  font-size: 2rem;
+}
+p {
+  font-size: 1.8rem;
+  @include xl {
+    font-size: 2rem;
+  }
+}
+
+.text-primary {
+  color: $font-primary !important;
+}
+
+.color-green {
+  color: $green !important;
+}
+.color-darker-green {
+  color: $darker-green !important;
+}
+.color-light-green {
+  color: $light-green;
+}
+
+.font-LufgaBold {
+  font-family: 'LufgaBold';
+}
+.font-BoldenVan {
+  font-family: 'BoldenVan';
+}
+
+// main 開始
+
+.t-14 {
+  font-size: 1.4rem;
+}
+.t-16 {
+  font-size: 1.6rem;
+}
+.t-18 {
+  font-size: 1.8rem;
+}
+.t-20 {
+  font-size: 2rem;
+}
+.t-22 {
+  font-size: 2.2rem;
+}
+.t-24 {
+  font-size: 2.4rem;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+// loader
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 50px !important;
+  height: 50px !important;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid $darker-green;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: $darker-green transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// Market
+.market-place-container {
+  position: relative;
+  display: flex;
+  flex-direction: column-reverse;
+  @include sm {
+    display: block;
+  }
+}
+
+@keyframes moveupdown {
+  0% {
+    transform: translateY(0);
+  }
+  55% {
+    transform: translateY(-40px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes infiniteSlide {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-1200px, 0, 0); /*位移值= img的width * img數量*/
+  }
+}

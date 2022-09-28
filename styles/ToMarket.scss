@@ -1,0 +1,27 @@
+@use './_variables' as *;
+@use './mixin' as *;
+@import './globals.scss';
+
+.to-market-area {
+  margin-top: -1px;
+  background-image: url('../public/assets/images/home/home_collection_bk.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: 10% 40px;
+
+  @include lg {
+    padding: 5% 60px 8%;
+  }
+  .to-market-btn {
+    display: none;
+    @include lg {
+      @include btn($dark-bluegreen-button);
+      width: 140px;
+      height: 45px;
+    }
+  }
+  p {
+    color: white;
+    line-height: 1.5;
+  }
+}

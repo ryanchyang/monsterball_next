@@ -1,0 +1,36 @@
+@use './_variables' as *;
+@use './mixin' as *;
+@import './globals.scss';
+
+.technology-area {
+  position: relative;
+  background-color: $home-bg;
+  @include lg {
+    padding: 4%;
+    background: url('../public/assets/images/home/home_bk_technology.png'),
+      linear-gradient(180deg, #001f1b 0, transparent);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+
+  h2 {
+    color: $green-button;
+    @include lg {
+      color: white;
+    }
+  }
+
+  .technology-tag-img {
+    width: 100%;
+    max-width: 220px;
+    padding: 15px;
+    height: auto;
+    @include lg {
+      padding: 30px;
+    }
+    img {
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+}

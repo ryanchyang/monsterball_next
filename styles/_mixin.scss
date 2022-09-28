@@ -1,0 +1,105 @@
+@mixin mobile {
+  @media (max-width: 375px) {
+    @content;
+  }
+}
+@mixin pad {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+@mixin pc {
+  @media (min-width: 1264px) {
+    @content;
+  }
+}
+@mixin mb {
+  @media (max-width: 576px) {
+    @content;
+  }
+}
+@mixin sm {
+  @media (min-width: 576px) {
+    @content;
+  }
+}
+@mixin md {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+@mixin lg {
+  @media (min-width: 992px) {
+    @content;
+  }
+}
+@mixin xl {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin xxl {
+  @media (min-width: 1560px) {
+    @content;
+  }
+}
+
+// Btn
+@mixin btn($color) {
+  border: none;
+  white-space: nowrap;
+  word-break: break-all;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  height: 45px;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 22px;
+  color: #f1eacf;
+  border-radius: 15px;
+  // box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.21);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  padding: 5px 20px;
+  background: $color;
+  transition: background 0.2s;
+  &:hover {
+    background: lighten($color, 3%);
+  }
+  &:disabled {
+    opacity: 0.5;
+    background: $color;
+  }
+}
+
+// input
+@mixin input($width, $height, $color, $bg) {
+  width: $width;
+  height: $height;
+  font-size: 1.6rem;
+  line-height: 22px;
+  font-family: 'BoldenVan';
+  color: $color;
+  border-radius: 15px;
+  padding: 5px 20px;
+  background-color: $bg;
+}
+
+@mixin outlineInput($width, $height, $color, $borderColor) {
+  width: $width;
+  height: $height;
+  font-size: 1.6rem;
+  line-height: 22px;
+  font-family: 'BoldenVan';
+  color: $color;
+  border-radius: 15px;
+  padding: 5px 20px;
+  border: 1px solid $borderColor;
+  background-color: transparent;
+}
+
+@mixin bgcolor($color) {
+  background-color: $color;
+}

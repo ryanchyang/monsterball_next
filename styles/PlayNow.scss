@@ -1,0 +1,65 @@
+@use './_variables' as *;
+@use './mixin' as *;
+@import './globals.scss';
+
+.play-now-area {
+  position: relative;
+  background-color: $home-bg;
+  padding-top: 0;
+  padding-bottom: 20vw;
+
+  @include lg {
+    padding: 100px 10% 10%;
+    background-image: url('../public/assets/images/home/home_playnow_bk.png');
+    background-color: #001f1b;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  h2 {
+    z-index: 3;
+    @include lg {
+      color: white;
+    }
+  }
+
+  p {
+    z-index: 3;
+    font-family: 'LufgaBold';
+    color: $light-green;
+    line-height: 1.5;
+    @include lg {
+      color: white;
+    }
+  }
+
+  .play-now-btn {
+    display: none;
+    @include lg {
+      @include btn($dark-bluegreen-button);
+      width: 140px;
+      height: 45px;
+    }
+  }
+
+  .play-now-img {
+    position: absolute;
+    top: -25%;
+    right: 0;
+    width: 80%;
+    max-width: 350px;
+    opacity: 0.9;
+    height: auto;
+    animation: moveupdown 5s ease-in infinite;
+    img {
+      width: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    @include lg {
+      width: 45%;
+      max-width: 550px;
+    }
+  }
+}

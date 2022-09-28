@@ -1,0 +1,95 @@
+@use './_variables' as *;
+@use './mixin' as *;
+@import './globals.scss';
+.team-area {
+  position: relative;
+  background-color: $home-bg;
+  @include lg {
+    padding: 3%;
+    background-image: url('../public/assets/images/home/home_bk_team.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
+  h2 {
+    margin-top: -30px;
+    color: $green-button;
+    @include lg {
+      color: white;
+      margin-top: 0;
+    }
+  }
+  .team-card-block {
+    @include lg {
+      display: none;
+    }
+    margin: 0 -40px;
+    background-color: #1e1e1e;
+  }
+  .team-card-grid {
+    display: none;
+    @include lg {
+      display: grid;
+      grid-template-columns: 0.25fr 0.25fr 0.25fr 0.25fr;
+      margin: 0 15vw;
+    }
+  }
+  .team-card {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    @include lg {
+      padding: 15px;
+    }
+  }
+  .team-member-img {
+    width: 250px;
+    height: 250px;
+    @include lg {
+      width: 13vw;
+      height: 13vw;
+    }
+    overflow: hidden;
+    img {
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+  .member-position {
+    color: $green-button;
+  }
+  .member-title {
+    color: #21735c;
+  }
+}
+
+.swiper-button-prev {
+  margin-left: 20px;
+  &::after {
+    transform: translateX(-1px) scale(0.45);
+  }
+}
+.swiper-button-next {
+  margin-right: 20px;
+  &::after {
+    transform: translateX(1px) scale(0.45);
+  }
+}
+.swiper-button-next,
+.swiper-button-prev {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 35px !important;
+  height: 35px !important;
+  border-radius: 50%;
+  transition: 0.2s;
+  &:hover {
+    background-color: rgba(127, 127, 127, 0.5);
+  }
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-weight: bolder;
+  color: $light-green;
+}
