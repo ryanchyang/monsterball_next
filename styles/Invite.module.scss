@@ -191,14 +191,44 @@
   margin-left: auto;
   padding: 15px 60px;
 }
-
+.sort-by {
+  position: absolute;
+  left: 0;
+  top: 13px;
+  font-family: 'BoldenVan';
+  color: $font-primary;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+.sort-by-sm {
+  position: absolute;
+  left: 0;
+  top: -10px;
+  font-family: 'BoldenVan';
+  color: $font-primary;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.sort-btn {
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  @include btn($bluegreen-button);
+  font-family: 'BoldenVan';
+  padding: 0px 15px 0 20px;
+  font-size: 1.4rem;
+  line-height: 12px;
+  height: 34px;
+  border-radius: 8px;
+}
 .dropdown-menu-item {
   color: $dark-bluegreen-button;
   font-size: 1.6rem;
   padding: 10px 15px;
   font-family: 'BoldenVan';
   &:hover {
-    color: #14141f;
+    color: $dark-bluegreen-button;
+    background-color: lighten($font-primary, 5%);
   }
 }
 // icon
@@ -208,7 +238,6 @@
   width: 20px;
   height: 20px;
 }
-
 .search-icon {
   position: absolute;
   top: 4px;
@@ -216,10 +245,58 @@
   color: $font-primary;
   font-size: 2rem;
 }
+.sort-icon {
+  position: absolute;
+  top: 15px;
+  right: 0;
+  font-size: 2rem;
+  color: $font-primary;
+  transition: 0.2s;
+}
+.orderBy-icon {
+  font-size: 1.8rem;
+  margin-left: 3px;
+  color: $font-primary;
+  transition: 0.2s;
+}
 
 // input
 .detail-input {
   @include outlineInput(100%, 30px, black, $font-primary);
   color: $font-primary;
   padding-right: 35px;
+}
+// table
+.table-pc {
+  width: 100%;
+  thead {
+    th:nth-child(1) {
+      background-color: $bluegreen-button;
+      border-radius: 10px 0 0 10px;
+    }
+    th:nth-child(2) {
+      background-color: $bluegreen-button;
+    }
+    th:nth-child(3) {
+      background-color: $bluegreen-button;
+      border-radius: 0 10px 10px 0;
+    }
+  }
+  th,
+  td {
+    font-size: 1.6rem;
+    font-family: 'BoldenVan';
+    line-height: 2.2rem;
+    color: $font-primary;
+    padding: 15px;
+  }
+}
+
+@keyframes scaleup {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
