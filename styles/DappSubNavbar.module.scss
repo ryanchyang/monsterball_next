@@ -25,19 +25,19 @@
   li {
     width: 100%;
     padding: 5px 10px;
-    color: $darker-green;
     font-family: 'BoldenVan';
     text-align: center;
     white-space: nowrap;
-    @include xl {
-      z-index: 11;
-      color: black;
-    }
     a {
+      color: $darker-green;
       opacity: 0.5;
       cursor: pointer;
       &:hover {
         opacity: 1;
+      }
+      @include xl {
+        z-index: 11;
+        color: black;
       }
     }
   }

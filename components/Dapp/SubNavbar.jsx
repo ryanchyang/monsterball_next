@@ -1,20 +1,29 @@
 import styles from '../../styles/DappSubNavbar.module.scss';
+import Link from 'next/link';
 
 const SubNavbar = () => {
   return (
     <div className={styles.subnavbar}>
       <ul className={styles.list}>
         <li>
-          <a>Swap</a>
+          <Link href="/dapp/swap">
+            <a>Swap</a>
+          </Link>
         </li>
         <li>
-          <a>Liquidity</a>
+          <Link href="/dapp/liquidity">
+            <a>Liquidity</a>
+          </Link>
         </li>
         <li>
-          <a>MFB Pool</a>
+          <Link href="/dapp/mfb_pool">
+            <a>MFB Pool</a>
+          </Link>
         </li>
         <li>
-          <a>Wallet</a>
+          <Link href="/dapp/wallet">
+            <a>Wallet</a>
+          </Link>
         </li>
       </ul>
     </div>

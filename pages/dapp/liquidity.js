@@ -3,7 +3,7 @@ import SubNavbar from 'components/Dapp/SubNavbar';
 import Swap from 'components/Dapp/Swap';
 import Retail from 'components/Dapp/Retail';
 
-const SwapPage = () => {
+const LiquidityPage = () => {
   return (
     <div
       style={{ minHeight: 'calc(100vh - 30px)', backgroundColor: '#242735' }}
@@ -13,9 +13,9 @@ const SwapPage = () => {
     </div>
   );
 };
-export default SwapPage;
+export default LiquidityPage;
 
-SwapPage.getLayout = function getLayout(page) {
+LiquidityPage.getLayout = function getLayout(page) {
   return (
     <>
       <Navbar />
