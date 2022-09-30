@@ -35,7 +35,7 @@ const InviteOverview = () => {
 
   const orderByPcIconHandler = item => {
     // 有狀態顯示狀態arrow
-    // 如果沒有狀態看hover狀態
+    // 如果沒有狀態看hover狀態顯示 hover arrow
     if (item.title === selectedItem?.title)
       return (
         <AiOutlineArrowDown

@@ -15,12 +15,14 @@ import SideNavbar from './SideNavbar';
 import MyModal from './MyModal';
 import Spinner from './Spinner';
 import navbarImage from '@/images/header/menu_bg.png';
+import navbarImageDapp from '@/images/header/DApp_header.png';
 import navbarLogoMb from '@/images/logo_mb.png';
 import navbarLogoPc from '@/images/logo_pc.png';
 import navbarWallet from '@/images/header/btn_money.png';
 import metamaskLogo from '@/images/metamask.png';
 import walletconnectLogo from '@/images/walletconnect.png';
 import { AnimatePresence } from 'framer-motion';
+import useCurrentWidth from 'utils/hooks/useCurrentWidth';
 
 const binanceChainId = 97;
 
@@ -28,7 +30,9 @@ const Navbar = () => {
   const [sidebarShow, setSidebarShow] = useState(false);
   const [connectModalShow, setConnectModalShow] = useState(false);
   const [switchAlertModalShow, setSwitchAlertModalShow] = useState(false);
+  const [pageType, setPageType] = useState();
 
+  const currentWidth = useCurrentWidth();
   const router = useRouter();
 
   // web3 hook start
@@ -62,9 +66,11 @@ const Navbar = () => {
   const connector = connectors[0]; // 連接Metamask
 
   /* handler start */
+  const layoutHandler = () => {};
   /* hander end */
 
   /* useEffect start */
+  // scroll to specific element
   useEffect(() => {
     if (router.asPath) {
       let elem = document.getElementById(router.asPath.slice(2));
@@ -76,6 +82,13 @@ const Navbar = () => {
       window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }
   }, [router.asPath]);
+
+  // check page navbar type
+  useEffect(() => {
+    const page = router.pathname.split('/')[1];
+    if (!page) return setPageType('index');
+    return setPageType(page);
+  }, [router.pathname]);
 
   //連線後去看他如果switch chain 要擋下
   useEffect(() => {
@@ -204,15 +217,21 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <span onClick={() => router.push('/market/market_place')}>
-                  Market
-                </span>
+                <Link href={'/market/market_place'}>
+                  <a>
+                    <span>Market</span>
+                  </a>
+                </Link>
               </li>
               <li>
-                <span>DApp</span>
+                <Link href={'/dapp/swap'}>
+                  <span>DApp</span>
+                </Link>
               </li>
               <li>
-                <span onClick={() => router.push('/invite')}>Invite</span>
+                <Link href={'/invite'}>
+                  <span>Invite</span>
+                </Link>
               </li>
               <li>
                 <span>Play</span>
@@ -246,11 +265,21 @@ const Navbar = () => {
       </div>
       <div className="navbar-img">
         <Image
-          src={navbarImage}
+          src={
+            pageType === 'dapp' &&
+            currentWidth > process.env.NEXT_PUBLIC_XL_WIDTH
+              ? navbarImageDapp
+              : navbarImage
+          }
           alt="navbar_image"
-          layout="responsive"
+          layout={
+            currentWidth > process.env.NEXT_PUBLIC_XXL_WIDTH ||
+            currentWidth < process.env.NEXT_PUBLIC_SM_WIDTH
+              ? 'fill'
+              : 'responsive'
+          }
           width={1920}
-          height={320}
+          height={pageType === 'dapp' ? 250 : 300}
           quality={100}
         />
       </div>

@@ -1,0 +1,44 @@
+@use './_variables' as *;
+@use './_mixin' as *;
+
+.subnavbar {
+  padding: 15px;
+  background-color: #242735;
+}
+
+.list {
+  z-index: 11;
+  display: flex;
+  padding-top: 90px;
+  width: 100%;
+  font-size: 1.6rem;
+  @include xl {
+    width: 40%;
+    padding-top: 0;
+    position: fixed;
+    top: 4vw;
+    left: 150px;
+    @include xxl {
+      top: 80px;
+    }
+  }
+  li {
+    width: 100%;
+    padding: 5px 10px;
+    color: $darker-green;
+    font-family: 'BoldenVan';
+    text-align: center;
+    white-space: nowrap;
+    @include xl {
+      z-index: 11;
+      color: black;
+    }
+    a {
+      opacity: 0.5;
+      cursor: pointer;
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}
