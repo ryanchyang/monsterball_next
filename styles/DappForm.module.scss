@@ -60,6 +60,11 @@
   font-size: 5rem;
 }
 
+.plus-icon {
+  color: white;
+  font-size: 4rem;
+}
+
 .input {
   @include input(100%, 40px, white, #11131b);
   font-family: 'LufgaBold';

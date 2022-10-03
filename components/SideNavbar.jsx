@@ -83,10 +83,14 @@ const SideNavbar = props => {
             </span>
           </li>
           <li>
-            <span>DApp</span>
+            <Link href="/dapp/swap">
+              <span onClick={() => setSidebarShow(false)}>DApp</span>
+            </Link>
           </li>
           <li>
-            <span>Invite</span>
+            <Link href="/invite">
+              <span onClick={() => setSidebarShow(false)}>Invite</span>
+            </Link>
           </li>
           <li>
             <span>Play</span>

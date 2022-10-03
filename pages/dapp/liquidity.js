@@ -1,6 +1,6 @@
 import Navbar from 'components/Navbar';
 import SubNavbar from 'components/Dapp/SubNavbar';
-import Swap from 'components/Dapp/Swap';
+import Liquidity from 'components/Dapp/Liquidity';
 import Retail from 'components/Dapp/Retail';
 
 const LiquidityPage = () => {
@@ -9,7 +9,7 @@ const LiquidityPage = () => {
       style={{ minHeight: 'calc(100vh - 30px)', backgroundColor: '#242735' }}
     >
       <Retail />
-      <Swap />
+      <Liquidity />
     </div>
   );
 };
