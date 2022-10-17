@@ -1,8 +1,8 @@
 import { configureChains, defaultChains } from 'wagmi';
-
 // import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
+import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 
 // API key for Ethereum node
 // Two popular services are Infura (infura.io) and Alchemy (alchemy.com)
@@ -56,4 +56,12 @@ export const { chains, provider } = configureChains(
 );
 
 // Set up connectors
-export const connectors = [new MetaMaskConnector({ chains })];
+export const connectors = [
+  new MetaMaskConnector({ chains }),
+  new WalletConnectConnector({
+    chains,
+    options: {
+      qrcode: true,
+    },
+  }),
+];

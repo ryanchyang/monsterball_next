@@ -19,6 +19,7 @@ import '../styles/MarketSideBar.scss';
 import '../styles/BlindBox.scss';
 import Navbar from 'components/Navbar';
 import Footer from '/components/Footer';
+import { SessionProvider } from 'next-auth/react';
 import { WagmiConfig, createClient } from 'wagmi';
 import { connectors, provider } from 'utils/constants/connectors';
 
@@ -28,25 +29,29 @@ const client = createClient({
   provider,
 });
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   if (Component.getLayout) {
     return (
       <>
-        <WagmiConfig client={client}>
-          {Component.getLayout(<Component {...pageProps} />)}
-        </WagmiConfig>
+        <SessionProvider session={session}>
+          <WagmiConfig client={client}>
+            {Component.getLayout(<Component {...pageProps} />)}
+          </WagmiConfig>
+        </SessionProvider>
       </>
     );
   }
   return (
     <>
-      <WagmiConfig client={client}>
-        <Navbar />
-        <main>
-          <Component {...pageProps} />
-        </main>
-        <Footer />
-      </WagmiConfig>
+      <SessionProvider session={session}>
+        <WagmiConfig client={client}>
+          <Navbar />
+          <main>
+            <Component {...pageProps} />
+          </main>
+          <Footer />
+        </WagmiConfig>
+      </SessionProvider>
     </>
   );
 }

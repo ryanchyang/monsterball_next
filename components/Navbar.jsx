@@ -9,6 +9,7 @@ import {
   useNetwork,
   useSwitchNetwork,
 } from 'wagmi';
+import { useSession, signIn, signOut } from 'next-auth/react';
 import { shortenAddress } from '../utils/helpers/shortenAddress';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import SideNavbar from './SideNavbar';
@@ -35,11 +36,14 @@ const Navbar = () => {
   const currentWidth = useCurrentWidth();
   const router = useRouter();
 
-  // web3 hook start
+  /* auth start */
+  const { data: session } = useSession();
+  /* auth end */
+  console.log(session);
+  /* web3 start */
   const {
     connect,
     connectors,
-    activeConnector,
     isLoading: connectIsLoading,
     error,
   } = useConnect({
@@ -48,22 +52,32 @@ const Navbar = () => {
     },
     chainId: binanceChainId,
   });
+
   const { disconnect } = useDisconnect({
     onSuccess(data) {
       setConnectModalShow(false);
       setSwitchAlertModalShow(false);
     },
   });
-  const { address, isConnected } = useAccount();
+
+  const { address, connector: activeConnector, isConnected } = useAccount();
+
   const { chain } = useNetwork();
-  const { switchNetwork, isLoading: switchIsLoading } = useSwitchNetwork({
+
+  const {
+    switchNetwork,
+    isLoading: switchIsLoading,
+    error: switchError,
+  } = useSwitchNetwork({
     onSuccess(data) {
       setSwitchAlertModalShow(false);
     },
+    throwForSwitchChainNotSupported: true,
   });
+  /* web3 end */
 
-  // web3 hook end
-  const connector = connectors[0]; // 連接Metamask
+  const metamaskConnector = connectors[0]; // 連接Metamask
+  const walletconnectConnector = connectors[1]; // 連接Metamask
 
   /* handler start */
   const layoutHandler = () => {};
@@ -104,8 +118,8 @@ const Navbar = () => {
     <div className="d-flex flex-column justify-content-center align-items-center">
       <button
         className="connect-wallet-metamask-btn mb-3"
-        onClick={() => connect({ connector })}
-        disabled={!connector.ready || connectIsLoading || isConnected}
+        onClick={() => connect({ connector: metamaskConnector })}
+        disabled={!metamaskConnector.ready || connectIsLoading || isConnected}
       >
         {connectIsLoading && (
           <div className="spinner-container">
@@ -116,14 +130,20 @@ const Navbar = () => {
           <Image src={metamaskLogo} alt="metamask-button" />
         </div>
       </button>
-      <button className="connect-wallet-metamask-btn" disabled={true}>
+      <button
+        className="connect-wallet-metamask-btn"
+        onClick={() => connect({ connector: walletconnectConnector })}
+        disabled={
+          !walletconnectConnector.ready || connectIsLoading || isConnected
+        }
+      >
         <div>
           <Image src={walletconnectLogo} alt="walletconnect-button" />
         </div>
       </button>
       {isConnected && (
         <button className="disconnect-wallet-btn mt-5" onClick={disconnect}>
-          <span>{`Disconnect from ${connector.name}`}</span>
+          <span>{`Disconnect from ${activeConnector?.name}`}</span>
         </button>
       )}
     </div>
@@ -147,7 +167,7 @@ const Navbar = () => {
         <span>Switch network in wallet</span>
       </button>
       <button className="disconnect-wallet-btn" onClick={disconnect}>
-        <span>{`Disconnect from ${connector.name}`}</span>
+        <span>{`Disconnect from ${activeConnector?.name}`}</span>
       </button>
     </div>
   );
@@ -248,7 +268,7 @@ const Navbar = () => {
           <div
             className="navbar-wallet cursor-pointer "
             onClick={() => setConnectModalShow(true)}
-            disabled={!connector.ready}
+            // disabled={!metamaskConnector.ready}
           >
             <Image src={navbarWallet} alt="icon-wallet" className="" />
             {/* error 除錯 */}
@@ -262,6 +282,12 @@ const Navbar = () => {
             <div>{shortenAddress(address)}</div>
           </button>
         )}
+        {/* google login */}
+        <div>
+          <button onClick={() => signIn('google', { redirect: false })}>
+            Sign in
+          </button>
+        </div>
       </div>
       <div className="navbar-img">
         <Image
