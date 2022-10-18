@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import navbarLogoPc from '@/images/logo_pc.png';
 import navbarWallet from '@/images/header/btn_money.png';
-import MyModal from './MyModal';
+import MyModal from './Modal/MyModal';
 
 const Navbar2 = () => {
   const [modalShow, setModalShow] = useState(false);

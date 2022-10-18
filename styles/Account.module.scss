@@ -1,0 +1,176 @@
+@use './_variables' as *;
+@use './_mixin' as *;
+
+.section {
+  padding-top: 250px;
+  background-color: #295c5c;
+  @include xl {
+    background: url('../public/assets/images/home/home_collection_bk.png')
+      no-repeat;
+    background-size: 100% 100%;
+    padding-top: 250px;
+  }
+}
+
+.tab {
+  color: $font-primary;
+  font-size: 30px;
+  margin-bottom: 30px;
+  li {
+    font-family: 'BoldenVan';
+    padding: 15px 30px;
+    transition: color 0.5s;
+    cursor: pointer;
+    &:hover {
+      color: white;
+    }
+  }
+
+  .active {
+    border-bottom: 3px solid white;
+  }
+}
+
+.input-block {
+  margin-bottom: 15px;
+  span {
+    display: block;
+    font-size: 24px;
+    color: white;
+    font-family: 'BoldenVan';
+    margin-bottom: 10px;
+  }
+}
+
+.input {
+  @include input(100%, 45px, black, white);
+}
+
+.btn {
+  @include btn($bluegreen-button);
+  font-family: 'BoldenVan';
+  width: 100%;
+  margin-top: 15px;
+  &:last-child {
+    margin-left: 15px;
+  }
+  @include xl {
+    margin-top: 0;
+    width: 150px;
+    margin-left: 15px;
+  }
+}
+
+.bind-block {
+  margin: 0 auto 100px;
+}
+
+.card-block {
+  padding: 40px 50px 50px 50px;
+  width: 90%;
+  margin: 0 auto;
+  font-family: 'LufgaBold';
+  display: grid;
+  gap: 30px;
+  grid-template-columns: 1fr;
+
+  @include md {
+    grid-template-columns: 0.5fr 0.5fr;
+  }
+  @include xl {
+    grid-template-columns: 0.33fr 0.33fr 0.33fr;
+  }
+  @include xxl {
+    grid-template-columns: 0.25fr 0.25fr 0.25fr 0.25fr;
+  }
+  .card {
+    padding: 25px;
+    width: 100%;
+    background-color: #343444;
+    border-radius: 15px;
+    transition: ease-in-out 0.3s;
+    &:hover {
+      transform: translateY(-10px);
+    }
+    .card-header {
+      height: 50px;
+      border-bottom: none;
+    }
+    .avatar {
+      margin-right: 10px;
+      width: 50px;
+      height: 50px;
+      overflow: hidden;
+      border-radius: 15px;
+      img {
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+    .info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      color: grey;
+      font-size: 1.2rem;
+    }
+    .author {
+      font-size: 1.6rem;
+      a {
+        color: white;
+      }
+    }
+    .like-btn {
+      @include btn(#1f1f2c);
+      height: 30px;
+      font-size: 1.2rem;
+      border-radius: 8px;
+      padding: 5px 10px;
+    }
+    .card-media {
+      position: relative;
+      width: 100%;
+      border-radius: 15px;
+      overflow: hidden;
+      height: 60vw;
+      @include mb {
+        height: 60vw;
+      }
+      @include xl {
+        height: 20vw;
+      }
+      @include xxl {
+        height: 15vw;
+      }
+
+      img {
+        transform: scale(1.2);
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
+    }
+    .card-title {
+      a {
+        font-size: 2rem;
+        color: white;
+      }
+    }
+    .meta-info {
+      display: flex;
+      justify-content: space-between;
+      color: grey;
+      font-size: 1.2rem;
+      .pricing {
+        font-size: 1.4rem;
+        color: white;
+      }
+      .tags {
+        background-color: $green;
+        border-radius: 8px;
+        padding: 5px 10px;
+        color: white;
+      }
+    }
+  }
+}

@@ -10,6 +10,7 @@ import bnbIcon from '@/images/dapp/icon_bnb.png';
 
 const Swap = () => {
   const [fromDropdownShow, setFromDropdownShow] = useState(false);
+  const [toDropdownShow, setToDropdownShow] = useState(false);
   return (
     <section className={styles['swap-area']}>
       <div className={styles['form-area']}>
@@ -96,7 +97,7 @@ const Swap = () => {
               <div className="p-3 w-100 d-flex align-items-center">
                 <span className="w-100 t-16">To</span>
                 <Dropdown
-                  onToggle={() => setFromDropdownShow(!fromDropdownShow)}
+                  onToggle={() => setToDropdownShow(!toDropdownShow)}
                   onSelect={eventKey => 1}
                 >
                   <Dropdown.Toggle
@@ -121,7 +122,7 @@ const Swap = () => {
                       <IoMdArrowDropdown
                         className={formStyles['sort-icon']}
                         style={
-                          fromDropdownShow
+                          toDropdownShow
                             ? { transform: 'rotate(180deg)' }
                             : { transition: 'rotate(0deg)' }
                         }

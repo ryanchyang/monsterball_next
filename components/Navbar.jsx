@@ -7,23 +7,26 @@ import {
   useConnect,
   useDisconnect,
   useNetwork,
+  useSignMessage,
   useSwitchNetwork,
 } from 'wagmi';
+import { SiweMessage } from 'siwe';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { shortenAddress } from '../utils/helpers/shortenAddress';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import SideNavbar from './SideNavbar';
-import MyModal from './MyModal';
+import MyModal from './Modal/MyModal';
+import ConnectModal from './Modal/ConnectModal';
+import SwitchAlertModal from './Modal/SwitchAlertModal';
 import Spinner from './Spinner';
 import navbarImage from '@/images/header/menu_bg.png';
 import navbarImageDapp from '@/images/header/DApp_header.png';
 import navbarLogoMb from '@/images/logo_mb.png';
 import navbarLogoPc from '@/images/logo_pc.png';
 import navbarWallet from '@/images/header/btn_money.png';
-import metamaskLogo from '@/images/metamask.png';
-import walletconnectLogo from '@/images/walletconnect.png';
 import { AnimatePresence } from 'framer-motion';
 import useCurrentWidth from 'utils/hooks/useCurrentWidth';
+import { getNonce } from 'utils/api/web3';
 
 const binanceChainId = 97;
 
@@ -32,14 +35,19 @@ const Navbar = () => {
   const [connectModalShow, setConnectModalShow] = useState(false);
   const [switchAlertModalShow, setSwitchAlertModalShow] = useState(false);
   const [pageType, setPageType] = useState();
+  const [_isConnected, _setIsConnected] = useState(false);
+  const [bindWallet, setBindWallet] = useState({
+    status: false,
+    isLoading: false,
+  });
 
   const currentWidth = useCurrentWidth();
   const router = useRouter();
 
   /* auth start */
-  const { data: session } = useSession();
+  const { data: session, status: sessionStatus } = useSession();
   /* auth end */
-  console.log(session);
+
   /* web3 start */
   const {
     connect,
@@ -64,6 +72,8 @@ const Navbar = () => {
 
   const { chain } = useNetwork();
 
+  const { signMessageAsync } = useSignMessage();
+
   const {
     switchNetwork,
     isLoading: switchIsLoading,
@@ -77,10 +87,40 @@ const Navbar = () => {
   /* web3 end */
 
   const metamaskConnector = connectors[0]; // 連接Metamask
-  const walletconnectConnector = connectors[1]; // 連接Metamask
+  const walletconnectConnector = connectors[1]; // 連接Walletconnect
 
   /* handler start */
-  const layoutHandler = () => {};
+  const bindWalletHandler = async () => {
+    const chainId = chain?.id;
+    if (!address || !chainId) return;
+    setBindWallet({ ...bindWallet, isLoading: true });
+    const nonce = await getNonce();
+    // Create SIWE message with pre-fetched nonce and sign with wallet
+    const message = new SiweMessage({
+      domain: window.location.host,
+      address,
+      statement: 'Bind your wallet to Monsterball.',
+      uri: window.location.origin,
+      version: '1',
+      chainId,
+      nonce: nonce,
+    });
+
+    const signature = await signMessageAsync({
+      message: message.prepareMessage(),
+    });
+    setBindWallet({ status: true, isLoading: true });
+
+    // Verify signature
+    // const verifyRes = await fetch('/api/verify', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({ message, signature }),
+    // });
+    // if (!verifyRes.ok) throw new Error('Error verifying message');
+  };
   /* hander end */
 
   /* useEffect start */
@@ -112,85 +152,51 @@ const Navbar = () => {
       setSwitchAlertModalShow(true);
     }
   }, [chain, switchNetwork]);
-  /* useEffect end */
 
-  const connectModalContent = (
-    <div className="d-flex flex-column justify-content-center align-items-center">
-      <button
-        className="connect-wallet-metamask-btn mb-3"
-        onClick={() => connect({ connector: metamaskConnector })}
-        disabled={!metamaskConnector.ready || connectIsLoading || isConnected}
-      >
-        {connectIsLoading && (
-          <div className="spinner-container">
-            <Spinner />
-          </div>
-        )}
-        <div>
-          <Image src={metamaskLogo} alt="metamask-button" />
-        </div>
-      </button>
-      <button
-        className="connect-wallet-metamask-btn"
-        onClick={() => connect({ connector: walletconnectConnector })}
-        disabled={
-          !walletconnectConnector.ready || connectIsLoading || isConnected
-        }
-      >
-        <div>
-          <Image src={walletconnectLogo} alt="walletconnect-button" />
-        </div>
-      </button>
-      {isConnected && (
-        <button className="disconnect-wallet-btn mt-5" onClick={disconnect}>
-          <span>{`Disconnect from ${activeConnector?.name}`}</span>
-        </button>
-      )}
-    </div>
-  );
-  const switchAlertModalContent = (
-    <div className="d-flex flex-column justify-content-center align-items-center">
-      <p className="mb-5">
-        Currently this page only supported in BNB Smart Chain Testnet. Please
-        switch your network to continue.
-      </p>
-      <button
-        className="switch-network-btn mb-4"
-        onClick={() => switchNetwork(binanceChainId)}
-        disabled={switchIsLoading}
-      >
-        {switchIsLoading && (
-          <div className="spinner-container">
-            <Spinner />
-          </div>
-        )}
-        <span>Switch network in wallet</span>
-      </button>
-      <button className="disconnect-wallet-btn" onClick={disconnect}>
-        <span>{`Disconnect from ${activeConnector?.name}`}</span>
-      </button>
-    </div>
-  );
+  // fix hydration problem
+  useEffect(() => {
+    _setIsConnected(isConnected);
+  }, [isConnected]);
+  /* useEffect end */
 
   return (
     <header className="my-navbar">
       <MyModal
         show={connectModalShow}
         onHide={() => setConnectModalShow(false)}
-        content={connectModalContent}
+        content={
+          <ConnectModal
+            metamaskConnector={metamaskConnector}
+            walletconnectConnector={walletconnectConnector}
+            activeConnector={activeConnector}
+            connectIsLoading={connectIsLoading}
+            isConnected={isConnected}
+            connect={connect}
+            disconnect={disconnect}
+          />
+        }
         title={'Connect Wallet'}
       />
       <MyModal
         show={switchAlertModalShow}
-        content={switchAlertModalContent}
+        content={
+          <SwitchAlertModal
+            switchNetwork={switchNetwork}
+            binanceChainId={binanceChainId}
+            switchIsLoading={switchIsLoading}
+            activeConnector={activeConnector}
+            disconnect={disconnect}
+          />
+        }
         title={'Check your network'}
         close={false}
       />
+      {/* side navbar */}
       <AnimatePresence>
         {sidebarShow && <SideNavbar setSidebarShow={setSidebarShow} />}
       </AnimatePresence>
       <div className="navbar-content w-100 d-flex justify-content-between align-items-center">
-        <div className="w-100 d-flex align-items-start">
+        <div className="col-8 d-flex align-items-start">
           {/* logo */}
           <Link href={'/'} className="navbar-logo" passHref>
             <a>
@@ -263,32 +269,69 @@ const Navbar = () => {
         <span className="cursor-pointer" onClick={() => setSidebarShow(true)}>
           <GiHamburgerMenu className="icon-hamburger" />
         </span>
-        {/* wallet */}
-        {!isConnected ? (
-          <div
-            className="navbar-wallet cursor-pointer "
-            onClick={() => setConnectModalShow(true)}
-            // disabled={!metamaskConnector.ready}
-          >
-            <Image src={navbarWallet} alt="icon-wallet" className="" />
-            {/* error 除錯 */}
-            {/* {error && <div>{error.message}</div>} */}
+        {/* navbar left */}
+        <div className="d-lg-flex d-none col-4 justify-content-end align-items-center">
+          {/* bind wallet btn */}
+          {!bindWallet.status && _isConnected ? (
+            <button
+              className="bind-wallet-btn me-4 "
+              onClick={bindWalletHandler}
+            >
+              {bindWallet.isLoading ? (
+                <div className="spinner-container">
+                  <Spinner />
+                </div>
+              ) : (
+                'Bind wallet'
+              )}
+            </button>
+          ) : (
+            ''
+          )}
+          {/* wallet btn */}
+          {session && (
+            <>
+              {!_isConnected ? (
+                <div
+                  className="navbar-wallet cursor-pointer "
+                  onClick={() => setConnectModalShow(true)}
+                  // disabled={!metamaskConnector.ready}
+                >
+                  <Image src={navbarWallet} alt="icon-wallet" className="" />
+                  {/* error 除錯 */}
+                  {/* {error && <div>{error.message}</div>} */}
+                </div>
+              ) : (
+                <button
+                  className="connected-wallet-btn"
+                  onClick={() => setConnectModalShow(true)}
+                >
+                  {shortenAddress(address)}
+                </button>
+              )}
+            </>
+          )}
+          {/* google login */}
+          <div className="d-flex">
+            {sessionStatus === 'unauthenticated' && (
+              <button
+                className="signin-btn"
+                onClick={() => signIn('google', { redirect: false })}
+              >
+                Sign in
+              </button>
+            )}
+
+            <button
+              className="signout-btn ms-4"
+              onClick={() => signOut({ redirect: false })}
+            >
+              Sign out
+            </button>
           </div>
-        ) : (
-          <button
-            className="connected-wallet-btn"
-            onClick={() => setConnectModalShow(true)}
-          >
-            <div>{shortenAddress(address)}</div>
-          </button>
-        )}
-        {/* google login */}
-        <div>
-          <button onClick={() => signIn('google', { redirect: false })}>
-            Sign in
-          </button>
         </div>
       </div>
+      {/* navbar bg image */}
       <div className="navbar-img">
         <Image
           src={

@@ -23,7 +23,7 @@
 
   @include lg {
     display: block;
-    width: 60%;
+    width: 80%;
     li {
       width: 100%;
       display: flex;
@@ -177,6 +177,7 @@
 
 .connected-wallet-btn {
   @include btn($bluegreen-button);
+  font-family: 'LufgaBold';
 }
 
 .disconnect-wallet-btn {
@@ -196,10 +197,35 @@
   }
 }
 
+.bind-wallet-btn {
+  @include btn($bluegreen-button);
+  font-family: 'LufgaBold';
+  position: relative;
+  width: 120px;
+  text-align: center;
+  .spinner-container {
+    top: -10px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    transform: scale(0.3);
+  }
+}
+
 .spinner-container {
   width: auto;
   position: absolute;
   top: -3px;
   right: -70px;
   transform: scale(0.5);
+}
+
+.signin-btn {
+  @include btn($bluegreen-button);
+  font-family: 'LufgaBold';
+}
+.signout-btn {
+  @include btn($bluegreen-button);
+  font-family: 'LufgaBold';
 }

@@ -12,14 +12,13 @@
   height: 80vh;
   @include md {
     background-color: transparent;
-    background-image: url('../public/assets/images/photo_2022-10-17_14-36-03.jpg');
+    background-image: url('../public/assets/images/home/bg_banner.png');
     background-size: cover;
     height: 55vw;
   }
   @include lg {
     padding: 12vh 10% 3% 10%;
     background-size: 100% auto;
-    background-position: center;
     height: 45vw;
   }
   h2:first-child {

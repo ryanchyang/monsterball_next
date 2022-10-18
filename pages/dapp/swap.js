@@ -6,7 +6,10 @@ import Retail from 'components/Dapp/Retail';
 const SwapPage = () => {
   return (
     <div
-      style={{ minHeight: 'calc(100vh - 30px)', backgroundColor: '#242735' }}
+      style={{
+        minHeight: 'calc(100vh - 30px)',
+        backgroundColor: '#242735',
+      }}
     >
       <Retail />
       <Swap />
