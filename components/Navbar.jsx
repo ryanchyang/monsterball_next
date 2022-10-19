@@ -14,6 +14,7 @@ import { SiweMessage } from 'siwe';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { shortenAddress } from '../utils/helpers/shortenAddress';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import NavbarItems from './NavbarItems';
 import SideNavbar from './SideNavbar';
 import MyModal from './Modal/MyModal';
 import ConnectModal from './Modal/ConnectModal';
@@ -47,7 +48,6 @@ const Navbar = () => {
   /* auth start */
   const { data: session, status: sessionStatus } = useSession();
   /* auth end */
-
   /* web3 start */
   const {
     connect,
@@ -209,61 +209,7 @@ const Navbar = () => {
             </a>
           </Link>
           {/* navbar pc */}
-          <div className="navbar-pc">
-            <ul className="w-100 d-flex justify-content-between t-16 font-BoldenVan">
-              <li>
-                <Link href={'/#video'} passHref>
-                  <span>Gamplay</span>
-                </Link>
-              </li>
-              <li>
-                <span
-                  onClick={() =>
-                    window.open(
-                      'https://monsterfootball-1.gitbook.io/untitled/',
-                      '_blank'
-                    )
-                  }
-                >
-                  Paper
-                </span>
-              </li>
-              <li>
-                <Link href={'/#roadmap'} scroll={false}>
-                  <a>
-                    <span>Road map</span>
-                  </a>
-                </Link>
-              </li>
-              <li>
-                <Link href={'/#nft_item'} scroll={false}>
-                  <a>
-                    <span>NFT item</span>
-                  </a>
-                </Link>
-              </li>
-              <li>
-                <Link href={'/market/market_place'}>
-                  <a>
-                    <span>Market</span>
-                  </a>
-                </Link>
-              </li>
-              <li>
-                <Link href={'/dapp/swap'}>
-                  <span>DApp</span>
-                </Link>
-              </li>
-              <li>
-                <Link href={'/invite'}>
-                  <span>Invite</span>
-                </Link>
-              </li>
-              <li>
-                <span>Play</span>
-              </li>
-            </ul>
-          </div>
+          <NavbarItems />
         </div>
         {/* hamburger */}
         <span className="cursor-pointer" onClick={() => setSidebarShow(true)}>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from '../../styles/Swap.module.scss';
 import formStyles from '../../styles/DappForm.module.scss';
 import Image from 'next/image';
@@ -11,8 +11,43 @@ import bnbIcon from '@/images/dapp/icon_bnb.png';
 const Swap = () => {
   const [fromDropdownShow, setFromDropdownShow] = useState(false);
   const [toDropdownShow, setToDropdownShow] = useState(false);
+  // console.log(window);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      var configuration = {
+        from: 'ETH',
+        to: 'RBC',
+        fromChain: 'ETH',
+        toChain: 'ETH',
+        amount: 1,
+        iframe: 'flex',
+        hideSelectionFrom: false,
+        hideSelectionTo: false,
+        theme: 'dark',
+        background: '#28372e',
+        injectTokens: {
+          eth: ['0xd123575d94a7ad9bff3ad037ae9d4d52f41a7518'],
+          bsc: ['0x8aed24bf6e0247be51c57d68ad32a176bf86f4d9'],
+        },
+        slippagePercent: {
+          instantTrades: 2,
+          crossChain: 5,
+        },
+        promoCode: 'a1bc4da1f2',
+        fee: 0.075,
+        feeTarget: '0xecA0A3eFCf009519052Dc92306fE821b9c7A32A2',
+      };
+      // prevent accidental changes to the object, for example, when re-creating a widget for another theme
+      Object.freeze(configuration);
+      // create widget
+      rubicWidget.init(configuration);
+    }
+  }, []);
+
   return (
     <section className={styles['swap-area']}>
+      <div id="rubic-widget-root"></div>
       <div className={styles['form-area']}>
         <div className={formStyles.block}>
           <div className={formStyles.header}>

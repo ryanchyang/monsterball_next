@@ -22,6 +22,8 @@ import Footer from '/components/Footer';
 import { SessionProvider } from 'next-auth/react';
 import { WagmiConfig, createClient } from 'wagmi';
 import { connectors, provider } from 'utils/constants/connectors';
+import Script from 'next/script';
+import Head from 'next/head';
 
 const client = createClient({
   autoConnect: true,
@@ -33,6 +35,12 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   if (Component.getLayout) {
     return (
       <>
+        <Head>
+          <script
+            type="text/javascript"
+            src="https://widgets.rubic.exchange/iframe/bundle.min.js"
+          ></script>
+        </Head>
         <SessionProvider session={session}>
           <WagmiConfig client={client}>
             {Component.getLayout(<Component {...pageProps} />)}
@@ -43,6 +51,12 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   }
   return (
     <>
+      <Head>
+        <script
+          type="text/javascript"
+          src="https://widgets.rubic.exchange/iframe/bundle.min.js"
+        ></script>
+      </Head>
       <SessionProvider session={session}>
         <WagmiConfig client={client}>
           <Navbar />

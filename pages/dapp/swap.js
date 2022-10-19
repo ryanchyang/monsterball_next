@@ -2,6 +2,7 @@ import Navbar from 'components/Navbar';
 import SubNavbar from 'components/Dapp/SubNavbar';
 import Swap from 'components/Dapp/Swap';
 import Retail from 'components/Dapp/Retail';
+import Script from 'next/script';
 
 const SwapPage = () => {
   return (
