@@ -14,6 +14,8 @@ import { SiweMessage } from 'siwe';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { shortenAddress } from '../utils/helpers/shortenAddress';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import { BsPlusLg } from 'react-icons/bs';
+import { FiAlertTriangle } from 'react-icons/fi';
 import NavbarItems from './NavbarItems';
 import SideNavbar from './SideNavbar';
 import MyModal from './Modal/MyModal';
@@ -28,6 +30,7 @@ import navbarWallet from '@/images/header/btn_money.png';
 import { AnimatePresence } from 'framer-motion';
 import useCurrentWidth from 'utils/hooks/useCurrentWidth';
 import { getNonce } from 'utils/api/web3';
+import mfbImg from '@/images/coin_mfb.png';
 
 const binanceChainId = 97;
 
@@ -35,6 +38,7 @@ const Navbar = () => {
   const [sidebarShow, setSidebarShow] = useState(false);
   const [connectModalShow, setConnectModalShow] = useState(false);
   const [switchAlertModalShow, setSwitchAlertModalShow] = useState(false);
+  const [bindWalletModalShow, setBindWalletModalShow] = useState(false);
   const [pageType, setPageType] = useState();
   const [_isConnected, _setIsConnected] = useState(false);
   const [bindWallet, setBindWallet] = useState({
@@ -48,6 +52,8 @@ const Navbar = () => {
   /* auth start */
   const { data: session, status: sessionStatus } = useSession();
   /* auth end */
+  console.log(session);
+
   /* web3 start */
   const {
     connect,
@@ -191,6 +197,20 @@ const Navbar = () => {
         title={'Check your network'}
         close={false}
       />
+      <MyModal
+        show={switchAlertModalShow}
+        content={
+          <SwitchAlertModal
+            switchNetwork={switchNetwork}
+            binanceChainId={binanceChainId}
+            switchIsLoading={switchIsLoading}
+            activeConnector={activeConnector}
+            disconnect={disconnect}
+          />
+        }
+        title={'Check your network'}
+        close={false}
+      />
       {/* side navbar */}
       <AnimatePresence>
         {sidebarShow && <SideNavbar setSidebarShow={setSidebarShow} />}
@@ -217,33 +237,46 @@ const Navbar = () => {
         </span>
         {/* navbar left */}
         <div className="d-lg-flex d-none col-4 justify-content-end align-items-center">
-          {/* bind wallet btn */}
-          {!bindWallet.status && _isConnected ? (
-            <button
-              className="bind-wallet-btn me-4 "
-              onClick={bindWalletHandler}
-            >
-              {bindWallet.isLoading ? (
-                <div className="spinner-container">
-                  <Spinner />
+          {/* MFB count */}
+          {session?.user.address && (
+            <div className="d-flex me-4">
+              <div className="system-mfb-count me-3">
+                <div style={{ position: 'absolute', top: '9px', left: '5px' }}>
+                  <Image src={mfbImg} alt="mfb coin" width={20} height={20} />
                 </div>
-              ) : (
-                'Bind wallet'
-              )}
-            </button>
-          ) : (
-            ''
+                <input type="text" disabled value={session.user.systemMfb} />
+                <BsPlusLg
+                  style={{
+                    fontSize: '20px',
+                    color: 'white',
+                    paddingBottom: '5px',
+                    marginLeft: '3px',
+                  }}
+                />
+              </div>
+            </div>
           )}
           {/* wallet btn */}
           {session && (
             <>
               {!_isConnected ? (
                 <div
-                  className="navbar-wallet cursor-pointer "
-                  onClick={() => setConnectModalShow(true)}
+                  className="navbar-wallet cursor-pointer me-4 position-relative"
+                  onClick={() => {
+                    if (!session.user.address) return set;
+                    setConnectModalShow(true);
+                  }}
                   // disabled={!metamaskConnector.ready}
                 >
                   <Image src={navbarWallet} alt="icon-wallet" className="" />
+                  <div className="alert-icon">
+                    <FiAlertTriangle
+                      style={{
+                        color: 'white',
+                        fontSize: '18px',
+                      }}
+                    />
+                  </div>
                   {/* error 除錯 */}
                   {/* {error && <div>{error.message}</div>} */}
                 </div>
@@ -257,23 +290,44 @@ const Navbar = () => {
               )}
             </>
           )}
+          {/* bind wallet btn */}
+          {!bindWallet.status && _isConnected ? (
+            <button
+              className="bind-wallet-btn me-4"
+              onClick={bindWalletHandler}
+            >
+              {bindWallet.isLoading ? (
+                <div className="spinner-container">
+                  <Spinner />
+                </div>
+              ) : (
+                'Bind wallet'
+              )}
+            </button>
+          ) : (
+            ''
+          )}
           {/* google login */}
           <div className="d-flex">
-            {sessionStatus === 'unauthenticated' && (
+            {!session ? (
               <button
                 className="signin-btn"
                 onClick={() => signIn('google', { redirect: false })}
               >
                 Sign in
               </button>
+            ) : (
+              <div className="profile cursor-pointer ">
+                <Link href="/account">
+                  <Image
+                    src={session.user.image}
+                    alt="profile image"
+                    width={50}
+                    height={50}
+                  />
+                </Link>
+              </div>
             )}
-
-            <button
-              className="signout-btn ms-4"
-              onClick={() => signOut({ redirect: false })}
-            >
-              Sign out
-            </button>
           </div>
         </div>
       </div>

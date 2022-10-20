@@ -1,5 +1,8 @@
 import Image from 'next/image';
-import nftItem from '@/images/home/nftItem/nft_item_01.png';
+import dark from '@/images/home/nftItem/dark-idle.gif';
+import fire from '@/images/home/nftItem/fire-idle.gif';
+import light from '@/images/home/nftItem/light-idle.gif';
+import water from '@/images/home/nftItem/water-idle.gif';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -28,72 +31,48 @@ const NftItem = () => {
       <div className="nft-item-monster-block">
         <ul className="nft-item-monster-list">
           <li className="nft-item-card">
-            <div className="nft-item-card-img">
-              <Image src={nftItem} alt="" layout="responsive" />
+            <div className="nft-item-card-img dark">
+              <Image src={dark} alt="" layout="responsive" />
             </div>
           </li>
           <li className="nft-item-card">
             <div className="nft-item-card-img">
-              <Image src={nftItem} alt="" layout="responsive" />
+              <Image src={fire} alt="" layout="responsive" />
             </div>
           </li>
           <li className="nft-item-card">
             <div className="nft-item-card-img">
-              <Image src={nftItem} alt="" layout="responsive" />
+              <Image src={light} alt="" layout="responsive" />
             </div>
           </li>
           <li className="nft-item-card">
             <div className="nft-item-card-img">
-              <Image src={nftItem} alt="" layout="responsive" />
+              <Image src={water} alt="" layout="responsive" />
+            </div>
+          </li>
+          <li className="nft-item-card">
+            <div className="nft-item-card-img dark">
+              <Image src={dark} alt="" layout="responsive" />
             </div>
           </li>
           <li className="nft-item-card">
             <div className="nft-item-card-img">
-              <Image src={nftItem} alt="" layout="responsive" />
+              <Image src={fire} alt="" layout="responsive" />
             </div>
           </li>
           <li className="nft-item-card">
             <div className="nft-item-card-img">
-              <Image
-                src={nftItem}
-                alt=""
-                layout="responsive"
-                width={500}
-                height={500}
-              />
+              <Image src={light} alt="" layout="responsive" />
             </div>
           </li>
           <li className="nft-item-card">
             <div className="nft-item-card-img">
-              <Image
-                src={nftItem}
-                alt=""
-                layout="responsive"
-                width={500}
-                height={500}
-              />
+              <Image src={water} alt="" layout="responsive" />
             </div>
           </li>
           <li className="nft-item-card">
-            <div className="nft-item-card-img">
-              <Image
-                src={nftItem}
-                alt=""
-                layout="responsive"
-                width={500}
-                height={500}
-              />
-            </div>
-          </li>
-          <li className="nft-item-card">
-            <div className="nft-item-card-img">
-              <Image
-                src={nftItem}
-                alt=""
-                layout="responsive"
-                width={500}
-                height={500}
-              />
+            <div className="nft-item-card-img dark">
+              <Image src={dark} alt="" layout="responsive" />
             </div>
           </li>
         </ul>

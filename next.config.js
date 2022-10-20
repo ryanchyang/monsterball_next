@@ -2,14 +2,17 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  images: {
+    domains: ['lh3.googleusercontent.com'],
+  },
 };
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
-module.exports = withBundleAnalyzer({
-  reactStrictMode: true,
-  swcMinify: true,
-});
-// module.exports = nextConfig;
+// module.exports = withBundleAnalyzer({
+//   reactStrictMode: true,
+//   swcMinify: true,
+// });
+module.exports = nextConfig;

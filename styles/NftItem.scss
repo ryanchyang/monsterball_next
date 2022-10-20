@@ -60,9 +60,16 @@
       width: 100%;
       height: 100%;
       img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+        transform: scale(1.05);
+        top: -150px !important;
+      }
+      &.dark {
+        img {
+          top: -180px !important;
+          @include xl {
+            top: -220px !important;
+          }
+        }
       }
     }
   }

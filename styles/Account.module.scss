@@ -2,6 +2,7 @@
 @use './_mixin' as *;
 
 .section {
+  min-height: 100vh;
   padding-top: 250px;
   background-color: #295c5c;
   @include xl {
@@ -44,6 +45,10 @@
 
 .input {
   @include input(100%, 45px, black, white);
+  &:disabled {
+    background-color: #ababab;
+    color: #383838;
+  }
 }
 
 .btn {

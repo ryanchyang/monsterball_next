@@ -1,9 +1,11 @@
 import styles from '../../styles/Account.module.scss';
+import { signOut } from 'next-auth/react';
 import { useState } from 'react';
 import MyNft from './MyNft';
 import BindWallet from './BindWallet';
+import TokenBuy from './TokenBuy';
 
-// tabType : nft, bind
+// tabType : nft, bind , token
 
 const Account = () => {
   const [tabType, setTabType] = useState('nft');
@@ -11,6 +13,12 @@ const Account = () => {
   return (
     <section className={`${styles.section}`}>
       <div className={styles.tab}>
+        <button
+          className="signout-btn m-auto"
+          onClick={() => signOut({ callbackUrl: 'http://localhost:3000' })}
+        >
+          Sign out
+        </button>
         <ul className="d-flex justify-content-center">
           <li
             className={tabType === 'nft' ? styles.active : ''}
@@ -24,10 +32,17 @@ const Account = () => {
           >
             Wallet Bind
           </li>
+          <li
+            className={tabType === 'token' ? styles.active : ''}
+            onClick={() => setTabType('token')}
+          >
+            Token
+          </li>
         </ul>
       </div>
       {tabType === 'nft' && <MyNft />}
       {tabType === 'bind' && <BindWallet />}
+      {tabType === 'token' && <TokenBuy />}
     </section>
   );
 };

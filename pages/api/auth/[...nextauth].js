@@ -15,53 +15,37 @@ export const authOptions = {
   callbacks: {
     async signIn({ user, account, profile }) {
       if (account.provider === 'google') {
-        const githubUser = {
-          id: metadata.id,
-          login: metadata.login,
-          name: metadata.name,
-          avatar: user.image,
-        };
-
-        user.accessToken = await getTokenFromYourAPIServer(
-          'github',
-          githubUser
-        );
-
         const result = await googleLogIn(account.id_token);
 
         if (result.code === 'G_0000') {
           user.country = result.data.country;
+          user.address = result.data.address;
           user.systemMfb = result.data.mfb;
           user.systemGold = result.data.gold;
           user.token = result.data.token;
           return true;
         }
 
-        return true;
+        return false;
       }
-
-      const result = await googleLogIn(account.id_token);
-      // console.log(result);
-      if (result.code === 'G_0000') {
-        account.country = result.data.country;
-        account.systemMfb = result.data.mfb;
-        account.systemGold = result.data.gold;
-        account.token = result.data.token;
-        return true;
-      }
-      return false;
     },
     async jwt({ token, user, account }) {
-      // console.log({ account });
-      token.country = account.country;
-
-      // console.log(user);
-
+      if (user) {
+        token.token = user.token;
+        token.country = user.country;
+        token.address = user.address;
+        token.systemMfb = user.systemMfb;
+        token.systemGold = user.systemGold;
+      }
       return token;
     },
     async session({ session, token, user }) {
-      console.log({ token });
-      session.accessToken = token.access_token;
+      // 重新整理畫面只會走session
+      session.token = token.token;
+      session.user.country = token.country;
+      session.user.address = token.address;
+      session.user.systemMfb = token.systemMfb;
+      session.user.systemGold = token.systemGold;
       return session;
     },
   },
