@@ -27,10 +27,11 @@ import navbarImageDapp from '@/images/header/DApp_header.png';
 import navbarLogoMb from '@/images/logo_mb.png';
 import navbarLogoPc from '@/images/logo_pc.png';
 import navbarWallet from '@/images/header/btn_money.png';
+import mfbImg from '@/images/coin_mfb.png';
 import { AnimatePresence } from 'framer-motion';
 import useCurrentWidth from 'utils/hooks/useCurrentWidth';
 import { getNonce } from 'utils/api/web3';
-import mfbImg from '@/images/coin_mfb.png';
+import { getIfBindWallet } from 'utils/api/auth';
 
 const binanceChainId = 97;
 
@@ -62,7 +63,7 @@ const Navbar = () => {
     error,
   } = useConnect({
     onSuccess(data) {
-      setConnectModalShow(false);
+      // setConnectModalShow(false);
     },
     chainId: binanceChainId,
   });
@@ -115,7 +116,7 @@ const Navbar = () => {
     const signature = await signMessageAsync({
       message: message.prepareMessage(),
     });
-    setBindWallet({ status: true, isLoading: true });
+    if (signature) setBindWallet({ status: true, isLoading: false });
 
     // Verify signature
     // const verifyRes = await fetch('/api/verify', {
@@ -130,6 +131,7 @@ const Navbar = () => {
   /* hander end */
 
   /* useEffect start */
+
   // scroll to specific element
   useEffect(() => {
     if (router.asPath) {
@@ -159,6 +161,27 @@ const Navbar = () => {
     }
   }, [chain, switchNetwork]);
 
+  // 登入成功後如果沒有登入錢包跟綁定要跳視窗
+  useEffect(() => {
+    if (!session) return;
+
+    if (session.user.address) {
+      setBindWallet({ ...bindWallet, status: true });
+    }
+    if (_isConnected && session.user.address) return;
+    setConnectModalShow(true);
+  }, [session]);
+
+  // 是否有綁定的錢包
+  useEffect(() => {
+    if (!address || !session) return;
+    console.log('address shown');
+    (async () => {
+      const bindResult = await getIfBindWallet(session.user.token, address);
+      if (bindResult.data) setBindWallet({ ...bindWallet, status: true });
+    })();
+  }, [address, session]);
+
   // fix hydration problem
   useEffect(() => {
     _setIsConnected(isConnected);
@@ -176,12 +199,15 @@ const Navbar = () => {
             walletconnectConnector={walletconnectConnector}
             activeConnector={activeConnector}
             connectIsLoading={connectIsLoading}
-            isConnected={isConnected}
+            isConnected={_isConnected}
             connect={connect}
             disconnect={disconnect}
+            bindWallet={bindWallet}
+            bindWalletHandler={bindWalletHandler}
+            address={address}
           />
         }
-        title={'Connect Wallet'}
+        title={'Wallet setting'}
       />
       <MyModal
         show={switchAlertModalShow}
@@ -263,7 +289,6 @@ const Navbar = () => {
                 <div
                   className="navbar-wallet cursor-pointer me-4 position-relative"
                   onClick={() => {
-                    if (!session.user.address) return set;
                     setConnectModalShow(true);
                   }}
                   // disabled={!metamaskConnector.ready}
@@ -289,23 +314,6 @@ const Navbar = () => {
                 </button>
               )}
             </>
-          )}
-          {/* bind wallet btn */}
-          {!bindWallet.status && _isConnected ? (
-            <button
-              className="bind-wallet-btn me-4"
-              onClick={bindWalletHandler}
-            >
-              {bindWallet.isLoading ? (
-                <div className="spinner-container">
-                  <Spinner />
-                </div>
-              ) : (
-                'Bind wallet'
-              )}
-            </button>
-          ) : (
-            ''
           )}
           {/* google login */}
           <div className="d-flex">

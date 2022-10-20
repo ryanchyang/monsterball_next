@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Spinner from 'components/Spinner';
 import metamaskLogo from '@/images/metamask.png';
 import walletconnectLogo from '@/images/walletconnect.png';
+import { shortenAddress } from 'utils/helpers/shortenAddress';
 
 const ConnectModal = props => {
   const {
@@ -12,9 +13,15 @@ const ConnectModal = props => {
     isConnected,
     connect,
     disconnect,
+    bindWallet,
+    bindWalletHandler,
+    address,
   } = props;
   return (
     <div className="d-flex flex-column justify-content-center align-items-center">
+      <p className="text-center mb-5">
+        Please finish wallet setting to unlocked more operation authority.
+      </p>
       <button
         className="connect-wallet-metamask-btn mb-3"
         onClick={() => connect({ connector: metamaskConnector })}
@@ -40,8 +47,28 @@ const ConnectModal = props => {
           <Image src={walletconnectLogo} alt="walletconnect-button" />
         </div>
       </button>
+      {/* wallet address */}
+      {address && (
+        <div className="address-modal-btn mt-5 mb-4 cursor-pointer">
+          {shortenAddress(address)}
+        </div>
+      )}
+      {/* bind wallet btn */}
+      {!bindWallet.status && isConnected ? (
+        <button className="bind-wallet-btn mb-4" onClick={bindWalletHandler}>
+          {bindWallet.isLoading ? (
+            <div className="spinner-container">
+              <Spinner />
+            </div>
+          ) : (
+            'Bind wallet'
+          )}
+        </button>
+      ) : (
+        ''
+      )}
       {isConnected && (
-        <button className="disconnect-wallet-btn mt-5" onClick={disconnect}>
+        <button className="disconnect-wallet-btn" onClick={disconnect}>
           <span>{`Disconnect from ${activeConnector?.name}`}</span>
         </button>
       )}

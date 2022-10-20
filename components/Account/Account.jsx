@@ -4,6 +4,7 @@ import { useState } from 'react';
 import MyNft from './MyNft';
 import BindWallet from './BindWallet';
 import TokenBuy from './TokenBuy';
+import routeConfig from 'routeConfig';
 
 // tabType : nft, bind , token
 
@@ -15,7 +16,7 @@ const Account = () => {
       <div className={styles.tab}>
         <button
           className="signout-btn m-auto"
-          onClick={() => signOut({ callbackUrl: 'http://localhost:3000' })}
+          onClick={() => signOut({ callbackUrl: `${routeConfig.FRONT_END}` })}
         >
           Sign out
         </button>

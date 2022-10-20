@@ -14,6 +14,21 @@ export const googleLogIn = async id_token => {
     return err;
   }
 };
+
+export const getIfBindWallet = async (id_token, address) => {
+  try {
+    const response = await axios.get(
+      `${config.CHECK_BIND}?address=${address}`,
+      {
+        headers: { Authorization: `Bearer ${id_token}` },
+      }
+    );
+    return response.data;
+  } catch (err) {
+    return err;
+  }
+};
+
 // {
 //     code: 'G_0001',
 //     message: 'VALID_ERROR',

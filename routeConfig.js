@@ -5,6 +5,7 @@ const front = 'http://localhost:3000';
 const config = {
   // AUTH
   LOG_IN: `${host}/user/login`,
+  CHECK_BIND: `${host}/user/checkWalletExist`,
 
   // GET NONCE
   NONCE: `${host}/nonce`,

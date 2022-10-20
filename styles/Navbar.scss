@@ -185,6 +185,27 @@
   width: 60%;
 }
 
+.address-modal-btn {
+  @include btn($bluegreen-button);
+  width: 60%;
+}
+
+.bind-wallet-btn {
+  @include btn($bluegreen-button);
+  width: 60%;
+  font-family: 'LufgaBold';
+  position: relative;
+  text-align: center;
+  .spinner-container {
+    top: -10px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    transform: scale(0.3);
+  }
+}
+
 .switch-network-btn {
   position: relative;
   @include btn($bluegreen-button);
@@ -193,22 +214,6 @@
   .spinner-container {
     top: -10px;
     right: 0px;
-    transform: scale(0.3);
-  }
-}
-
-.bind-wallet-btn {
-  @include btn($bluegreen-button);
-  font-family: 'LufgaBold';
-  position: relative;
-  width: 120px;
-  text-align: center;
-  .spinner-container {
-    top: -10px;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
     transform: scale(0.3);
   }
 }
