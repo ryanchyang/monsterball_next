@@ -1,6 +1,7 @@
 // 前端 API 路徑
 const host = 'https://test.monsterball.me/gateway/app';
-const front = 'http://localhost:3000';
+// const front = 'http://localhost:3000';
+const front = 'https://strong-kleicha-01c85e.netlify.app/';
 
 const config = {
   // AUTH
