@@ -39,6 +39,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
           <script
             type="text/javascript"
             src="https://widgets.rubic.exchange/iframe/bundle.min.js"
+            defer
           ></script>
         </Head>
         <SessionProvider session={session}>
@@ -55,6 +56,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
         <script
           type="text/javascript"
           src="https://widgets.rubic.exchange/iframe/bundle.min.js"
+          defer
         ></script>
       </Head>
       <SessionProvider session={session}>

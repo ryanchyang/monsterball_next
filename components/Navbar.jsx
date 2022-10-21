@@ -10,11 +10,13 @@ import {
   useSignMessage,
   useSwitchNetwork,
 } from 'wagmi';
-import { SiweMessage } from 'siwe';
+import useSWR from 'swr';
+import { verifyMessage } from 'ethers/lib/utils';
+// import { SiweMessage } from 'siwe';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { shortenAddress } from '../utils/helpers/shortenAddress';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import { BsPlusLg } from 'react-icons/bs';
+import { BsPlusLg, BsLink45Deg } from 'react-icons/bs';
 import { FiAlertTriangle } from 'react-icons/fi';
 import NavbarItems from './NavbarItems';
 import SideNavbar from './SideNavbar';
@@ -31,7 +33,8 @@ import mfbImg from '@/images/coin_mfb.png';
 import { AnimatePresence } from 'framer-motion';
 import useCurrentWidth from 'utils/hooks/useCurrentWidth';
 import { getNonce } from 'utils/api/web3';
-import { getIfBindWallet } from 'utils/api/auth';
+import { getIfBindWallet, verifyBindWallet } from 'utils/api/auth';
+import apiCodeConfig from 'apiCodeConfig';
 
 const binanceChainId = 97;
 
@@ -41,11 +44,8 @@ const Navbar = () => {
   const [switchAlertModalShow, setSwitchAlertModalShow] = useState(false);
   const [bindWalletModalShow, setBindWalletModalShow] = useState(false);
   const [pageType, setPageType] = useState();
-  const [_isConnected, _setIsConnected] = useState(false);
-  const [bindWallet, setBindWallet] = useState({
-    status: false,
-    isLoading: false,
-  });
+  // const [_isConnected, _setIsConnected] = useState(false);
+  const [bindWalletLoading, setBindWalletLoading] = useState(false);
 
   const currentWidth = useCurrentWidth();
   const router = useRouter();
@@ -53,7 +53,6 @@ const Navbar = () => {
   /* auth start */
   const { data: session, status: sessionStatus } = useSession();
   /* auth end */
-  console.log(session);
 
   /* web3 start */
   const {
@@ -79,7 +78,26 @@ const Navbar = () => {
 
   const { chain } = useNetwork();
 
-  const { signMessageAsync } = useSignMessage();
+  const { data, isLoading, signMessage } = useSignMessage({
+    async onSuccess(data, variables) {
+      // Verify signature when sign message succeeds
+      const bindAddress = verifyMessage(variables.message, data);
+      if (bindAddress) {
+        const verifyResult = await verifyBindWallet(
+          session.token,
+          bindAddress,
+          data
+        );
+
+        if (verifyResult.code !== apiCodeConfig['success']) return;
+        bindWalletMutate();
+        setBindWalletLoading(false);
+        localStorage.setItem('bind_address', bindAddress);
+        setConnectModalShow(false);
+      }
+    },
+  });
+  // const { signMessageAsync } = useSignMessage();
 
   const {
     switchNetwork,
@@ -93,6 +111,15 @@ const Navbar = () => {
   });
   /* web3 end */
 
+  /* client fetching start */
+
+  const { data: bindWalletStatus, mutate: bindWalletMutate } = useSWR(
+    !address || !session ? null : '/api/user/checkWalletExist',
+    () => getIfBindWallet(session.token, address)
+  );
+
+  /* client fetching end */
+
   const metamaskConnector = connectors[0]; // 連接Metamask
   const walletconnectConnector = connectors[1]; // 連接Walletconnect
 
@@ -100,33 +127,36 @@ const Navbar = () => {
   const bindWalletHandler = async () => {
     const chainId = chain?.id;
     if (!address || !chainId) return;
-    setBindWallet({ ...bindWallet, isLoading: true });
-    const nonce = await getNonce();
+    setBindWalletLoading(true);
+
+    const nonceResult = await getNonce(session.token, address);
+    if (nonceResult.code !== apiCodeConfig['success']) return;
+
+    signMessage({ message: nonceResult.data });
     // Create SIWE message with pre-fetched nonce and sign with wallet
-    const message = new SiweMessage({
-      domain: window.location.host,
-      address,
-      statement: 'Bind your wallet to Monsterball.',
-      uri: window.location.origin,
-      version: '1',
-      chainId,
-      nonce: nonce,
-    });
-
-    const signature = await signMessageAsync({
-      message: message.prepareMessage(),
-    });
-    if (signature) setBindWallet({ status: true, isLoading: false });
-
-    // Verify signature
-    // const verifyRes = await fetch('/api/verify', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({ message, signature }),
+    // const message = new SiweMessage({
+    //   domain: window.location.host,
+    //   address: address.toLowerCase(), //轉小寫給簽名包起來
+    //   statement: 'Bind your wallet to Monsterball.',
+    //   uri: window.location.origin,
+    //   version: '1',
+    //   chainId,
+    //   nonce: nonceResult.data,
     // });
-    // if (!verifyRes.ok) throw new Error('Error verifying message');
+
+    // const signature = await signMessageAsync({
+    //   message: message.prepareMessage(),
+    // });
+    // if (!signature) return;
+    // const verifyResult = await verifyBindWallet(
+    //   session.token,
+    //   address,
+    //   signature
+    // );
+    // console.log(verifyResult);
+    // if (verifyResult.code !== apiCodeConfig['success']) return;
+    // bindWalletMutate();
+    // setBindWalletLoading(false);
   };
   /* hander end */
 
@@ -164,28 +194,15 @@ const Navbar = () => {
   // 登入成功後如果沒有登入錢包跟綁定要跳視窗
   useEffect(() => {
     if (!session) return;
-
-    if (session.user.address) {
-      setBindWallet({ ...bindWallet, status: true });
-    }
-    if (_isConnected && session.user.address) return;
+    if (isConnected && session.user.address) return;
+    if (isConnected && bindWalletStatus) return;
     setConnectModalShow(true);
   }, [session]);
 
-  // 是否有綁定的錢包
-  useEffect(() => {
-    if (!address || !session) return;
-    console.log('address shown');
-    (async () => {
-      const bindResult = await getIfBindWallet(session.user.token, address);
-      if (bindResult.data) setBindWallet({ ...bindWallet, status: true });
-    })();
-  }, [address, session]);
-
   // fix hydration problem
-  useEffect(() => {
-    _setIsConnected(isConnected);
-  }, [isConnected]);
+  // useEffect(() => {
+  //   _setIsConnected(isConnected);
+  // }, [isConnected]);
   /* useEffect end */
 
   return (
@@ -199,29 +216,16 @@ const Navbar = () => {
             walletconnectConnector={walletconnectConnector}
             activeConnector={activeConnector}
             connectIsLoading={connectIsLoading}
-            isConnected={_isConnected}
+            isConnected={isConnected}
             connect={connect}
             disconnect={disconnect}
-            bindWallet={bindWallet}
+            bindWalletLoading={bindWalletLoading}
+            bindWalletStatus={bindWalletStatus}
             bindWalletHandler={bindWalletHandler}
             address={address}
           />
         }
         title={'Wallet setting'}
-      />
-      <MyModal
-        show={switchAlertModalShow}
-        content={
-          <SwitchAlertModal
-            switchNetwork={switchNetwork}
-            binanceChainId={binanceChainId}
-            switchIsLoading={switchIsLoading}
-            activeConnector={activeConnector}
-            disconnect={disconnect}
-          />
-        }
-        title={'Check your network'}
-        close={false}
       />
       <MyModal
         show={switchAlertModalShow}
@@ -264,7 +268,7 @@ const Navbar = () => {
         {/* navbar left */}
         <div className="d-lg-flex d-none col-4 justify-content-end align-items-center">
           {/* MFB count */}
-          {session?.user.address && (
+          {isConnected && bindWalletStatus && (
             <div className="d-flex me-4">
               <div className="system-mfb-count me-3">
                 <div style={{ position: 'absolute', top: '9px', left: '5px' }}>
@@ -285,7 +289,7 @@ const Navbar = () => {
           {/* wallet btn */}
           {session && (
             <>
-              {!_isConnected ? (
+              {!isConnected ? (
                 <div
                   className="navbar-wallet cursor-pointer me-4 position-relative"
                   onClick={() => {
@@ -306,12 +310,24 @@ const Navbar = () => {
                   {/* {error && <div>{error.message}</div>} */}
                 </div>
               ) : (
-                <button
-                  className="connected-wallet-btn"
-                  onClick={() => setConnectModalShow(true)}
-                >
-                  {shortenAddress(address)}
-                </button>
+                <div className="position-relative">
+                  <button
+                    className="connected-wallet-btn me-4"
+                    onClick={() => setConnectModalShow(true)}
+                  >
+                    {shortenAddress(address)}
+                  </button>
+                  {!bindWalletStatus && (
+                    <div className="link-icon">
+                      <BsLink45Deg
+                        style={{
+                          color: 'white',
+                          fontSize: '18px',
+                        }}
+                      />
+                    </div>
+                  )}
+                </div>
               )}
             </>
           )}

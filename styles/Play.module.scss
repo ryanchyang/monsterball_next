@@ -1,0 +1,22 @@
+@use './_variables' as *;
+@use './_mixin' as *;
+
+.section {
+  min-height: 100vh;
+  padding: 30px;
+  padding-top: 250px;
+  background-color: #295c5c;
+  @include xl {
+    background: url('../public/assets/images/home/home_collection_bk.png')
+      no-repeat;
+    background-size: 100% 100%;
+    padding: 7% 5%;
+    padding-top: 250px;
+  }
+}
+
+.content {
+  font-size: 2.4rem;
+  color: white;
+  font-family: 'BoldenVan';
+}

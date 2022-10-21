@@ -5,14 +5,6 @@ const nextConfig = {
   images: {
     domains: ['lh3.googleusercontent.com'],
   },
-  // async rewrites() {
-  //   return [
-  //     {
-  //       source: '/',
-  //       destination: 'https://test.monsterball.me/',
-  //     },
-  //   ];
-  // },
 };
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({

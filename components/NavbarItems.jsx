@@ -54,7 +54,9 @@ const NavbarItems = () => {
             </Link>
           </li>
           <li>
-            <span>Play</span>
+            <Link href={'/play'}>
+              <span>Play</span>
+            </Link>
           </li>
         </ul>
       </div>

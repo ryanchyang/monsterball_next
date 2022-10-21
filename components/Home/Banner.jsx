@@ -3,6 +3,7 @@ import coinMfb from '@/images/coin_mfb.png';
 import coinGold from '@/images/coin_gold.png';
 import { motion as m } from 'framer-motion';
 import { fadeInFromLeft } from '../../utils/constants/framerConstant';
+import fire from '@/images/home/nftItem/fire-idle.gif';
 
 const Banner = () => {
   return (
@@ -52,6 +53,12 @@ const Banner = () => {
             BUY GOLD
           </button>
         </div>
+        {/* <div
+          className="nft-item-card-img"
+          style={{ position: 'absolute', right: -50, top: -310 }}
+        >
+          <Image src={fire} alt="" width={1000} height={1000} />
+        </div> */}
       </section>
     </>
   );

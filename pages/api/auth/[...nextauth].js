@@ -1,6 +1,7 @@
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import { googleLogIn } from 'utils/api/auth';
+import apiCodeConfig from 'apiCodeConfig';
 
 export const authOptions = {
   // Configure one or more authentication providers
@@ -16,14 +17,16 @@ export const authOptions = {
     async signIn({ user, account, profile }) {
       if (account.provider === 'google') {
         const result = await googleLogIn(account.id_token);
-
-        if (result.code === 'G_0000') {
+        if (result.code === apiCodeConfig['success']) {
           user.country = result.data.country;
           user.address = result.data.address;
           user.systemMfb = result.data.mfb;
           user.systemGold = result.data.gold;
           user.token = result.data.token;
           return true;
+        }
+        if (result.code === apiCodeConfig['appNotLogin']) {
+          return '/play?app=false';
         }
 
         return false;
@@ -41,7 +44,6 @@ export const authOptions = {
     },
     async session({ session, token, user }) {
       // 重新整理畫面只會走session
-      //去更新 session
 
       session.token = token.token;
       session.user.country = token.country;

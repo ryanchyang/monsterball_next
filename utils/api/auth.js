@@ -23,14 +23,23 @@ export const getIfBindWallet = async (id_token, address) => {
         headers: { Authorization: `Bearer ${id_token}` },
       }
     );
-    return response.data;
+    return response.data.data;
   } catch (err) {
     return err;
   }
 };
 
-// {
-//     code: 'G_0001',
-//     message: 'VALID_ERROR',
-//     data: 'verifyThirdPartyToken.thirdPartyToken: must not be blank'
-//   }
+export const verifyBindWallet = async (id_token, address, signature) => {
+  try {
+    const response = await axios.post(
+      config.BIND_WALLET,
+      { address, signature },
+      {
+        headers: { Authorization: `Bearer ${id_token}` },
+      }
+    );
+    return response.data;
+  } catch (err) {
+    return err;
+  }
+};

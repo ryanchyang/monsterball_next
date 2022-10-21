@@ -8,7 +8,9 @@ const config = {
   CHECK_BIND: `${host}/user/checkWalletExist`,
 
   // GET NONCE
-  NONCE: `${host}/nonce`,
+  NONCE: `${host}/user/nonce`,
+  // BIND WALLET
+  BIND_WALLET: `${host}/user/bindWallet`,
 
   // FRONT-END
   FRONT_END: `${front}`,

@@ -3,6 +3,7 @@ import Spinner from 'components/Spinner';
 import metamaskLogo from '@/images/metamask.png';
 import walletconnectLogo from '@/images/walletconnect.png';
 import { shortenAddress } from 'utils/helpers/shortenAddress';
+import { BsLink45Deg } from 'react-icons/bs';
 
 const ConnectModal = props => {
   const {
@@ -13,7 +14,8 @@ const ConnectModal = props => {
     isConnected,
     connect,
     disconnect,
-    bindWallet,
+    bindWalletStatus,
+    bindWalletLoading,
     bindWalletHandler,
     address,
   } = props;
@@ -54,9 +56,9 @@ const ConnectModal = props => {
         </div>
       )}
       {/* bind wallet btn */}
-      {!bindWallet.status && isConnected ? (
+      {!bindWalletStatus && isConnected ? (
         <button className="bind-wallet-btn mb-4" onClick={bindWalletHandler}>
-          {bindWallet.isLoading ? (
+          {bindWalletLoading ? (
             <div className="spinner-container">
               <Spinner />
             </div>
