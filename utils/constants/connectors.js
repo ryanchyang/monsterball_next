@@ -1,8 +1,9 @@
-import { configureChains, defaultChains } from 'wagmi';
+import { configureChains, defaultChains } from "wagmi";
 // import { alchemyProvider } from 'wagmi/providers/alchemy';
-import { publicProvider } from 'wagmi/providers/public';
-import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
-import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
+import { publicProvider } from "wagmi/providers/public";
+import { alchemyProvider } from "wagmi/providers/alchemy";
+import { MetaMaskConnector } from "wagmi/connectors/metaMask";
+import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 
 // API key for Ethereum node
 // Two popular services are Infura (infura.io) and Alchemy (alchemy.com)
@@ -13,38 +14,38 @@ import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 // 加入binance chain 物件
 const binanceChain = {
   id: 56,
-  name: 'Binance Smart Chain Mainnet',
-  network: 'Binance Smart Chain Mainnet',
+  name: "Binance Smart Chain Mainnet",
+  network: "Binance Smart Chain Mainnet",
   nativeCurrency: {
     decimals: 18,
-    name: 'Binance',
-    symbol: 'BNB',
+    name: "Binance",
+    symbol: "BNB",
   },
   rpcUrls: {
-    default: 'https://bsc-dataseed.binance.org/',
+    default: "https://bsc-dataseed.binance.org/",
   },
   blockExplorers: {
-    default: { name: 'BscScan', url: 'https://bscscan.com/' },
+    default: { name: "BscScan", url: "https://bscscan.com/" },
   },
   testnet: false,
 };
 
 const binanceTestChain = {
   id: 97,
-  name: 'Binance Smart Chain Testnet',
-  network: 'Binance Smart Chain Testnet',
+  name: "Binance Smart Chain Testnet",
+  network: "Binance Smart Chain Testnet",
   nativeCurrency: {
     decimals: 18,
-    name: 'Binance',
-    symbol: 'tBNB',
+    name: "Binance",
+    symbol: "tBNB",
   },
   rpcUrls: {
-    default: 'https://data-seed-prebsc-1-s1.binance.org:8545',
+    default: "https://data-seed-prebsc-1-s1.binance.org:8545",
   },
   blockExplorers: {
     default: {
-      name: 'BSC Testnet Network',
-      url: 'https://testnet.bscscan.com/',
+      name: "BSC Testnet Network",
+      url: "https://testnet.bscscan.com/",
     },
   },
   testnet: true,
@@ -52,7 +53,13 @@ const binanceTestChain = {
 
 export const { chains, provider } = configureChains(
   [...defaultChains, binanceChain, binanceTestChain],
-  [publicProvider()]
+  [
+    alchemyProvider({
+      apiKey: "JnVwa2U_57zKfb03rbD9rqh8Ss3JZLcp",
+      priority: 1,
+    }),
+    publicProvider({ priority: 0 }),
+  ]
 );
 
 // Set up connectors

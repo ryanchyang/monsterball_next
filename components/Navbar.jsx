@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import Image from 'next/image';
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import Image from "next/image";
 import {
   useAccount,
   useConnect,
@@ -9,32 +9,33 @@ import {
   useNetwork,
   useSignMessage,
   useSwitchNetwork,
-} from 'wagmi';
-import useSWR from 'swr';
-import { verifyMessage } from 'ethers/lib/utils';
+  useBalance,
+} from "wagmi";
+import useSWR from "swr";
+import { verifyMessage } from "ethers/lib/utils";
 // import { SiweMessage } from 'siwe';
-import { useSession, signIn, signOut } from 'next-auth/react';
-import { shortenAddress } from '../utils/helpers/shortenAddress';
-import { GiHamburgerMenu } from 'react-icons/gi';
-import { BsPlusLg, BsLink45Deg } from 'react-icons/bs';
-import { FiAlertTriangle } from 'react-icons/fi';
-import NavbarItems from './NavbarItems';
-import SideNavbar from './SideNavbar';
-import MyModal from './Modal/MyModal';
-import ConnectModal from './Modal/ConnectModal';
-import SwitchAlertModal from './Modal/SwitchAlertModal';
-import Spinner from './Spinner';
-import navbarImage from '@/images/header/menu_bg.png';
-import navbarImageDapp from '@/images/header/DApp_header.png';
-import navbarLogoMb from '@/images/logo_mb.png';
-import navbarLogoPc from '@/images/logo_pc.png';
-import navbarWallet from '@/images/header/btn_money.png';
-import mfbImg from '@/images/coin_mfb.png';
-import { AnimatePresence } from 'framer-motion';
-import useCurrentWidth from 'utils/hooks/useCurrentWidth';
-import { getNonce } from 'utils/api/web3';
-import { getIfBindWallet, verifyBindWallet } from 'utils/api/auth';
-import apiCodeConfig from 'apiCodeConfig';
+import { useSession, signIn, signOut } from "next-auth/react";
+import { shortenAddress } from "../utils/helpers/shortenAddress";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { BsPlusLg, BsLink45Deg } from "react-icons/bs";
+import { FiAlertTriangle } from "react-icons/fi";
+import NavbarItems from "./NavbarItems";
+import SideNavbar from "./SideNavbar";
+import MyModal from "./Modal/MyModal";
+import ConnectModal from "./Modal/ConnectModal";
+import SwitchAlertModal from "./Modal/SwitchAlertModal";
+import Spinner from "./Spinner";
+import navbarImage from "@/images/header/menu_bg.png";
+import navbarImageDapp from "@/images/header/DApp_header.png";
+import navbarLogoMb from "@/images/logo_mb.png";
+import navbarLogoPc from "@/images/logo_pc.png";
+import navbarWallet from "@/images/header/btn_money.png";
+import mfbImg from "@/images/coin_mfb.png";
+import { AnimatePresence } from "framer-motion";
+import useCurrentWidth from "utils/hooks/useCurrentWidth";
+import { getNonce } from "utils/api/web3";
+import { getIfBindWallet, verifyBindWallet } from "utils/api/auth";
+import apiCodeConfig from "apiCodeConfig";
 
 const binanceChainId = 97;
 
@@ -64,7 +65,7 @@ const Navbar = () => {
     onSuccess(data) {
       // setConnectModalShow(false);
     },
-    chainId: binanceChainId,
+    // chainId: binanceChainId,
   });
 
   const { disconnect } = useDisconnect({
@@ -89,10 +90,10 @@ const Navbar = () => {
           data
         );
 
-        if (verifyResult.code !== apiCodeConfig['success']) return;
+        if (verifyResult.code !== apiCodeConfig["success"]) return;
         bindWalletMutate();
         setBindWalletLoading(false);
-        localStorage.setItem('bind_address', bindAddress);
+        localStorage.setItem("bind_address", bindAddress);
         setConnectModalShow(false);
       }
     },
@@ -114,7 +115,7 @@ const Navbar = () => {
   /* client fetching start */
 
   const { data: bindWalletStatus, mutate: bindWalletMutate } = useSWR(
-    !address || !session ? null : '/api/user/checkWalletExist',
+    !address || !session ? null : "/api/user/checkWalletExist",
     () => getIfBindWallet(session.token, address)
   );
 
@@ -130,7 +131,7 @@ const Navbar = () => {
     setBindWalletLoading(true);
 
     const nonceResult = await getNonce(session.token, address);
-    if (nonceResult.code !== apiCodeConfig['success']) return;
+    if (nonceResult.code !== apiCodeConfig["success"]) return;
 
     signMessage({ message: nonceResult.data });
     // Create SIWE message with pre-fetched nonce and sign with wallet
@@ -168,28 +169,28 @@ const Navbar = () => {
       let elem = document.getElementById(router.asPath.slice(2));
 
       if (elem) {
-        elem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        elem.scrollIntoView({ behavior: "smooth", block: "center" });
       }
     } else {
-      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     }
   }, [router.asPath]);
 
   // check page navbar type
   useEffect(() => {
-    const page = router.pathname.split('/')[1];
-    if (!page) return setPageType('index');
+    const page = router.pathname.split("/")[1];
+    if (!page) return setPageType("index");
     return setPageType(page);
   }, [router.pathname]);
 
   //連線後去看他如果switch chain 要擋下
-  useEffect(() => {
-    if (!chain || !switchNetwork) return;
-    if (chain?.id !== binanceChainId) {
-      // show modal to switch chain or log out
-      setSwitchAlertModalShow(true);
-    }
-  }, [chain, switchNetwork]);
+  // useEffect(() => {
+  //   if (!chain || !switchNetwork) return;
+  //   if (chain?.id !== binanceChainId) {
+  //     // show modal to switch chain or log out
+  //     setSwitchAlertModalShow(true);
+  //   }
+  // }, [chain, switchNetwork]);
 
   // 登入成功後如果沒有登入錢包跟綁定要跳視窗
   useEffect(() => {
@@ -225,7 +226,7 @@ const Navbar = () => {
             address={address}
           />
         }
-        title={'Wallet setting'}
+        title={"Wallet setting"}
       />
       <MyModal
         show={switchAlertModalShow}
@@ -238,7 +239,7 @@ const Navbar = () => {
             disconnect={disconnect}
           />
         }
-        title={'Check your network'}
+        title={"Check your network"}
         close={false}
       />
       {/* side navbar */}
@@ -248,7 +249,7 @@ const Navbar = () => {
       <div className="navbar-content w-100 d-flex justify-content-between align-items-center">
         <div className="col-8 d-flex align-items-start">
           {/* logo */}
-          <Link href={'/'} className="navbar-logo" passHref>
+          <Link href={"/"} className="navbar-logo" passHref>
             <a>
               <div className="navbar-logo-mb">
                 <Image src={navbarLogoMb} alt="logo" />
@@ -271,16 +272,16 @@ const Navbar = () => {
           {isConnected && bindWalletStatus && (
             <div className="d-flex me-4">
               <div className="system-mfb-count me-3">
-                <div style={{ position: 'absolute', top: '9px', left: '5px' }}>
+                <div style={{ position: "absolute", top: "9px", left: "5px" }}>
                   <Image src={mfbImg} alt="mfb coin" width={20} height={20} />
                 </div>
                 <input type="text" disabled value={session.user.systemMfb} />
                 <BsPlusLg
                   style={{
-                    fontSize: '20px',
-                    color: 'white',
-                    paddingBottom: '5px',
-                    marginLeft: '3px',
+                    fontSize: "20px",
+                    color: "white",
+                    paddingBottom: "5px",
+                    marginLeft: "3px",
                   }}
                 />
               </div>
@@ -301,8 +302,8 @@ const Navbar = () => {
                   <div className="alert-icon">
                     <FiAlertTriangle
                       style={{
-                        color: 'white',
-                        fontSize: '18px',
+                        color: "white",
+                        fontSize: "18px",
                       }}
                     />
                   </div>
@@ -321,8 +322,8 @@ const Navbar = () => {
                     <div className="link-icon">
                       <BsLink45Deg
                         style={{
-                          color: 'white',
-                          fontSize: '18px',
+                          color: "white",
+                          fontSize: "18px",
                         }}
                       />
                     </div>
@@ -336,7 +337,7 @@ const Navbar = () => {
             {!session ? (
               <button
                 className="signin-btn"
-                onClick={() => signIn('google', { redirect: false })}
+                onClick={() => signIn("google", { redirect: false })}
               >
                 Sign in
               </button>
@@ -359,7 +360,7 @@ const Navbar = () => {
       <div className="navbar-img">
         <Image
           src={
-            pageType === 'dapp' &&
+            pageType === "dapp" &&
             currentWidth > process.env.NEXT_PUBLIC_XL_WIDTH
               ? navbarImageDapp
               : navbarImage
@@ -368,11 +369,11 @@ const Navbar = () => {
           layout={
             currentWidth > process.env.NEXT_PUBLIC_XXL_WIDTH ||
             currentWidth < process.env.NEXT_PUBLIC_SM_WIDTH
-              ? 'fill'
-              : 'responsive'
+              ? "fill"
+              : "responsive"
           }
           width={1920}
-          height={pageType === 'dapp' ? 250 : 300}
+          height={pageType === "dapp" ? 250 : 300}
           quality={100}
         />
       </div>
