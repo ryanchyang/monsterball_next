@@ -32,6 +32,32 @@
   }
 }
 
+.my-nft-subtab {
+  margin: 0 auto;
+  padding: 15px 15px 15px 15px;
+  width: 83%;
+  color: $font-primary;
+  font-size: 20px;
+  margin-bottom: 15px;
+  background-color: $dark-green;
+  border-radius: 30px;
+  li {
+    text-align: center;
+    font-family: 'BoldenVan';
+    padding: 15px 15px;
+    transition: color 0.5s;
+    cursor: pointer;
+    &:hover {
+      color: white;
+    }
+  }
+
+  .active {
+    background-color: $bluegreen-button;
+    border-radius: 18px;
+  }
+}
+
 .input-block {
   margin-bottom: 15px;
   span {
@@ -177,5 +203,12 @@
         color: white;
       }
     }
+  }
+}
+
+.token-buy {
+  h3 {
+    color: white;
+    font-family: 'LufgaBold';
   }
 }
