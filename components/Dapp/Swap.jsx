@@ -10,100 +10,132 @@ import bnbIcon from '@/images/dapp/icon_bnb.png';
 import {
   useAccount,
   useBalance,
-  usePrepareSendTransaction,
   useSendTransaction,
+  useContractRead,
+  usePrepareContractWrite,
+  useContractWrite,
 } from 'wagmi';
 import useSWR from 'swr';
-import axios from 'axios';
+import Spinner from 'components/Spinner';
 import { getQuote, getSwap } from 'utils/api/web3';
+import useDebounce from 'utils/hooks/useDebounce';
+import { tokenAbi } from '../../utils/constants/tokenAbi';
+import { BigNumber } from 'ethers';
 
 //bnb address 0xb8c77482e45f1f44de1745f52c74426c631bdd52
 // goerli eth 0x7af963cF6D228E564e2A0aA0DdBF06210B38615D
 
+//this is the only contract you can use if you decide to make transaction by our API.
+const openOceanAddress = '0x6352a56caadc4f1e25cd6c75970fa768a3304e64';
+
+const tokenList = {
+  BNB: { token: 'BNB', address: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE' },
+  USDT: {
+    token: 'USDT',
+    address: '0x55d398326f99059ff775485246999027b3197955',
+  },
+};
+
+const bnbContract = {
+  addressOrName: tokenList.BNB.address, // wagmi版本命名問題
+  contractInterface: tokenAbi, // wagmi版本命名問題
+};
+const usdtContract = {
+  addressOrName: tokenList.USDT.address, // wagmi版本命名問題
+  contractInterface: tokenAbi, // wagmi版本命名問題
+};
+
+const approveConfig = {
+  functionName: 'approve',
+  args: [
+    openOceanAddress,
+    '115792089237316195423570985008687907853269984665640564039457584007913129639935', // max
+  ],
+};
+
 const Swap = () => {
-  const [fromToken, setFromToken] = useState(
-    '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE' //bnb
-  );
-
-  const [toToken, setToToken] = useState(
-    '0x55d398326f99059ff775485246999027b3197955' // USDT address
-  );
+  const [fromToken, setFromToken] = useState(tokenList.USDT);
+  const [toToken, setToToken] = useState(tokenList.BNB);
   const [value, setValue] = useState('1');
-  const [valueExchanged, setValueExchanged] = useState('');
-
+  // const [valueExchanged, setValueExchanged] = useState('');
   const [fromDropdownShow, setFromDropdownShow] = useState(false);
   const [toDropdownShow, setToDropdownShow] = useState(false);
 
+  const debounceValue = useDebounce(value, 500);
+
+  /* web3 start */
+
+  const { config } = usePrepareContractWrite({
+    ...usdtContract,
+    ...approveConfig,
+  });
+
+  const {
+    data: approve,
+    isLoading: approveLoading,
+    isSuccess: approveSuccess,
+    write: approveWrite,
+  } = useContractWrite(config);
+
   const { address, connector: activeConnector, isConnected } = useAccount();
 
-  const { data: balance } = useBalance({
+  const { data: bnbBalance } = useBalance({
     addressOrName: address,
   });
 
-  const { data, isLoading, isSuccess, sendTransaction } =
-    useSendTransaction(config);
+  const { data: usdtBalance } = useBalance({
+    addressOrName: address,
+    token: tokenList.USDT.address,
+  });
 
-  const { data: quote, mutat: quoteMutate } = useSWR(
-    ['fetchQuote', value],
-    () => getQuote(fromToken, toToken, value)
+  const { data: isApproved } = useContractRead({
+    ...usdtContract,
+    functionName: 'allowance',
+    args: [address, openOceanAddress],
+  });
+  // console.log(isApproved.toString());
+  const {
+    data: quote,
+    mutate: quoteMutate,
+    isValidating: quoteValidating,
+  } = useSWR(
+    ['fetchQuote', debounceValue, fromToken],
+    () => getQuote(fromToken.address, toToken.address, value)
+    // { refreshInterval: 5000 } // 每五秒fetch一次
   );
 
-  console.log(quote);
+  const { data: quoteSwap, mutate: quoteSwapMutate } = useSWR(
+    quote ? ['fetchConfig', quote] : null,
+    () => getSwap(fromToken.address, toToken.address, value, address)
+  );
+
+  const { data, isLoading, error, isSuccess, sendTransaction } =
+    useSendTransaction({
+      request: {
+        from: address,
+        to: openOceanAddress,
+        gasLimit: BigNumber.from(quoteSwap ? quoteSwap.estimatedGas : '0'),
+        gasPrice: BigNumber.from(quoteSwap ? quoteSwap.gasPrice : '0'),
+        data: quoteSwap?.data ?? '',
+      },
+    });
+  /* web3 end */
 
   /* Handler start */
 
   const changeValueHandler = e => {
     setValue(e.target.value);
-    setValueExchanged('');
+    // setValueExchanged('');
+  };
+
+  const approveHandler = async () => {
+    approveWrite();
   };
 
   const swapHandler = async () => {
-    const result = await getSwap(fromToken, toToken, value, address);
-    if (result) {
-      const { estimatedGas, data, gasPrice } = result;
-      const swapParams = {
-        from: address,
-        to: '0x6352a56caadc4f1e25cd6c75970fa768a3304e64', //this is the only contract you can use if you decide to make transaction by our API.
-        gas: estimatedGas,
-        gasPrice: gasPrice,
-        data,
-      };
-    }
-    console.log(result);
+    sendTransaction();
   };
   /* Handler end */
-
-  // useEffect(() => {
-  //   if (typeof window !== 'undefined') {
-  //     var configuration = {
-  //       from: 'ETH',
-  //       to: 'RBC',
-  //       fromChain: 'ETH',
-  //       toChain: 'ETH',
-  //       amount: 1,
-  //       iframe: 'flex',
-  //       hideSelectionFrom: false,
-  //       hideSelectionTo: false,
-  //       theme: 'dark',
-  //       background: '#28372e',
-  //       injectTokens: {
-  //         eth: ['0xd123575d94a7ad9bff3ad037ae9d4d52f41a7518'],
-  //         bsc: ['0x8aed24bf6e0247be51c57d68ad32a176bf86f4d9'],
-  //       },
-  //       slippagePercent: {
-  //         instantTrades: 2,
-  //         crossChain: 5,
-  //       },
-  //       promoCode: 'a1bc4da1f2',
-  //       fee: 0.075,
-  //       feeTarget: '0xecA0A3eFCf009519052Dc92306fE821b9c7A32A2',
-  //     };
-  //     // prevent accidental changes to the object, for example, when re-creating a widget for another theme
-  //     Object.freeze(configuration);
-  //     // create widget
-  //     rubicWidget.init(configuration);
-  //   }
-  // }, []);
 
   return (
     <section className={styles['swap-area']}>
@@ -161,7 +193,7 @@ const Swap = () => {
                           height={20}
                         />
                       </div>
-                      <span>BNB</span>
+                      <span>{fromToken.token}</span>
                       <IoMdArrowDropdown
                         className={formStyles['sort-icon']}
                         style={
@@ -183,9 +215,9 @@ const Swap = () => {
                   >
                     <Dropdown.Item
                       className={styles['dropdown-menu-item']}
-                      eventKey={'BNB'}
+                      eventKey={fromToken.token}
                     >
-                      BNB
+                      {fromToken.token}
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
@@ -195,22 +227,53 @@ const Swap = () => {
                 <input
                   type="number"
                   className={formStyles.input}
-                  value={value}
+                  value={value ?? 0}
                   onChange={changeValueHandler}
                   min={0}
-                  max={balance?.formatted}
+                  max={
+                    fromToken.token === 'BNB'
+                      ? bnbBalance?.formatted
+                      : usdtBalance?.formatted
+                  }
                 />
-                <button className={formStyles.inputBtn}>MAX</button>
+                <button
+                  className={formStyles.inputBtn}
+                  onClick={() =>
+                    setValue(
+                      fromToken.token === 'BNB'
+                        ? bnbBalance?.formatted
+                        : usdtBalance?.formatted
+                    )
+                  }
+                >
+                  MAX
+                </button>
               </div>
               <div className="px-4 d-flex justify-content-end">
                 <small className="text-white">
-                  Balance: {balance?.formatted}
-                  {balance?.symbol}
+                  Balance:
+                  {fromToken.token === 'BNB'
+                    ? bnbBalance?.formatted
+                    : usdtBalance?.formatted}
+                  {fromToken.token === 'BNB'
+                    ? bnbBalance?.symbol
+                    : usdtBalance?.symbol}
                 </small>
               </div>
             </div>
             <div className="d-flex justify-content-center my-4">
-              <HiSwitchVertical className={formStyles['switch-icon']} />
+              <HiSwitchVertical
+                className={formStyles['switch-icon']}
+                onClick={() => {
+                  setFromToken(
+                    fromToken.token === 'BNB' ? tokenList.USDT : tokenList.BNB
+                  );
+                  setToToken(
+                    toToken.token === 'BNB' ? tokenList.USDT : tokenList.BNB
+                  );
+                  setValue(1);
+                }}
+              />
             </div>
             {/* input block */}
             <div>
@@ -238,7 +301,7 @@ const Swap = () => {
                           height={20}
                         />
                       </div>
-                      <span>USDT</span>
+                      <span>{toToken.token}</span>
                       <IoMdArrowDropdown
                         className={formStyles['sort-icon']}
                         style={
@@ -260,9 +323,9 @@ const Swap = () => {
                   >
                     <Dropdown.Item
                       className={styles['dropdown-menu-item']}
-                      eventKey={'USDT'}
+                      eventKey={toToken.token}
                     >
-                      USDT
+                      {toToken.token}
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
@@ -271,9 +334,20 @@ const Swap = () => {
                 <input
                   type="text"
                   className={formStyles.input}
-                  value={quote?.outAmount / 1e18}
+                  value={!quoteValidating ? quote?.outAmount / 1e18 : ''}
                   readOnly
                 />
+                {quoteValidating && (
+                  <div
+                    className="spinner-container"
+                    style={{
+                      position: 'absolute',
+                      left: 130,
+                    }}
+                  >
+                    <Spinner />
+                  </div>
+                )}
                 {/* <button className={formStyles.inputBtn}>MAX</button> */}
               </div>
               {/* <div className="px-4 d-flex justify-content-end">
@@ -281,10 +355,28 @@ const Swap = () => {
               </div> */}
             </div>
           </div>
-          <div className="d-flex justify-content-center mb-3">
-            <button className={formStyles['swap-btn']} onClick={swapHandler}>
-              SWAP
-            </button>
+          <div className="mb-3">
+            <div className="d-flex w-100">
+              <div className="col-6 text-center position-relative">
+                <button
+                  className={`${formStyles['swap-btn']} mx-auto mb-5`}
+                  onClick={approveHandler}
+                >
+                  Approve
+                </button>
+                <span className={formStyles['step-circle']}>1</span>
+                <span className={formStyles['step-bar']}></span>
+              </div>
+              <div className="col-6 text-center">
+                <button
+                  className={`${formStyles['swap-btn']} mx-auto mb-5`}
+                  onClick={swapHandler}
+                >
+                  SWAP
+                </button>
+                <span className={formStyles['step-circle']}>2</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
