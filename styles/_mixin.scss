@@ -71,6 +71,9 @@
   &:disabled {
     opacity: 0.5;
     background: $color;
+    &:hover {
+      background: $color;
+    }
   }
 }
 

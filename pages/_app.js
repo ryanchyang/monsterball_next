@@ -32,24 +32,6 @@ const client = createClient({
 });
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
-  if (Component.getLayout) {
-    return (
-      <>
-        {/* <Head>
-          <script
-            type="text/javascript"
-            src="https://widgets.rubic.exchange/iframe/bundle.min.js"
-            defer
-          ></script>
-        </Head> */}
-        <SessionProvider session={session}>
-          <WagmiConfig client={client}>
-            {Component.getLayout(<Component {...pageProps} />)}
-          </WagmiConfig>
-        </SessionProvider>
-      </>
-    );
-  }
   return (
     <>
       {/* <Head>
@@ -61,11 +43,17 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
       </Head> */}
       <SessionProvider session={session}>
         <WagmiConfig client={client}>
-          <Navbar />
-          <main>
-            <Component {...pageProps} />
-          </main>
-          <Footer />
+          {Component.getLayout ? (
+            <>{Component.getLayout(<Component {...pageProps} />)}</>
+          ) : (
+            <>
+              <Navbar />
+              <main>
+                <Component {...pageProps} />
+              </main>
+              <Footer />
+            </>
+          )}
         </WagmiConfig>
       </SessionProvider>
     </>

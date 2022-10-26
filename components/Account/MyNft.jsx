@@ -4,27 +4,13 @@ import styles from '../../styles/Account.module.scss';
 import { useState } from 'react';
 import { dataPanel } from 'components/Market/MarketPlace/testData';
 import { AiOutlineHeart } from 'react-icons/ai';
-import { getUserMonster } from 'utils/api/user';
-import { getUserInfo } from 'utils/api/user';
-import useSWR from 'swr';
-import { useSession } from 'next-auth/react';
 
-const MyNft = () => {
+const MyNft = props => {
+  const { myMonster } = props;
+
   const [tabType, setTabType] = useState('system');
   const [data, setData] = useState(dataPanel[0]);
   const [visible, setVisible] = useState(15);
-
-  /* auth start */
-  const { data: session, status: sessionStatus } = useSession();
-  /* auth end */
-
-  /* client fetching start */
-  const { data: myMonster, mutate: myMonsterMutate } = useSWR(
-    '/api/user/myMonster',
-    () => getUserMonster(session.token)
-  );
-  console.log(myMonster);
-  /* client fetching end */
 
   /* handler start */
   const showMoreItems = () => {

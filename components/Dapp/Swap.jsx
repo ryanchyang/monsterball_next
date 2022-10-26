@@ -10,6 +10,7 @@ import bnbIcon from '@/images/dapp/icon_bnb.png';
 import {
   useAccount,
   useBalance,
+  usePrepareSendTransaction,
   useSendTransaction,
   useContractRead,
   usePrepareContractWrite,
@@ -21,6 +22,8 @@ import { getQuote, getSwap } from 'utils/api/web3';
 import useDebounce from 'utils/hooks/useDebounce';
 import { tokenAbi } from '../../utils/constants/tokenAbi';
 import { BigNumber } from 'ethers';
+import MyToast from 'components/Modal/MyToast';
+import apiCodeConfig from 'apiCodeConfig';
 
 //bnb address 0xb8c77482e45f1f44de1745f52c74426c631bdd52
 // goerli eth 0x7af963cF6D228E564e2A0aA0DdBF06210B38615D
@@ -56,10 +59,12 @@ const approveConfig = {
 const Swap = () => {
   const [fromToken, setFromToken] = useState(tokenList.USDT);
   const [toToken, setToToken] = useState(tokenList.BNB);
-  const [value, setValue] = useState('1');
+  const [value, setValue] = useState('');
   // const [valueExchanged, setValueExchanged] = useState('');
   const [fromDropdownShow, setFromDropdownShow] = useState(false);
   const [toDropdownShow, setToDropdownShow] = useState(false);
+  const [toastShow, setToastShow] = useState(false);
+  const [toastContent, setToastContent] = useState({ title: '', content: '' });
 
   const debounceValue = useDebounce(value, 500);
 
@@ -93,32 +98,53 @@ const Swap = () => {
     functionName: 'allowance',
     args: [address, openOceanAddress],
   });
-  // console.log(isApproved.toString());
+
   const {
     data: quote,
     mutate: quoteMutate,
     isValidating: quoteValidating,
   } = useSWR(
-    ['fetchQuote', debounceValue, fromToken],
+    Number(value).valueOf() !== 0
+      ? ['fetchQuote', debounceValue, fromToken]
+      : null,
     () => getQuote(fromToken.address, toToken.address, value)
     // { refreshInterval: 5000 } // 每五秒fetch一次
   );
 
-  const { data: quoteSwap, mutate: quoteSwapMutate } = useSWR(
-    quote ? ['fetchConfig', quote] : null,
+  const {
+    data: quoteSwap,
+    mutate: quoteSwapMutate,
+    isValidating: quoteSwapValidating,
+  } = useSWR(
+    quote || Number(value).valueOf() !== 0 ? ['fetchConfig', quote] : null,
     () => getSwap(fromToken.address, toToken.address, value, address)
   );
-
+  console.log(quoteSwap);
   const { data, isLoading, error, isSuccess, sendTransaction } =
     useSendTransaction({
       request: {
         from: address,
         to: openOceanAddress,
-        gasLimit: BigNumber.from(quoteSwap ? quoteSwap.estimatedGas : '0'),
-        gasPrice: BigNumber.from(quoteSwap ? quoteSwap.gasPrice : '0'),
+        gasLimit: BigNumber.from(
+          !quoteSwapValidating && quoteSwap ? quoteSwap.estimatedGas : '0'
+        ),
+        gasPrice: BigNumber.from(
+          !quoteSwapValidating && quoteSwap ? quoteSwap.gasPrice : '0'
+        ),
         data: quoteSwap?.data ?? '',
       },
+
+      onError(error) {
+        if (error.code === apiCodeConfig['web3_rejectTransaction']) {
+          setToastContent({
+            title: 'Error',
+            content: 'User rejected Transaction',
+          });
+          setToastShow(true);
+        }
+      },
     });
+
   /* web3 end */
 
   /* Handler start */
@@ -126,6 +152,11 @@ const Swap = () => {
   const changeValueHandler = e => {
     setValue(e.target.value);
     // setValueExchanged('');
+  };
+
+  const toTokenAmountHandler = () => {
+    if (Number(value).valueOf === 0 || quoteValidating || !quote) return '';
+    return quote.outAmount / 1e18;
   };
 
   const approveHandler = async () => {
@@ -155,6 +186,12 @@ const Swap = () => {
         </div> */}
       </div>
       <div className={styles['form-area']}>
+        <MyToast
+          show={toastShow}
+          setShow={setToastShow}
+          title={toastContent.title}
+          content={toastContent.content}
+        />
         <div className={formStyles.block}>
           <div className={formStyles.header}>
             <div className="d-flex">
@@ -227,7 +264,7 @@ const Swap = () => {
                 <input
                   type="number"
                   className={formStyles.input}
-                  value={value ?? 0}
+                  value={value}
                   onChange={changeValueHandler}
                   min={0}
                   max={
@@ -235,6 +272,7 @@ const Swap = () => {
                       ? bnbBalance?.formatted
                       : usdtBalance?.formatted
                   }
+                  placeholder="0"
                 />
                 <button
                   className={formStyles.inputBtn}
@@ -271,7 +309,7 @@ const Swap = () => {
                   setToToken(
                     toToken.token === 'BNB' ? tokenList.USDT : tokenList.BNB
                   );
-                  setValue(1);
+                  setValue('');
                 }}
               />
             </div>
@@ -334,7 +372,7 @@ const Swap = () => {
                 <input
                   type="text"
                   className={formStyles.input}
-                  value={!quoteValidating ? quote?.outAmount / 1e18 : ''}
+                  value={toTokenAmountHandler()}
                   readOnly
                 />
                 {quoteValidating && (
@@ -357,25 +395,76 @@ const Swap = () => {
           </div>
           <div className="mb-3">
             <div className="d-flex w-100">
-              <div className="col-6 text-center position-relative">
-                <button
-                  className={`${formStyles['swap-btn']} mx-auto mb-5`}
-                  onClick={approveHandler}
-                >
-                  Approve
-                </button>
-                <span className={formStyles['step-circle']}>1</span>
-                <span className={formStyles['step-bar']}></span>
-              </div>
-              <div className="col-6 text-center">
-                <button
-                  className={`${formStyles['swap-btn']} mx-auto mb-5`}
-                  onClick={swapHandler}
-                >
-                  SWAP
-                </button>
-                <span className={formStyles['step-circle']}>2</span>
-              </div>
+              {/* 如果input金額為0 */}
+              {Number(value).valueOf() !== 0 ? (
+                <>
+                  {/* 如果input金額大於餘額 */}
+                  {Number(value).valueOf() <=
+                  (fromToken.token === 'BNB'
+                    ? bnbBalance?.formatted
+                    : usdtBalance?.formatted) ? (
+                    <>
+                      <div className="col-6 text-center position-relative">
+                        <button
+                          className={`${formStyles['swap-btn']} mx-auto mb-5`}
+                          onClick={approveHandler}
+                          disabled={isApproved.toString() !== '0'}
+                        >
+                          Approve
+                        </button>
+                        <span
+                          className={`${formStyles['step-circle']} ${
+                            isApproved.toString() !== '0' &&
+                            formStyles['active']
+                          }`}
+                        >
+                          1
+                        </span>
+                        {/* Status bar */}
+                        <span
+                          className={
+                            formStyles[
+                              `${
+                                isApproved.toString() !== '0'
+                                  ? 'step-bar--50'
+                                  : 'step-bar'
+                              }`
+                            ]
+                          }
+                        ></span>
+                      </div>
+                      <div className="col-6 text-center">
+                        <button
+                          className={`${formStyles['swap-btn']} mx-auto mb-5`}
+                          onClick={swapHandler}
+                          disabled={quoteSwapValidating || quoteValidating}
+                        >
+                          SWAP
+                        </button>
+                        <span className={formStyles['step-circle']}>2</span>
+                      </div>
+                    </>
+                  ) : (
+                    <div className="m-auto text-center position-relative">
+                      <button
+                        className={`${formStyles['swap-btn']} mx-auto w-100`}
+                        disabled={true}
+                      >
+                        Insufficient amount
+                      </button>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <div className="m-auto text-center position-relative">
+                  <button
+                    className={`${formStyles['swap-btn']} mx-auto w-100`}
+                    disabled={true}
+                  >
+                    Enter amount
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -16,6 +16,8 @@ const config = {
   USER_INFO: `${host}/user/userInfo`,
   // MY_MONSTER
   USER_MONSTER: `${host}/user/myMonster`,
+  // CHARGE_MFB
+  CHARGE_MFB_ADDRESS: `${host}/deposit/info`,
 
   // FRONT-END
   FRONT_END: `${front}`,
