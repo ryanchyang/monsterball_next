@@ -42,7 +42,7 @@ const InviteFriend = () => {
         </div>
         <div className={`${styles['btn-mt']} d-flex`}>
           <div
-            className={`${styles['content-block']} w-100 d-flex justify-content-center justify-content-xl-end`}
+            className={`${styles['content-block']} w-100 d-flex justify-content-center`}
           >
             <p className={styles['invite-btn']}>Invite friends</p>
           </div>

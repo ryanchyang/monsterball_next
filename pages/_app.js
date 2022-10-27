@@ -24,6 +24,7 @@ import { WagmiConfig, createClient } from 'wagmi';
 import { connectors, provider } from 'utils/constants/connectors';
 import Script from 'next/script';
 import Head from 'next/head';
+import { DefaultSeo } from 'next-seo';
 
 const client = createClient({
   autoConnect: true,
@@ -41,6 +42,21 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
           defer
         ></script>
       </Head> */}
+      <DefaultSeo
+        title="Monster Football"
+        description="Welcome to Monster Football"
+        openGraph={{
+          type: 'website',
+          locale: 'en_IE',
+          url: 'https://www.url.ie/',
+          siteName: 'Monster Football',
+        }}
+        twitter={{
+          handle: '@handle',
+          site: '@site',
+          cardType: 'summary_large_image',
+        }}
+      />
       <SessionProvider session={session}>
         <WagmiConfig client={client}>
           {Component.getLayout ? (

@@ -11,7 +11,7 @@ import {
   useSwitchNetwork,
   useBalance,
 } from 'wagmi';
-import useSWR, { useSWRConfig } from 'swr';
+import useSWR from 'swr';
 import { verifyMessage } from 'ethers/lib/utils';
 // import { SiweMessage } from 'siwe';
 import { useSession, signIn, signOut } from 'next-auth/react';
@@ -115,17 +115,23 @@ const Navbar = () => {
 
   /* client fetching start */
 
-  const { cache } = useSWRConfig();
-
   const { data: bindWalletStatus, mutate: bindWalletMutate } = useSWR(
     !address || !session ? null : '/api/user/checkWalletExist',
     () => getIfBindWallet(session.token, address),
-    { revalidateIfStale: false } // mount時不會refetch
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    } // mount時不會refetch
   );
   const { data: userInfo, mutate: userInfoMutate } = useSWR(
     !address || !session ? null : '/api/user/userInfo',
     () => getUserInfo(session.token),
-    { revalidateIfStale: false } // mount時不會refetch
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    } // mount時不會refetch
     // { revalidateOnMount: !cache.has('/api/user/userInfo') }// mount時不會refetch
   );
 

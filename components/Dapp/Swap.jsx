@@ -126,10 +126,14 @@ const Swap = () => {
         from: address,
         to: openOceanAddress,
         gasLimit: BigNumber.from(
-          !quoteSwapValidating && quoteSwap ? quoteSwap.estimatedGas : '0'
+          !quoteSwapValidating && quoteSwap
+            ? quoteSwap.estimatedGas.toString()
+            : '0'
         ),
         gasPrice: BigNumber.from(
-          !quoteSwapValidating && quoteSwap ? quoteSwap.gasPrice : '0'
+          !quoteSwapValidating && quoteSwap
+            ? quoteSwap.gasPrice.toString()
+            : '0'
         ),
         data: quoteSwap?.data ?? '',
       },

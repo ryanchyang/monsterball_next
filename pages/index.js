@@ -13,12 +13,14 @@ import Team from 'components/Home/Team';
 import Partner from 'components/Home/Partner';
 import Technology from 'components/Home/Technology';
 import useCurrentWidth from 'utils/hooks/useCurrentWidth';
+import { NextSeo } from 'next-seo';
 
 export default function Home() {
   const currentWidth = useCurrentWidth();
 
   return (
     <>
+      <NextSeo title="About us" description="Updated description as well" />
       <Banner />
       <AddressGroup currentWidth={currentWidth} />
       {currentWidth > Number(process.env.NEXT_PUBLIC_LG_WIDTH) && (

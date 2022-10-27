@@ -8,6 +8,7 @@ import routeConfig from 'routeConfig';
 import useSWR from 'swr';
 import { getUserMonster, getUserInfo } from 'utils/api/user';
 import { getChargeMfbAddress } from 'utils/api/mfb';
+import { getShopMonsters } from 'utils/api/monster';
 import { useSession } from 'next-auth/react';
 import { useAccount } from 'wagmi';
 
@@ -19,7 +20,6 @@ const Account = () => {
   /* auth start */
   const { data: session, status: sessionStatus } = useSession();
   /* auth end */
-  console.log(session);
 
   const { address } = useAccount();
 
@@ -27,18 +27,31 @@ const Account = () => {
   const { data: myMonster, mutate: myMonsterMutate } = useSWR(
     '/api/user/myMonster',
     () => getUserMonster(session.token),
-    { revalidateIfStale: false }
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    }
   );
+
   const { data: systemAddress } = useSWR(
     '/deposit/info',
     () => getChargeMfbAddress(session.token),
-    { revalidateIfStale: false }
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    }
   );
 
   const { data: userInfo, mutate: userInfoMutate } = useSWR(
     !address || !session ? null : '/api/user/userInfo',
     () => getUserInfo(session.token),
-    { revalidateIfStale: false }
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    }
   );
 
   /* client fetching end */

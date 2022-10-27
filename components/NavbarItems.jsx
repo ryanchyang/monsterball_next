@@ -43,6 +43,13 @@ const NavbarItems = () => {
             </Link>
           </li>
           <li>
+            <Link href={'/shop'}>
+              <a>
+                <span>Shop</span>
+              </a>
+            </Link>
+          </li>
+          <li>
             <Link href={'/dapp/swap'}>
               <span>DApp</span>
             </Link>
