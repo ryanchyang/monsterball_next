@@ -263,7 +263,7 @@ const Navbar = () => {
         {sidebarShow && <SideNavbar setSidebarShow={setSidebarShow} />}
       </AnimatePresence>
       <div className="navbar-content w-100 d-flex justify-content-between align-items-center">
-        <div className="col-8 d-flex align-items-start">
+        <div className="col-8 d-flex align-items-center">
           {/* logo */}
           <Link href={'/'} className="navbar-logo" passHref>
             <a>
@@ -355,7 +355,9 @@ const Navbar = () => {
                 className="signin-btn"
                 onClick={() => signIn('google', { redirect: false })}
               >
-                Sign in
+                <span data-text="Sign in" className="btn-text">
+                  Sign in
+                </span>
               </button>
             ) : (
               <div className="profile cursor-pointer ">
@@ -373,7 +375,7 @@ const Navbar = () => {
         </div>
       </div>
       {/* navbar bg image */}
-      <div className="navbar-img">
+      {/* <div className="navbar-img">
         <Image
           src={
             pageType === 'dapp' &&
@@ -392,7 +394,7 @@ const Navbar = () => {
           height={pageType === 'dapp' ? 250 : 300}
           quality={100}
         />
-      </div>
+      </div> */}
     </header>
   );
 };

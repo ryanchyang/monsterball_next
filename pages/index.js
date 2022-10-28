@@ -20,7 +20,10 @@ export default function Home() {
 
   return (
     <>
-      <NextSeo title="About us" description="Updated description as well" />
+      <NextSeo
+        title="Monster Football"
+        description="Welcome to Monster Football"
+      />
       <Banner />
       <AddressGroup currentWidth={currentWidth} />
       {currentWidth > Number(process.env.NEXT_PUBLIC_LG_WIDTH) && (

@@ -4,7 +4,7 @@
 
 .banner {
   background-color: black;
-  padding-top: 12vh;
+  padding-top: 400px;
   background-image: url('../public/assets/images/home/photo_2022-10-18_23-04-21.jpg');
   background-repeat: no-repeat;
   background-size: cover;
@@ -18,7 +18,7 @@
     height: 55vw;
   }
   @include lg {
-    padding: 12vh 10% 3% 10%;
+    padding: 400px 10% 3% 10%;
     background-size: 100% auto;
     background-size: cover;
     height: 46vw;
@@ -38,9 +38,6 @@
   }
   .banner-text-align {
     text-align: center;
-    @include xl {
-      text-align: left;
-    }
   }
   .banner-btn-green {
     @include btn($green-button);

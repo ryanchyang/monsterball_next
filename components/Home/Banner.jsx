@@ -9,9 +9,9 @@ const Banner = () => {
   return (
     <>
       <section className="banner d-flex flex-column">
-        <div className="col-sm-12 col-md-12  col-xl-6 col-12 d-flex flex-column justify-content-center">
+        <div className="col d-flex flex-column justify-content-center">
           <m.h2
-            className="banner-text-align"
+            className="banner-text-align t-70"
             variants={fadeInFromLeft}
             initial="hidden"
             animate="visible"
@@ -20,7 +20,7 @@ const Banner = () => {
             Monsterball
           </m.h2>
           <m.h2
-            className="color-darker-green banner-text-align"
+            className="color-darker-green banner-text-align t-70"
             variants={fadeInFromLeft}
             initial="hidden"
             animate="slowVisible"

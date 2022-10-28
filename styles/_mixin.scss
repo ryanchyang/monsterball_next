@@ -1,3 +1,5 @@
+@use './_variables' as *;
+
 @mixin mobile {
   @media (max-width: 375px) {
     @content;
@@ -47,26 +49,55 @@
 
 // Btn
 @mixin btn($color) {
-  border: none;
+  border: 5px solid transparent;
+  position: relative;
   white-space: nowrap;
   word-break: break-all;
   display: flex;
   justify-content: center;
   align-items: center;
   width: fit-content;
-  height: 45px;
+  line-height: 0.5;
+  font-family: 'mirza';
   font-weight: 400;
-  font-size: 1.6rem;
-  line-height: 22px;
-  color: #f1eacf;
-  border-radius: 15px;
-  // box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.21);
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-  padding: 5px 20px;
+  font-size: 5.5rem;
+  color: $white;
+  text-align: center;
+  border-radius: 30px;
+  padding: 10px 15px 25px 15px;
   background: $color;
   transition: background 0.2s;
+
+  .btn-text {
+    position: relative;
+    z-index: 3;
+    &::before {
+      z-index: -1;
+      display: block;
+      position: absolute;
+      content: attr(data-text);
+      color: $black;
+      -webkit-text-stroke-width: 8px;
+      -webkit-text-stroke-color: $primary-desaturate;
+    }
+  }
+
+  &::after {
+    position: absolute;
+    top: -10px;
+    bottom: -10px;
+    left: -10px;
+    right: -10px;
+    background: linear-gradient(to top, #ff6b00, #ffc700);
+    content: '';
+    z-index: -1;
+    border-radius: 36px;
+    // box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.21);
+    box-shadow: 2px 6px 2px 0px #00000059;
+  }
+
   &:hover {
-    background: lighten($color, 3%);
+    background: lighten($color, 5%);
   }
   &:disabled {
     opacity: 0.5;
