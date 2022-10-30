@@ -1,17 +1,26 @@
-@use './_variables' as *;
-@use './mixin' as *;
-@import './globals.scss';
+@use "./_variables" as *;
+@use "./mixin" as *;
+@import "./globals.scss";
 
 .roadmap-area {
+  overflow: hidden;
   scroll-behavior: smooth;
   position: relative;
-  background-color: $home-bg;
+  background: $primary url("../public/assets/images/bg_orange.png") no-repeat;
+  background-size: cover;
+  background-position: top center;
+
+  h2 {
+    color: $secondary-dark-green;
+  }
+
+  .roadmap-monster-bg {
+    position: relative;
+    transform: scale(1.07);
+  }
 
   @include lg {
-    padding: 5% 60px 8%;
-    background: #112435 url('../public/assets/images/home/home_roadmap_bg.png')
-      no-repeat 100% 100%;
-    background-size: cover;
+    padding: 0 60px 30px;
   }
   .roadmap-monster01-img {
     position: absolute;
@@ -77,7 +86,7 @@
   .roadmap-text-block {
     width: 100%;
     color: white;
-    font-family: 'LufgaBold';
+    font-family: "LufgaBold";
     padding: 0 5px;
 
     .roadmap-text-content {
@@ -163,7 +172,7 @@
         &::before {
           display: block;
           position: absolute;
-          content: '';
+          content: "";
           left: 0;
           top: 0;
           width: 0;

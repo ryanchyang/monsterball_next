@@ -1,0 +1,19 @@
+@use "./_variables" as *;
+@use "./mixin" as *;
+@import "./globals.scss";
+
+.guide-area {
+  overflow: hidden;
+  position: relative;
+  background: $primary
+    url("../public/assets/images/home/Gameplay_Model_Guide.png") repeat;
+  background-size: cover;
+  background-position: top center;
+
+  h2 {
+    color: $secondary-dark-green;
+  }
+  @include lg {
+    padding: 5% 60px 5%;
+  }
+}

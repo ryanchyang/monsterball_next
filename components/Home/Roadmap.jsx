@@ -1,29 +1,39 @@
-import Image from 'next/image';
-import { SiTarget } from 'react-icons/si';
-import monster1 from '@/images/home/roadmap_monster_01.png';
-import monster2 from '@/images/home/roadmap_monster_02.png';
-
+import Image from "next/image";
+import { SiTarget } from "react-icons/si";
+import monster1 from "@/images/home/roadmap_monster_01.png";
+import monster2 from "@/images/home/roadmap_monster_02.png";
+import monsterBg from "@/images/home/roadmap.png";
 const Roadmap = () => {
   return (
     <section id="roadmap" className="roadmap-area">
-      <div className="roadmap-monster01-img">
+      {/* <div className="roadmap-monster01-img">
         <Image src={monster1} alt="roadmap-monster" />
       </div>
       <div className="roadmap-monster02-img">
         <Image src={monster2} alt="roadmap-monster" />
+      </div> */}
+      <h2 className="text-center t-96">Roadmap</h2>
+      <div className="roadmap-monster-bg">
+        <div>
+          <Image
+            src={monsterBg}
+            alt="monster background"
+            layout="responsive"
+            quality={100}
+          />
+        </div>
       </div>
-      <h2 className="text-center text-lg-start">ROADMAP</h2>
       <div className="d-flex flex-column flex-lg-row justify-content-lg-between">
         {/* Q4/2021 */}
-        <div className="roadmap-text-block">
-          <h4 className="mt-5">
+        {/* <div className="roadmap-text-block">
+          <div className="mt-5">
             <div className="roadmap-target-icon">
               <SiTarget />
             </div>
-            <span className="roadmap-quarter-tag roadmap-quarter-tag-1">
+            <h className="roadmap-quarter-tag roadmap-quarter-tag-1">
               Q4/2021
-            </span>
-          </h4>
+            </h>
+          </div>
           <div className="roadmap-text-content roadmap-text-content-1">
             <p>
               16/11/2021: Launching <br />
@@ -40,9 +50,9 @@ const Roadmap = () => {
               MFB Marketplace Launching, MFB Listing, NFT Staking to Earn MFB
             </p>
           </div>
-        </div>
+        </div> */}
         {/* Q1/2022 */}
-        <div className="roadmap-text-block">
+        {/* <div className="roadmap-text-block">
           <h4 className="mt-lg-5">
             <div className="roadmap-target-icon">
               <SiTarget />
@@ -58,9 +68,9 @@ const Roadmap = () => {
               MID Q1/2022: Play-to-Earn, PvP, and Co-op mode release
             </p>
           </div>
-        </div>
+        </div> */}
         {/* Q2/2022 */}
-        <div className="roadmap-text-block">
+        {/* <div className="roadmap-text-block">
           <h4 className="mt-lg-5">
             <div className="roadmap-target-icon">
               <SiTarget />
@@ -76,9 +86,9 @@ const Roadmap = () => {
               Battlefield version release: Challenge &amp; Tournament
             </p>
           </div>
-        </div>
+        </div> */}
         {/* Q3/2022 */}
-        <div className="roadmap-text-block">
+        {/* <div className="roadmap-text-block">
           <h4 className="mt-lg-5">
             <div className="roadmap-target-icon">
               <SiTarget />
@@ -94,9 +104,9 @@ const Roadmap = () => {
               Release World championship, tournament
             </p>
           </div>
-        </div>
+        </div> */}
         {/* Q4/2022 */}
-        <div className="roadmap-text-block">
+        {/* <div className="roadmap-text-block">
           <h4 className="mt-lg-5">
             <div className="roadmap-target-icon">
               <SiTarget />
@@ -112,7 +122,7 @@ const Roadmap = () => {
               Gratitude gift giveaway
             </p>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

@@ -1,9 +1,9 @@
-@use './_variables' as *;
-@use './mixin' as *;
-@import './globals.scss';
+@use "./_variables" as *;
+@use "./mixin" as *;
+@import "./globals.scss";
 
 .whatsnew-area {
-  background-color: $home-bg;
+  background-color: $secondary-dark-green;
   @include xl {
     padding: 60px 80px;
   }
@@ -13,17 +13,24 @@
     position: relative;
     width: 100%;
     height: auto;
-    img {
-      transform: scale(1.1);
-    }
+    transform: scale(1.1);
   }
   .whatsnew-card-text {
+    font-family: "notoSansMala";
+    h3 {
+      color: $secondary-green;
+    }
+    p {
+      color: $white;
+    }
     &::after {
       display: block;
-      content: '';
+      content: "";
+      position: relative;
+      margin-top: 10px;
       width: 100%;
       height: 1px;
-      background-color: #295c5c;
+      background-color: #ffffff;
     }
   }
 }

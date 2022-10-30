@@ -1,6 +1,6 @@
-@use './_variables' as *;
-@use './mixin' as *;
-@import './globals.scss';
+@use "./_variables" as *;
+@use "./mixin" as *;
+@import "./globals.scss";
 
 .my-navbar {
   position: fixed;
@@ -21,36 +21,29 @@
   }
 }
 .navbar-pc {
+  width: 100%;
   display: none;
   color: $primary-desaturate;
-  font-family: 'mirza';
+  font-family: "mirza";
   @include lg {
     display: block;
-    width: 80%;
     li {
-      // svg {
-      //   font-size: 55px;
-      //   font-weight: bold;
-      //   width: fit-content;
-      //   height: 70px;
-      //   fill: $primary;
-      // }
-      // .svgText {
-      //   fill: $primary;
-      //   stroke: black;
-      //   stroke-width: 17px;
-      //   stroke-linejoin: round;
-      //   paint-order: stroke;
-      //   &::after {
-      //     position: absolute;
-      //     display: block;
-      //     content: '';
-      //     width: 100%;
-      //     height: 5px;
-      //     background-color: $black;
-      //   }
-      // }
-      width: 100%;
+      &:nth-child(1) {
+        width: 15%;
+      }
+      &:nth-child(2) {
+        width: 21%;
+      }
+      &:nth-child(3) {
+        width: 26.6%;
+      }
+      &:nth-child(4) {
+        width: 21.8%;
+      }
+      &:nth-child(5) {
+        width: 14.7%;
+      }
+      overflow: hidden;
       display: flex;
       padding: 5px 12px;
       font-size: 3.6rem;
@@ -66,6 +59,30 @@
         text-align: left;
         align-items: center;
       }
+      svg {
+        width: 100%;
+        cursor: pointer;
+        font-size: 55px;
+        font-weight: bold;
+        height: 70px;
+        fill: $primary;
+      }
+      .svgText {
+        fill: $primary-desaturate;
+        stroke: $primary-desaturate;
+        stroke-width: 1px;
+        stroke-linejoin: round;
+        paint-order: stroke;
+        &--active {
+          position: relative;
+          fill: $primary;
+          stroke: black;
+          stroke-width: 16px;
+          stroke-linejoin: round;
+          paint-order: stroke;
+        }
+      }
+
       span,
       a {
         white-space: nowrap;
@@ -85,19 +102,19 @@
     }
   }
 }
-.navbar-item--active {
-  position: relative;
-  color: $primary !important;
-  &::before {
-    z-index: -1;
-    display: block;
-    position: absolute;
-    content: attr(data-text);
-    color: $black;
-    -webkit-text-stroke-width: 10px;
-    -webkit-text-stroke-color: black;
-  }
-}
+// .navbar-item--active {
+//   position: relative;
+//   color: $primary !important;
+//   &::before {
+//     z-index: -1;
+//     display: block;
+//     position: absolute;
+//     content: attr(data-text);
+//     color: $black;
+//     -webkit-text-stroke-width: 10px;
+//     -webkit-text-stroke-color: black;
+//   }
+// }
 
 .navbar-img {
   display: block;
@@ -120,26 +137,23 @@
   }
 }
 
-.navbar-logo-mb {
-  width: 170px;
+// .navbar-logo-mb {
+//   width: 170px;
+//   display: block;
+//   img {
+//     width: 100%;
+//   }
+//   @include lg {
+//     display: none;
+//   }
+// }
+.navbar-logo-pc {
   display: block;
   img {
     width: 100%;
   }
   @include lg {
-    display: none;
-  }
-}
-.navbar-logo-pc {
-  width: 170px;
-  display: none;
-  img {
-    width: 100%;
-  }
-  @include lg {
-    margin-right: 15px;
-    width: 50px;
-    display: block;
+    margin-right: 30px;
   }
 }
 .icon-hamburger {
@@ -224,7 +238,7 @@
 
 .connected-wallet-btn {
   @include btn($bluegreen-button);
-  font-family: 'LufgaBold';
+  font-family: "LufgaBold";
 }
 
 .disconnect-wallet-btn {
@@ -240,7 +254,7 @@
 .bind-wallet-btn {
   @include btn($bluegreen-button);
   width: 60%;
-  font-family: 'LufgaBold';
+  font-family: "LufgaBold";
   position: relative;
   text-align: center;
   .spinner-container {
@@ -275,10 +289,17 @@
 
 .signin-btn {
   @include btn($primary);
+
+  &:hover {
+    background: $primary-desaturate;
+  }
+  span {
+    @include btnText($primary-desaturate);
+  }
 }
 .signout-btn {
   @include btn($bluegreen-button);
-  font-family: 'LufgaBold';
+  font-family: "LufgaBold";
 }
 
 .profile {
@@ -295,7 +316,7 @@
 .system-mfb-count {
   position: relative;
   input {
-    font-family: 'LufgaBold';
+    font-family: "LufgaBold";
     padding: 5px 5px 5px 35px;
     font-size: 20px;
     color: black;

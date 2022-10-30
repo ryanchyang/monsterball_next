@@ -1,11 +1,11 @@
-@use './_variables' as *;
-@use './mixin' as *;
-@import './globals.scss';
+@use "./_variables" as *;
+@use "./mixin" as *;
+@import "./globals.scss";
 
 .banner {
   background-color: black;
   padding-top: 400px;
-  background-image: url('../public/assets/images/home/photo_2022-10-18_23-04-21.jpg');
+  background-image: url("../public/assets/images/home/photo_2022-10-18_23-04-21.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -13,12 +13,12 @@
   height: 80vh;
   @include md {
     background-color: transparent;
-    background-image: url('../public/assets/images/home/index_bg.png');
+    background-image: url("../public/assets/images/home/index_bg.png");
     background-size: cover;
     height: 55vw;
   }
   @include lg {
-    padding: 400px 10% 3% 10%;
+    padding: 250px 10% 3% 10%;
     background-size: 100% auto;
     background-size: cover;
     height: 46vw;
@@ -28,35 +28,66 @@
       color: #30ad8f;
     }
   }
-  h2 {
-    line-height: 1.5;
+  h1 {
+    font-family: "mirza";
+    line-height: 1;
+    svg {
+      width: 100%;
+      font-size: 70px;
+      font-weight: bold;
+      height: 84px;
+      fill: $primary;
+    }
+    .svgText {
+      &--active {
+        position: relative;
+        fill: $primary;
+        stroke: white;
+        stroke-width: 19px;
+        stroke-linejoin: round;
+        paint-order: stroke;
+      }
+    }
   }
   p {
-    text-align: left;
-    margin-top: 20px;
-    line-height: 1.8;
+    font-family: "mirza";
+    text-align: center;
+    color: $white;
+    font-size: 4rem;
+    margin-top: 100px;
+    line-height: 1;
   }
   .banner-text-align {
     text-align: center;
   }
-  .banner-btn-green {
-    @include btn($green-button);
-
-    width: 140px;
-    height: 45px;
-  }
-  .banner-btn-icon {
-    width: 25px;
-    height: 25px;
-    margin-right: 10px;
-    img {
-      width: 100%;
-      height: auto;
+  .banner-buy-btn {
+    font-family: "LufgaBold";
+    width: fit-content;
+    height: 100%;
+    position: relative;
+    background-color: transparent;
+    border: none;
+    &:hover {
+      filter: brightness(80%);
     }
   }
-  .banner-btn-bluegreen {
-    @include btn($bluegreen-button);
-    width: 140px;
-    height: 45px;
+  .banner-btn-icon {
+    width: 100%;
+    height: 100%;
+    color: $white;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: -8px;
+    top: 0;
+    span {
+      padding-bottom: 5px;
+      font-size: 2.4rem;
+      @include btnText($secondary-green);
+    }
+    .yellow-text {
+      @include btnText($secondary);
+    }
   }
 }

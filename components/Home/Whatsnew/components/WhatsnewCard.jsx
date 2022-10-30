@@ -1,10 +1,9 @@
-import Image from 'next/image';
-import MonsterCard1 from '@/images/home/home_banner_01.png';
-import { RiDiscordLine } from 'react-icons/ri';
-import { AiOutlineTwitter } from 'react-icons/ai';
-import { FaTelegramPlane } from 'react-icons/fa';
-import { motion as m } from 'framer-motion';
-import { flipCardVariants } from 'utils/constants/framerConstant';
+import Image from "next/image";
+import MonsterCard1 from "@/images/home/home_banner_01.png";
+import { AiOutlineTwitter } from "react-icons/ai";
+import { FaTelegramPlane, FaDiscord } from "react-icons/fa";
+import { motion as m } from "framer-motion";
+import { flipCardVariants } from "utils/constants/framerConstant";
 
 const WhatsnewCard = () => {
   return (
@@ -18,14 +17,14 @@ const WhatsnewCard = () => {
         />
       </div>
       <div className="whatsnew-card-text">
-        <h5 className="color-light-green">ANNOUNCEMENTS</h5>
-        <p className="text-primary">New monsters are coming !!!</p>
-        <p className="text-primary">Apr 11 - 3</p>
+        <h3 className="mt-3">ANNOUNCEMENTS</h3>
+        <p className="text-white t-24">New monsters are coming !!!</p>
+        <p className="text-white t-24">Apr 11 - 3</p>
       </div>
       <div>
-        <RiDiscordLine className="text-primary t-18 my-3 mx-3" />
-        <AiOutlineTwitter className="text-primary t-18 my-3 mx-3" />
-        <FaTelegramPlane className="text-primary t-18 my-3 mx-3" />
+        <FaDiscord className="text-dark t-24 my-3 mx-3 ms-0" />
+        <AiOutlineTwitter className="text-dark t-24 my-3 mx-3" />
+        <FaTelegramPlane className="text-dark t-24 my-3 mx-3" />
       </div>
     </m.div>
   );

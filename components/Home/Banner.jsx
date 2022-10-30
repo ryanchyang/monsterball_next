@@ -1,56 +1,96 @@
-import Image from 'next/image';
-import coinMfb from '@/images/coin_mfb.png';
-import coinGold from '@/images/coin_gold.png';
-import { motion as m } from 'framer-motion';
-import { fadeInFromLeft } from '../../utils/constants/framerConstant';
-import fire from '@/images/home/nftItem/fire-idle.gif';
+import Image from "next/image";
+import coinMfb from "@/images/icon_NFTS_1.png";
+import coinGold from "@/images/icon_gold_1.png";
+import buyBtn from "@/images/btn_buy_1.png";
+import { motion as m } from "framer-motion";
+import { fadeInFromLeft } from "../../utils/constants/framerConstant";
 
 const Banner = () => {
   return (
     <>
       <section className="banner d-flex flex-column">
-        <div className="col d-flex flex-column justify-content-center">
-          <m.h2
+        <div className="col d-flex flex-column">
+          <m.h1
             className="banner-text-align t-70"
             variants={fadeInFromLeft}
             initial="hidden"
             animate="visible"
             exit="exit"
           >
-            Monsterball
-          </m.h2>
-          <m.h2
+            <svg viewBox="0 0 439 84">
+              <text className={"svgText--active"} x="0" y="50">
+                MONSTERBALL
+              </text>
+            </svg>
+          </m.h1>
+          <m.h1
             className="color-darker-green banner-text-align t-70"
             variants={fadeInFromLeft}
             initial="hidden"
             animate="slowVisible"
             exit="exit"
           >
-            Ready to kick !!
-          </m.h2>
-          <p className="font-BoldenVan text-primary px-2 banner-text-align text-start mx-lg-0 mx-5 mb-5">
+            <svg viewBox="0 0 439 84">
+              <text className={"svgText--active"} x="0" y="50">
+                ready to kick!!
+              </text>
+            </svg>
+          </m.h1>
+          <p className="col-8 banner-text-align mx-auto">
             In a world full of monsters, form a strong football team and there
-            are monsters of various attributes waiting for you to collect, come
-            and enter this fantasy world!
+            are monsters of various attributes <br /> waiting for you to
+            collect, come and enter this fantasy world!
           </p>
         </div>
-        <div className="d-flex justify-content-center justify-content-xl-start">
-          <div className="me-4">
-            <button className="banner-btn-green font-BoldenVan">
+        <div className="d-flex justify-content-center">
+          <button className="banner-buy-btn me-5">
+            <div>
+              <Image
+                src={buyBtn}
+                alt="coin-mfb"
+                width={275}
+                height={105}
+                unoptimized
+              />
               <div className="banner-btn-icon">
-                <Image src={coinMfb} alt="coin-mfb" />
+                <div className="me-4">
+                  <Image
+                    src={coinMfb}
+                    alt="coin-mfb"
+                    width={80}
+                    height={80}
+                    unoptimized
+                  />
+                </div>
+                <span data-text="Buy NFTS">Buy NFTS</span>
               </div>
-              <span>BUY MFB</span>
-            </button>
-          </div>
-          <button className="banner-btn-bluegreen font-BoldenVan">
-            <div
-              className="banner-btn-icon"
-              style={{ width: '20px', height: '20px' }}
-            >
-              <Image src={coinGold} alt="buy-gold" />
             </div>
-            BUY GOLD
+          </button>
+
+          <button className="banner-buy-btn">
+            <div>
+              <Image
+                src={buyBtn}
+                alt="coin-mfb"
+                width={275}
+                height={105}
+                unoptimized
+              />
+              <div className="banner-btn-icon">
+                <div className="me-4">
+                  <Image
+                    src={coinGold}
+                    alt="coinGold"
+                    width={80}
+                    height={80}
+                    unoptimized
+                  />
+                </div>
+                <span data-text="Buy Coins" className="yellow-text">
+                  Buy Coins
+                </span>
+              </div>
+            </div>
           </button>
         </div>
         {/* <div
