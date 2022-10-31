@@ -1,12 +1,12 @@
-@use "./_variables" as *;
-@use "./mixin" as *;
-@import "./globals.scss";
+@use './_variables' as *;
+@use './mixin' as *;
+@import './globals.scss';
 
 .guide-area {
   overflow: hidden;
   position: relative;
   background: $primary
-    url("../public/assets/images/home/Gameplay_Model_Guide.png") repeat;
+    url('../public/assets/images/home/Gameplay_Model_Guide.png') no-repeat;
   background-size: cover;
   background-position: top center;
 
@@ -14,6 +14,33 @@
     color: $secondary-dark-green;
   }
   @include lg {
-    padding: 5% 60px 5%;
+    padding: 5% 60px 8%;
+  }
+
+  .swiper-btn {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -10%);
+    .hover {
+      display: none;
+    }
+    .unhover {
+      display: block;
+    }
+    &:hover {
+      .hover {
+        display: block;
+      }
+      .unhover {
+        display: none;
+      }
+    }
+    &.mybtn-prev {
+      left: 135px;
+    }
+    &.mybtn-next {
+      right: 135px;
+    }
   }
 }

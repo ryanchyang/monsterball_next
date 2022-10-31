@@ -1,12 +1,12 @@
-@use "./_variables" as *;
-@use "./mixin" as *;
-@import "./globals.scss";
+@use './_variables' as *;
+@use './mixin' as *;
+@import './globals.scss';
 
 .roadmap-area {
   overflow: hidden;
   scroll-behavior: smooth;
   position: relative;
-  background: $primary url("../public/assets/images/bg_orange.png") no-repeat;
+  background: $primary url('../public/assets/images/bg_orange.png') no-repeat;
   background-size: cover;
   background-position: top center;
 
@@ -14,7 +14,55 @@
     color: $secondary-dark-green;
   }
 
+  .roadmap-block {
+    & > div {
+      width: 350px;
+      &:nth-child(1) {
+        color: $secondary-dark-green;
+        h2 {
+          color: $secondary-dark-green;
+        }
+      }
+      &:nth-child(2) {
+        color: $secondary-green;
+        h2 {
+          color: $secondary-green;
+        }
+      }
+      &:nth-child(3) {
+        color: $primary-desaturate;
+        h2 {
+          color: $primary-desaturate;
+        }
+      }
+      &:nth-child(4) {
+        color: $primary;
+        h2 {
+          color: $primary;
+        }
+      }
+    }
+    position: absolute;
+    width: 95%;
+    top: 63vh;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 3;
+    h2 {
+      font-size: 5.5rem;
+    }
+    p {
+      font-size: 2.4rem;
+    }
+    @include xl {
+      width: 93%;
+    }
+  }
+
   .roadmap-monster-bg {
+    z-index: 1;
     position: relative;
     transform: scale(1.07);
   }
@@ -86,7 +134,7 @@
   .roadmap-text-block {
     width: 100%;
     color: white;
-    font-family: "LufgaBold";
+    font-family: 'LufgaBold';
     padding: 0 5px;
 
     .roadmap-text-content {
@@ -172,7 +220,7 @@
         &::before {
           display: block;
           position: absolute;
-          content: "";
+          content: '';
           left: 0;
           top: 0;
           width: 0;

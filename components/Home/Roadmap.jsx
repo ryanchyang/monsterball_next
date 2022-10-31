@@ -1,8 +1,8 @@
-import Image from "next/image";
-import { SiTarget } from "react-icons/si";
-import monster1 from "@/images/home/roadmap_monster_01.png";
-import monster2 from "@/images/home/roadmap_monster_02.png";
-import monsterBg from "@/images/home/roadmap.png";
+import Image from 'next/image';
+import { SiTarget } from 'react-icons/si';
+import monster1 from '@/images/home/roadmap_monster_01.png';
+import monster2 from '@/images/home/roadmap_monster_02.png';
+import monsterBg from '@/images/home/roadmap.png';
 const Roadmap = () => {
   return (
     <section id="roadmap" className="roadmap-area">
@@ -20,10 +20,41 @@ const Roadmap = () => {
             alt="monster background"
             layout="responsive"
             quality={100}
+            priority
           />
         </div>
       </div>
-      <div className="d-flex flex-column flex-lg-row justify-content-lg-between">
+      <div className="roadmap-block d-flex flex-column flex-lg-row justify-content-lg-between">
+        <div className="text-center">
+          <h2 className="mb-5">2022 Q1</h2>
+          <p>
+            Game design <br />
+            Economic model <br />
+            Main gameplay determined <br />
+            Art style determined <br />
+          </p>
+        </div>
+        <div className="text-center">
+          <h2 className="mb-5">2022 Q3</h2>
+          <p>
+            White Paper <br />
+            Alpha test <br />
+            Official Website <br />
+          </p>
+        </div>
+        <div className="text-center">
+          <h2 className="mb-5">2022 Q4</h2>
+          <p>Project Launch</p>
+        </div>
+        <div className="text-center">
+          <h2 className="mb-5">2023 Q1</h2>
+          <p>
+            Hatch <br />
+            Daily rewards <br />
+            World Map <br />
+          </p>
+        </div>
+
         {/* Q4/2021 */}
         {/* <div className="roadmap-text-block">
           <div className="mt-5">

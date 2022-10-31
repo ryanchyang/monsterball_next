@@ -1,28 +1,29 @@
-@use "./_variables" as *;
-@use "./mixin" as *;
-@import "~bootstrap/scss/bootstrap";
+@use './_variables' as *;
+@use './mixin' as *;
+@import '~bootstrap/scss/bootstrap';
 
 // @import './marketTemplate.scss';
 @font-face {
-  font-family: "LufgaBold";
-  src: url(../public/assets/fonts/LufgaBold.ttf) format("truetype");
+  font-family: 'LufgaBold';
+  src: url(../public/assets/fonts/LufgaBold.ttf) format('truetype');
 }
 @font-face {
-  font-family: "BoldenVan";
-  src: url(../public/assets/fonts/BoldenVan.ttf) format("truetype");
+  font-family: 'BoldenVan';
+  src: url(../public/assets/fonts/BoldenVan.ttf) format('truetype');
 }
 @font-face {
-  font-family: "bahnschrift";
-  src: url(../public/assets/fonts/bahnschrift.ttf) format("truetype");
+  font-family: 'bahnschrift';
+  src: url(../public/assets/fonts/bahnschrift.ttf) format('truetype');
 }
 @font-face {
-  font-family: "mirza";
-  src: url(../public/assets/fonts/Mirza-Bold.woff2) format("truetype");
+  font-family: 'mirza';
+  src: url(../public/assets/fonts/Mirza-Bold.woff2) format('truetype');
 }
 @font-face {
-  font-family: "notoSansMala";
-  src: url(../public/assets/fonts/LufgaBold.ttf) format("truetype");
+  font-family: 'notoSansMala';
+  src: url(../public/assets/fonts/LufgaBold.ttf) format('truetype');
 }
+
 // reset browser
 
 // 共用class 開始
@@ -157,7 +158,7 @@ h2 {
   font-size: 3rem;
   letter-spacing: 2px;
   color: $font-primary;
-  font-family: "mirza";
+  font-family: 'mirza';
   font-weight: bold;
   @include xl {
     font-size: 3.6rem;
@@ -165,7 +166,7 @@ h2 {
   }
 }
 h3 {
-  font-family: "notoSansMala";
+  font-family: 'notoSansMala';
   font-size: 2.8rem;
   @include xl {
     font-size: 4rem;
@@ -181,6 +182,7 @@ h5 {
   font-size: 2rem;
 }
 p {
+  font-family: 'notoSansMala';
   font-size: 1.8rem;
   @include xl {
     font-size: 2rem;
@@ -202,13 +204,13 @@ p {
 }
 
 .font-LufgaBold {
-  font-family: "LufgaBold";
+  font-family: 'LufgaBold';
 }
 .font-BoldenVan {
-  font-family: "BoldenVan";
+  font-family: 'BoldenVan';
 }
 .font-mirza {
-  font-family: "mirza";
+  font-family: 'mirza';
 }
 
 // main 開始

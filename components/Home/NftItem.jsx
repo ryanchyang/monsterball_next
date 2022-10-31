@@ -10,13 +10,16 @@ import 'swiper/css';
 const NftItem = () => {
   return (
     <section id="nft_item" className="nft-item-area">
-      <div className="d-flex flex-column align-items-center col-lg-7 mx-auto">
-        <h2 className="mb-4 text-center">Various combinations</h2>
-        <p>
-          Combine multiple major Monster types with hundreds of coats body parts
-          and mode, creating infinite possibilities of Monster
+      <div className="nft-item-content d-flex flex-column align-items-center col-lg-8 mx-auto">
+        <h2 className="mb-4 text-center t-96 text-white">NFT Display</h2>
+        <h4 className="t-70 mb-5">BUY. SELL. COLLECT.</h4>
+        <p className="col-6">
+          The things you earn and buy in Monsterball are yours to own. {''}
+          {`That's`} right - each Monster is an NFT which means that they hold
+          value and can be sold and bought on our marketplace. Stay tuned for
+          news about the release of our marketplace
         </p>
-        <button
+        {/* <button
           className="nft-item-btn mt-4"
           onClick={() =>
             window.open(
@@ -26,7 +29,7 @@ const NftItem = () => {
           }
         >
           READ WHITE PAPER
-        </button>
+        </button> */}
       </div>
       <div className="nft-item-monster-block">
         <ul className="nft-item-monster-list">

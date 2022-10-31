@@ -3,18 +3,31 @@
 @import './globals.scss';
 
 .nft-item-area {
-  margin-top: -1px;
+  z-index: 3;
+  margin-top: -200px;
   position: relative;
-  background-color: $home-bg;
+  background: transparent url('../public/assets/images/home/NFT_Display_1.png')
+    no-repeat;
+  background-size: auto auto cover;
+  background-position: top center;
   @include lg {
-    background: url('../public/assets/images/home/bg_nft_item.png'),
-      linear-gradient(180deg, #1a515f 0, #228378);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
+    // background: url('../public/assets/images/home/bg_nft_item.png'),
+    //   linear-gradient(180deg, #1a515f 0, #228378);
   }
   @include xl {
     padding: 3%;
   }
+  // .nft-item-display {
+  //   position: absolute;
+  //   top: -180px;
+  //   left: 50%;
+  //   z-index: 3;
+  //   transform: scale(1.15) translate(-44%, 0);
+  // }
+  .nft-item-content {
+    margin-top: 150px;
+  }
+
   .nft-item-btn {
     @include btn($green-button);
     width: fit-content;
@@ -30,7 +43,7 @@
     white-space: nowrap;
     overflow: hidden;
     @include xl {
-      margin: 50px 0;
+      margin: 280px -60px 80px;
     }
   }
   .nft-item-monster-list {
@@ -49,12 +62,13 @@
     height: 45vw;
     margin: 0 15px;
     border-radius: 3vw;
+    border: 15px solid $secondary-dark-green;
     @include lg {
       width: 15vw;
       height: 15vw;
       border-radius: 2vw;
     }
-    background-color: #1a515f;
+    background-color: $black;
 
     .nft-item-card-img {
       width: 100%;
@@ -75,7 +89,13 @@
   }
 
   h2 {
-    color: $green-button;
+    font-size: 9.6rem;
+    color: $white;
+  }
+  h4 {
+    font-family: 'mirza';
+    font-size: 7rem;
+    color: $secondary;
   }
   p {
     font-family: 'LufgaBold';
