@@ -3,27 +3,28 @@
 @import './globals.scss';
 
 .partner-area {
+  top: -80px;
   position: relative;
-  background-color: $home-bg;
-  padding: 30px;
+  background-color: $white;
+  padding: 0 30px;
   padding-top: 0;
+  margin-bottom: -100px;
   @include lg {
-    padding: 7% 3%;
-    background-color: #228378;
-    background-image: url('../public/assets/images/home/home_bk_investors.png');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
+    padding: 0% 3%;
   }
   h2 {
-    color: $green-button;
+    color: $secondary-dark-green;
+    margin-bottom: 5%;
   }
   .partner-grid {
     display: grid;
-    grid-template-columns: 0.33fr 0.33fr 0.33fr;
+    // grid-template-columns: 0.33fr 0.33fr 0.33fr;
+    grid-template-columns: repeat(5, 1fr);
+    margin-bottom: 121px;
     @include lg {
-      width: 75%;
-      margin: 0 auto;
-      grid-template-columns: 0.25fr 0.25fr 0.25fr 0.25fr;
+      // width: 75%;
+      // margin: 0 auto;
+      // grid-template-columns: 0.25fr 0.25fr 0.25fr 0.25fr;
     }
   }
   .partner-img {
@@ -41,6 +42,13 @@
       width: 80%;
       max-width: 100px;
       object-fit: cover;
+    }
+    &.pic13 {
+      img {
+        width: 70%;
+        max-width: 100px;
+        object-fit: cover;
+      }
     }
   }
 }

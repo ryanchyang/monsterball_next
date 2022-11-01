@@ -7,10 +7,10 @@
   z-index: 1;
   background: transparent url('../public/assets/images/home/team_bg.png')
     no-repeat;
-  background-size: auto auto cover;
+  background-size: cover;
   background-position: top center;
   @include lg {
-    padding: 8% 3% 15%;
+    padding: 8% 3% 18%;
   }
   h2 {
     font-size: 9.6rem;
@@ -24,9 +24,11 @@
     z-index: 3;
     position: relative;
     margin-top: 10px;
+    margin-bottom: 50px;
   }
   .team-frame {
     position: absolute;
+    width: fit-content;
     top: 140px;
     left: 0;
     right: 0;
@@ -59,7 +61,7 @@
     justify-content: center;
     align-items: center;
     @include lg {
-      padding: 15px;
+      padding: 0px;
     }
   }
   .team-member-img {
@@ -74,7 +76,7 @@
     cursor: pointer;
     position: absolute;
     top: 50%;
-    transform: translate(0, -10%);
+    transform: translate(0, -30%);
     .hover {
       display: none;
     }
@@ -90,10 +92,10 @@
       }
     }
     &.mybtn-prev {
-      left: 135px;
+      left: 45px;
     }
     &.mybtn-next {
-      right: 135px;
+      right: 45px;
     }
   }
 }

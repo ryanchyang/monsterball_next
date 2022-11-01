@@ -14,9 +14,13 @@
     color: $secondary-dark-green;
   }
   @include lg {
-    padding: 5% 60px 8%;
+    padding: 5% 60px 10%;
   }
-
+  .video {
+    iframe {
+      margin-top: 0px;
+    }
+  }
   .swiper-btn {
     cursor: pointer;
     position: absolute;

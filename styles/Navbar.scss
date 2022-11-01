@@ -1,6 +1,6 @@
-@use "./_variables" as *;
-@use "./mixin" as *;
-@import "./globals.scss";
+@use './_variables' as *;
+@use './mixin' as *;
+@import './globals.scss';
 
 .my-navbar {
   position: fixed;
@@ -24,7 +24,7 @@
   width: 100%;
   display: none;
   color: $primary-desaturate;
-  font-family: "mirza";
+  font-family: 'mirza';
   @include lg {
     display: block;
     li {
@@ -238,7 +238,7 @@
 
 .connected-wallet-btn {
   @include btn($bluegreen-button);
-  font-family: "LufgaBold";
+  font-family: 'LufgaBold';
 }
 
 .disconnect-wallet-btn {
@@ -254,7 +254,7 @@
 .bind-wallet-btn {
   @include btn($bluegreen-button);
   width: 60%;
-  font-family: "LufgaBold";
+  font-family: 'LufgaBold';
   position: relative;
   text-align: center;
   .spinner-container {
@@ -291,7 +291,9 @@
   @include btn($primary);
 
   &:hover {
-    background: $primary-desaturate;
+    &::after {
+      background-color: $primary-desaturate;
+    }
   }
   span {
     @include btnText($primary-desaturate);
@@ -299,7 +301,7 @@
 }
 .signout-btn {
   @include btn($bluegreen-button);
-  font-family: "LufgaBold";
+  font-family: 'LufgaBold';
 }
 
 .profile {
@@ -316,7 +318,7 @@
 .system-mfb-count {
   position: relative;
   input {
-    font-family: "LufgaBold";
+    font-family: 'LufgaBold';
     padding: 5px 5px 5px 35px;
     font-size: 20px;
     color: black;

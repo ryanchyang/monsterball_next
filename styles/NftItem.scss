@@ -8,7 +8,7 @@
   position: relative;
   background: transparent url('../public/assets/images/home/NFT_Display_1.png')
     no-repeat;
-  background-size: auto auto cover;
+  background-size: cover;
   background-position: top center;
   @include lg {
     // background: url('../public/assets/images/home/bg_nft_item.png'),

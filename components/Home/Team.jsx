@@ -36,20 +36,18 @@ const Team = () => {
   return (
     <section className="team-area">
       <div className="team-frame">
-        <div>
-          <Image
-            src={frame}
-            alt="team frame"
-            width={1892}
-            height={807}
-            quality={100}
-            priority
-          />
-        </div>
+        <Image
+          src={frame}
+          alt="team frame"
+          width={1886}
+          height={807}
+          quality={100}
+          priority
+        />
       </div>
-
-      {/* 手機板顯示 */}
       <h2 className="text-center team-title">Team</h2>
+      {/* 手機板顯示 */}
+
       <div className="team-card-block">
         <Swiper
           slidesPerView={1}
@@ -71,8 +69,7 @@ const Team = () => {
       {/* 電腦板顯示 */}
 
       <div className="team-card-block-pc">
-        <div className="col-10 mx-auto">
-          <h2 className="mb-4 text-center">Team</h2>
+        <div className="col-11 mx-auto">
           <Swiper
             slidesPerView={4}
             spaceBetween={0}

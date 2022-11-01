@@ -1,18 +1,18 @@
 import Image from 'next/image';
-import partner1 from '@/images/home/investors/home_partner_01.png';
-import partner2 from '@/images/home/investors/home_partner_02.png';
-import partner3 from '@/images/home/investors/home_partner_03.png';
-import partner4 from '@/images/home/investors/home_partner_04.png';
-import partner5 from '@/images/home/investors/home_partner_05.png';
-import partner6 from '@/images/home/investors/home_partner_06.png';
-import partner7 from '@/images/home/investors/home_partner_07.png';
-import partner8 from '@/images/home/investors/home_partner_08.png';
-import partner9 from '@/images/home/investors/home_partner_09.png';
-import partner10 from '@/images/home/investors/home_partner_10.png';
-import partner11 from '@/images/home/investors/home_partner_11.png';
-import partner12 from '@/images/home/investors/home_partner_12.png';
-import partner13 from '@/images/home/investors/home_partner_13.png';
-import partner14 from '@/images/home/investors/home_partner_14.png';
+import partner1 from '@/images/home/investors/icon_Partner_1.png';
+import partner2 from '@/images/home/investors/icon_Partner_2.png';
+import partner3 from '@/images/home/investors/icon_Partner_3.png';
+import partner4 from '@/images/home/investors/icon_Partner_4.png';
+import partner5 from '@/images/home/investors/icon_Partner_5.png';
+import partner6 from '@/images/home/investors/icon_Partner_6.png';
+import partner7 from '@/images/home/investors/icon_Partner_7.png';
+import partner8 from '@/images/home/investors/icon_Partner_8.png';
+import partner9 from '@/images/home/investors/icon_Partner_9.png';
+import partner10 from '@/images/home/investors/icon_Partner_10.png';
+import partner11 from '@/images/home/investors/icon_Partner_11.png';
+import partner12 from '@/images/home/investors/icon_Partner_12.png';
+import partner13 from '@/images/home/investors/icon_Partner_13.png';
+import partner14 from '@/images/home/investors/icon_Partner_14.png';
 
 const Partner = () => {
   const partners = {
@@ -34,10 +34,10 @@ const Partner = () => {
 
   return (
     <section className="partner-area">
-      <h2 className="text-center mb-5">Investors and Partners</h2>
+      <h2 className="text-center t-96">Investors and Partner</h2>
       <div className="partner-grid">
-        {Array.from({ length: 13 }).map((_, i) => (
-          <div key={i} className="partner-img">
+        {Array.from({ length: 14 }).map((_, i) => (
+          <div key={i} className={`partner-img pic${i}`}>
             <Image src={partners[`partner${i + 1}`]} alt="partner-logo" />
           </div>
         ))}

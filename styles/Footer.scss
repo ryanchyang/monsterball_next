@@ -6,33 +6,62 @@
   padding: 37.5px 40px;
   background-color: $home-bg;
   @include lg {
-    background-image: url('../public/assets/images/home/bg_footer.png');
+    background-image: url('../public/assets/images/home/Follow_Us.png');
     background-repeat: no-repeat;
-    background-size: 100% 100%;
-    padding: 10% 15% 5% 20%;
+
+    background-size: cover;
+    background-position: top center;
+    padding: 2% 10% 6%;
     margin-top: -15px;
   }
   h2 {
-    display: none;
-    @include lg {
-      display: block;
-      color: white;
-    }
+    display: block;
+    color: white;
+    margin-bottom: 100px;
   }
   .email-input {
-    @include input(190px, 45px, black, white);
-    @include lg {
-      width: 200px;
-    }
+    @include input(539px, 103px, black, white);
+    // @include lg {
+    //   width: 200px;
+    // }
   }
   .footer-subscribe-btn {
-    font-family: 'LufgaBold';
-    @include btn(#006f73);
-    width: 190px;
-    @include lg {
-      width: 150px;
+    // border: 5px solid transparent;
+    position: relative;
+    border: none;
+    white-space: nowrap;
+    word-break: break-all;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    line-height: 1;
+    font-family: 'mirza';
+    font-weight: 400;
+    font-size: 5.5rem;
+    color: $white;
+    border-radius: 36px;
+    padding: 10px 15px 25px 15px;
+    background: linear-gradient(to top, #ff6b00, #ffc700);
+    transition: background 0.2s;
+    span {
+      position: relative;
+      z-index: 3;
+    }
+    // box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.21);
+    box-shadow: 2px 6px 2px 0px #00000059;
+    &::after {
+      display: block;
+      position: absolute;
+      width: calc(100% - 10px);
+      height: calc(100% - 10px);
+      top: 5px;
+      background: $primary;
+      content: '';
+      border-radius: 30px;
     }
   }
+
   .footer-navbar {
     display: none;
     @include lg {

@@ -44,14 +44,42 @@ const Guide = () => {
               {[1, 1, 1].map((_, i) => (
                 <SwiperSlide key={i}>
                   <div
+                    className="video"
                     style={{
                       width: '1319px',
                       height: '758px',
                       borderRadius: '30px',
                       backgroundColor: 'black',
                       margin: '0 auto',
+                      overflow: 'hidden',
                     }}
-                  ></div>
+                  >
+                    {/* <video
+                      className="introVideo"
+                      width="100%"
+                      height="auto"
+                      controls="controls"
+                      autoPlay="autoplay"
+                      muted="muted"
+                      loop="loop"
+                      playsInline=""
+                    >
+                      <source
+                        // src={'/assets/video/index_vedio.mp4'}
+                        src={'https://www.youtube.com/watch?v=Zsnt2Xm1NBo'}
+                        type="video/youtube"
+                      />
+                    </video> */}
+                    <iframe
+                      width="1319px"
+                      height="758px"
+                      src="https://www.youtube.com/embed/Zsnt2Xm1NBo"
+                      title="派大星反霸凌"
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                    ></iframe>
+                  </div>
                 </SwiperSlide>
               ))}
             </div>

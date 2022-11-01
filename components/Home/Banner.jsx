@@ -1,9 +1,15 @@
-import Image from "next/image";
-import coinMfb from "@/images/icon_NFTS_1.png";
-import coinGold from "@/images/icon_gold_1.png";
-import buyBtn from "@/images/btn_buy_1.png";
-import { motion as m } from "framer-motion";
-import { fadeInFromLeft } from "../../utils/constants/framerConstant";
+import Image from 'next/image';
+import coinMfb from '@/images/icon_NFTS_1.png';
+import coinGold from '@/images/icon_gold_1.png';
+import buyBtn from '@/images/btn_buy_1.png';
+import { motion as m } from 'framer-motion';
+import { fadeInFromLeft } from '../../utils/constants/framerConstant';
+import { TbBrandTwitter } from 'react-icons/tb';
+import { AiOutlineFacebook } from 'react-icons/ai';
+import twitter from '@/images/home/btn_Twitter_1.png';
+import facebook from '@/images/home/btn_Facebook_1.png';
+import instagram from '@/images/home/btn_Instagram_1.png';
+import twitch from '@/images/home/btn_Twitch_1.png';
 
 const Banner = () => {
   return (
@@ -18,7 +24,7 @@ const Banner = () => {
             exit="exit"
           >
             <svg viewBox="0 0 439 84">
-              <text className={"svgText--active"} x="0" y="50">
+              <text className={'svgText--active'} x="0" y="50">
                 MONSTERBALL
               </text>
             </svg>
@@ -31,7 +37,7 @@ const Banner = () => {
             exit="exit"
           >
             <svg viewBox="0 0 439 84">
-              <text className={"svgText--active"} x="0" y="50">
+              <text className={'svgText--active'} x="0" y="50">
                 ready to kick!!
               </text>
             </svg>
@@ -42,7 +48,7 @@ const Banner = () => {
             collect, come and enter this fantasy world!
           </p>
         </div>
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center position-relative">
           <button className="banner-buy-btn me-5">
             <div>
               <Image
@@ -66,7 +72,6 @@ const Banner = () => {
               </div>
             </div>
           </button>
-
           <button className="banner-buy-btn">
             <div>
               <Image
@@ -92,6 +97,30 @@ const Banner = () => {
               </div>
             </div>
           </button>
+          <div className="social-links">
+            <div>
+              <Image src={twitter} alt="twitter logo" width={30} height={30} />
+            </div>
+            <div>
+              <Image
+                src={facebook}
+                alt="facebook logo"
+                width={30}
+                height={30}
+              />
+            </div>
+            <div>
+              <Image
+                src={instagram}
+                alt="instagram logo"
+                width={30}
+                height={30}
+              />
+            </div>
+            <div>
+              <Image src={twitch} alt="twitch logo" width={30} height={30} />
+            </div>
+          </div>
         </div>
         {/* <div
           className="nft-item-card-img"
