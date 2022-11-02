@@ -6,17 +6,19 @@
   overflow: hidden;
   scroll-behavior: smooth;
   position: relative;
-  background: $primary url('../public/assets/images/bg_orange.png') no-repeat;
+  background: $primary_orange url('../public/assets/images/home/Roadmap.png')
+    no-repeat;
   background-size: cover;
   background-position: top center;
 
   h2 {
-    color: $secondary-dark-green;
+    color: $secondary_yellow--light;
   }
 
   .roadmap-block {
     & > div {
-      width: 350px;
+      width: 20%;
+      max-width: 350px;
       &:nth-child(1) {
         color: $secondary-dark-green;
         h2 {
@@ -30,21 +32,21 @@
         }
       }
       &:nth-child(3) {
-        color: $primary-desaturate;
+        color: $primary_brown--desaturate;
         h2 {
-          color: $primary-desaturate;
+          color: $primary_brown--desaturate;
         }
       }
       &:nth-child(4) {
-        color: $primary;
+        color: $primary_brown;
         h2 {
-          color: $primary;
+          color: $primary_brown;
         }
       }
     }
     position: absolute;
     width: 95%;
-    top: 63vh;
+    top: 53%;
     left: 0;
     right: 0;
     margin-left: auto;
@@ -56,19 +58,25 @@
     p {
       font-size: 2.4rem;
     }
+    @include lg {
+      top: 50%;
+    }
     @include xl {
-      width: 93%;
+      width: 95%;
+      top: 53%;
     }
   }
 
   .roadmap-monster-bg {
     z-index: 1;
     position: relative;
-    transform: scale(1.07);
+    transform: scale(1.01);
+    margin-top: -30px;
   }
 
   @include lg {
-    padding: 0 60px 30px;
+    // padding: 0 60px 30px;
+    padding: 0;
   }
   .roadmap-monster01-img {
     position: absolute;

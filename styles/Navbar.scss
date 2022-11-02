@@ -10,8 +10,8 @@
 }
 .navbar-content {
   position: relative;
-  height: 126px;
-  background-color: $secondary-light;
+  height: 60px;
+  background-color: $secondary_brown;
   line-height: 1;
   z-index: 5;
   padding: 0px 30px;
@@ -20,10 +20,20 @@
     padding: 0px 50px;
   }
 }
+.navbar-left {
+  width: 80%;
+  @include lg {
+    width: 70%;
+  }
+  @include xl {
+    width: 60%;
+  }
+}
+
 .navbar-pc {
   width: 100%;
   display: none;
-  color: $primary-desaturate;
+  color: $secondary_brown;
   font-family: 'mirza';
   @include lg {
     display: block;
@@ -41,16 +51,16 @@
         width: 21.8%;
       }
       &:nth-child(5) {
-        width: 14.7%;
+        width: 13.7%;
       }
       overflow: hidden;
       display: flex;
-      padding: 5px 12px;
+      padding: 5px 0px;
       font-size: 3.6rem;
       justify-content: center;
       @include xxl {
-        padding: 30px;
-        font-size: 5.5rem;
+        padding: 10px;
+        font-size: 4rem;
         font-weight: bold;
         font-stretch: normal;
         font-style: normal;
@@ -62,21 +72,21 @@
       svg {
         width: 100%;
         cursor: pointer;
-        font-size: 55px;
-        font-weight: bold;
+        font-size: 4rem;
+        font-weight: normal;
         height: 70px;
-        fill: $primary;
+        fill: $primary_brown--desaturate;
       }
       .svgText {
-        fill: $primary-desaturate;
-        stroke: $primary-desaturate;
-        stroke-width: 1px;
+        fill: $primary_brown--desaturate;
+        stroke: $primary_brown--desaturate;
+        stroke-width: 0.5px;
         stroke-linejoin: round;
         paint-order: stroke;
         &--active {
           position: relative;
-          fill: $primary;
-          stroke: black;
+          fill: $primary_brown--desaturate;
+          stroke: $primary_brown;
           stroke-width: 16px;
           stroke-linejoin: round;
           paint-order: stroke;
@@ -96,7 +106,7 @@
         height: 100%;
         display: flex;
         justify-content: center;
-        color: $primary-desaturate;
+        color: $primary_brown--desaturate;
         cursor: pointer;
       }
     }
@@ -137,29 +147,34 @@
   }
 }
 
-// .navbar-logo-mb {
-//   width: 170px;
-//   display: block;
-//   img {
-//     width: 100%;
-//   }
-//   @include lg {
-//     display: none;
-//   }
-// }
-.navbar-logo-pc {
+.navbar-logo-mb {
   display: block;
   img {
     width: 100%;
   }
   @include lg {
+    display: none;
+  }
+}
+.navbar-logo-pc {
+  display: none;
+
+  img {
+    width: 100%;
+  }
+  @include lg {
+    display: block;
     margin-right: 30px;
+  }
+  @include xxl {
+    display: block;
+    margin-right: 100px;
   }
 }
 .icon-hamburger {
   display: block;
-  font-size: 2.4rem;
-  color: $font-primary;
+  font-size: 3rem;
+  color: $black;
   cursor: pointer;
   @include lg {
     display: none;
@@ -288,15 +303,15 @@
 }
 
 .signin-btn {
-  @include btn($primary);
+  @include btn($primary_orange, #ff6b00, #ffc700);
 
   &:hover {
     &::after {
-      background-color: $primary-desaturate;
+      background-color: $primary_orange--desaturate;
     }
   }
   span {
-    @include btnText($primary-desaturate);
+    @include btnText($primary_brown);
   }
 }
 .signout-btn {

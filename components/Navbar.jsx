@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import Image from "next/image";
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import Image from 'next/image';
 import {
   useAccount,
   useConnect,
@@ -10,33 +10,29 @@ import {
   useSignMessage,
   useSwitchNetwork,
   useBalance,
-} from "wagmi";
-import useSWR from "swr";
-import { verifyMessage } from "ethers/lib/utils";
+} from 'wagmi';
+import useSWR from 'swr';
+import { verifyMessage } from 'ethers/lib/utils';
 // import { SiweMessage } from 'siwe';
-import { useSession, signIn, signOut } from "next-auth/react";
-import { shortenAddress } from "../utils/helpers/shortenAddress";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { BsPlusLg, BsLink45Deg } from "react-icons/bs";
-import { FiAlertTriangle } from "react-icons/fi";
-import NavbarItems from "./NavbarItems";
-import SideNavbar from "./SideNavbar";
-import MyModal from "./Modal/MyModal";
-import ConnectModal from "./Modal/ConnectModal";
-import SwitchAlertModal from "./Modal/SwitchAlertModal";
-import Spinner from "./Spinner";
-import navbarImage from "@/images/header/menu_bg.png";
-import navbarImageDapp from "@/images/header/DApp_header.png";
-import navbarLogoMb from "@/images/logo_mb.png";
-import navbarLogoPc from "@/images/header/icon_MB_logo_01.png";
-import navbarWallet from "@/images/header/btn_money.png";
-import mfbImg from "@/images/coin_mfb.png";
-import { AnimatePresence } from "framer-motion";
-import useCurrentWidth from "utils/hooks/useCurrentWidth";
-import { getNonce } from "utils/api/web3";
-import { getIfBindWallet, verifyBindWallet } from "utils/api/auth";
-import { getUserInfo } from "utils/api/user";
-import apiCodeConfig from "apiCodeConfig";
+import { useSession, signIn, signOut } from 'next-auth/react';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import NavbarItems from './NavbarItems';
+import SideNavbar from './SideNavbar';
+import MyModal from './Modal/MyModal';
+import ConnectModal from './Modal/ConnectModal';
+import SwitchAlertModal from './Modal/SwitchAlertModal';
+import NavbarRight from './NavbarRight';
+import Spinner from './Spinner';
+import navbarImage from '@/images/header/menu_bg.png';
+import navbarImageDapp from '@/images/header/DApp_header.png';
+import navbarLogoMb from '@/images/logo_mb.png';
+import navbarLogoPc from '@/images/header/icon_MB_logo_01.png';
+import { AnimatePresence } from 'framer-motion';
+import useCurrentWidth from 'utils/hooks/useCurrentWidth';
+import { getNonce } from 'utils/api/web3';
+import { getIfBindWallet, verifyBindWallet } from 'utils/api/auth';
+import { getUserInfo } from 'utils/api/user';
+import apiCodeConfig from 'apiCodeConfig';
 
 const binanceChainId = 97;
 
@@ -91,10 +87,10 @@ const Navbar = () => {
           data
         );
 
-        if (verifyResult.code !== apiCodeConfig["success"]) return;
+        if (verifyResult.code !== apiCodeConfig['success']) return;
         bindWalletMutate();
         setBindWalletLoading(false);
-        localStorage.setItem("bind_address", bindAddress);
+        localStorage.setItem('bind_address', bindAddress);
         setConnectModalShow(false);
       }
     },
@@ -116,7 +112,7 @@ const Navbar = () => {
   /* client fetching start */
 
   const { data: bindWalletStatus, mutate: bindWalletMutate } = useSWR(
-    !address || !session ? null : "/api/user/checkWalletExist",
+    !address || !session ? null : '/api/user/checkWalletExist',
     () => getIfBindWallet(session.token, address),
     {
       revalidateIfStale: false,
@@ -125,7 +121,7 @@ const Navbar = () => {
     } // mount時不會refetch
   );
   const { data: userInfo, mutate: userInfoMutate } = useSWR(
-    !address || !session ? null : "/api/user/userInfo",
+    !address || !session ? null : '/api/user/userInfo',
     () => getUserInfo(session.token),
     {
       revalidateIfStale: false,
@@ -147,7 +143,7 @@ const Navbar = () => {
     setBindWalletLoading(true);
 
     const nonceResult = await getNonce(session.token, address);
-    if (nonceResult.code !== apiCodeConfig["success"]) return;
+    if (nonceResult.code !== apiCodeConfig['success']) return;
 
     signMessage({ message: nonceResult.data });
     // Create SIWE message with pre-fetched nonce and sign with wallet
@@ -185,17 +181,17 @@ const Navbar = () => {
       let elem = document.getElementById(router.asPath.slice(2));
 
       if (elem) {
-        elem.scrollIntoView({ behavior: "smooth", block: "center" });
+        elem.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     } else {
-      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }
   }, [router.asPath]);
 
   // check page navbar type
   useEffect(() => {
-    const page = router.pathname.split("/")[1];
-    if (!page) return setPageType("index");
+    const page = router.pathname.split('/')[1];
+    if (!page) return setPageType('index');
     return setPageType(page);
   }, [router.pathname]);
 
@@ -242,7 +238,7 @@ const Navbar = () => {
             address={address}
           />
         }
-        title={"Wallet setting"}
+        title={'Wallet setting'}
       />
       <MyModal
         show={switchAlertModalShow}
@@ -255,25 +251,38 @@ const Navbar = () => {
             disconnect={disconnect}
           />
         }
-        title={"Check your network"}
+        title={'Check your network'}
         close={false}
       />
       {/* side navbar */}
       <AnimatePresence>
-        {sidebarShow && <SideNavbar setSidebarShow={setSidebarShow} />}
+        {sidebarShow && (
+          <SideNavbar
+            setSidebarShow={setSidebarShow}
+            isConnected={isConnected}
+            bindWalletStatus={bindWalletStatus}
+            userInfo={userInfo}
+            session={session}
+            setConnectModalShow={setConnectModalShow}
+            address={address}
+            signIn={signIn}
+          />
+        )}
       </AnimatePresence>
       <div className="navbar-content w-100 d-flex justify-content-between align-items-center">
-        {/* navbar right */}
-        <div className="col-10 d-flex align-items-center">
+        {/* navbar left */}
+        <div className="navbar-left d-flex align-items-center">
           {/* logo */}
-          <Link href={"/"} className="navbar-logo" passHref>
-            {/* <div className="navbar-logo-mb">
-                <Image src={navbarLogoMb} alt="logo" />
-              </div> */}
-            <div className="navbar-logo-pc">
-              <Image src={navbarLogoPc} alt="logo" width={147} height={96} />
-            </div>
-          </Link>
+          <div className="navbar-logo-mb">
+            <Link href={'/'} passHref>
+              <Image src={navbarLogoPc} alt="logo" width={73} height={47} />
+            </Link>
+          </div>
+          <div className="navbar-logo-pc">
+            <Link href={'/'} passHref>
+              <Image src={navbarLogoPc} alt="logo" width={73} height={47} />
+            </Link>
+          </div>
           {/* navbar pc */}
           <NavbarItems pageType={pageType} />
         </div>
@@ -281,95 +290,16 @@ const Navbar = () => {
         <span className="cursor-pointer" onClick={() => setSidebarShow(true)}>
           <GiHamburgerMenu className="icon-hamburger" />
         </span>
-        {/* navbar left */}
-        <div className="d-lg-flex d-none justify-content-end align-items-center">
-          {/* MFB count */}
-          {isConnected && bindWalletStatus && (
-            <div className="d-flex me-4">
-              <div className="system-mfb-count me-3">
-                <div style={{ position: "absolute", top: "9px", left: "5px" }}>
-                  <Image src={mfbImg} alt="mfb coin" width={20} height={20} />
-                </div>
-                <input type="text" disabled value={userInfo?.mfb} />
-                <BsPlusLg
-                  style={{
-                    fontSize: "20px",
-                    color: "white",
-                    paddingBottom: "5px",
-                    marginLeft: "3px",
-                  }}
-                />
-              </div>
-            </div>
-          )}
-          {/* wallet btn */}
-          {session && (
-            <>
-              {!isConnected ? (
-                <div
-                  className="navbar-wallet cursor-pointer me-4 position-relative"
-                  onClick={() => {
-                    setConnectModalShow(true);
-                  }}
-                  // disabled={!metamaskConnector.ready}
-                >
-                  <Image src={navbarWallet} alt="icon-wallet" className="" />
-                  <div className="alert-icon">
-                    <FiAlertTriangle
-                      style={{
-                        color: "white",
-                        fontSize: "18px",
-                      }}
-                    />
-                  </div>
-                  {/* error 除錯 */}
-                  {/* {error && <div>{error.message}</div>} */}
-                </div>
-              ) : (
-                <div className="position-relative">
-                  <button
-                    className="connected-wallet-btn me-4"
-                    onClick={() => setConnectModalShow(true)}
-                  >
-                    {shortenAddress(address)}
-                  </button>
-                  {!bindWalletStatus && (
-                    <div className="link-icon">
-                      <BsLink45Deg
-                        style={{
-                          color: "white",
-                          fontSize: "18px",
-                        }}
-                      />
-                    </div>
-                  )}
-                </div>
-              )}
-            </>
-          )}
-          {/* google login */}
-          <div className="d-flex">
-            {!session ? (
-              <button
-                className="signin-btn"
-                onClick={() => signIn("google", { redirect: false })}
-              >
-                <span data-text="Sign in">Sign in</span>
-              </button>
-            ) : (
-              <div className="profile cursor-pointer ">
-                <Link href="/account">
-                  <Image
-                    src={session.user.image}
-                    alt="profile image"
-                    width={50}
-                    height={50}
-                  />
-                </Link>
-              </div>
-            )}
-          </div>
-        </div>
+        {/* navbar right */}
+        <NavbarRight
+          isConnected={isConnected}
+          bindWalletStatus={bindWalletStatus}
+          userInfo={userInfo}
+          session={session}
+          setConnectModalShow={setConnectModalShow}
+          address={address}
+          signIn={signIn}
+        />
       </div>
       {/* navbar bg image */}
       {/* <div className="navbar-img">

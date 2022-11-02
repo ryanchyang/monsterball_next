@@ -20,9 +20,10 @@
   left: 0;
   width: 80%;
   height: 100%;
-  background-color: $home-bg;
+  background-color: $secondary_yellow--light;
   display: block;
-  border-right: 1px solid #29705f;
+  border-right: none;
+  box-shadow: 5px 0 40px rgba(0, 0, 0, 0.3);
 }
 
 .sidebar-list {
@@ -31,9 +32,9 @@
   flex-direction: column;
   align-items: center;
   padding: 30px;
-  font-size: 1.6rem;
-  font-family: 'BoldenVan';
-  color: $green-button;
+  font-size: 3rem;
+  font-family: 'mirza';
+  color: $black;
   li {
     width: 100%;
     padding: 15px;

@@ -1,11 +1,23 @@
-@use "./_variables" as *;
-@use "./mixin" as *;
-@import "./globals.scss";
+@use './_variables' as *;
+@use './mixin' as *;
+@import './globals.scss';
 
 .whatsnew-area {
-  background-color: $secondary-dark-green;
+  position: relative;
+  z-index: 1;
+  background-color: $primary_brown--desaturate;
+  @include md {
+    padding: 60px 50px;
+  }
   @include xl {
-    padding: 60px 80px;
+    padding: 60px 0px;
+  }
+  @include xxl {
+    padding: 30px 80px 60px 80px;
+  }
+
+  h2 {
+    color: $primary_brown;
   }
 
   .whatsnew-card-img {
@@ -16,16 +28,17 @@
     transform: scale(1.1);
   }
   .whatsnew-card-text {
-    font-family: "notoSansMala";
+    font-family: 'notoSansMala';
     h3 {
-      color: $secondary-green;
+      font-size: 2.8rem;
+      color: $primary_brown;
     }
     p {
       color: $white;
     }
     &::after {
       display: block;
-      content: "";
+      content: '';
       position: relative;
       margin-top: 10px;
       width: 100%;

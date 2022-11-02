@@ -34,7 +34,7 @@ const Partner = () => {
 
   return (
     <section className="partner-area">
-      <h2 className="text-center t-96">Investors and Partner</h2>
+      <h2 className="text-center">Investors and Partner</h2>
       <div className="partner-grid">
         {Array.from({ length: 14 }).map((_, i) => (
           <div key={i} className={`partner-img pic${i}`}>

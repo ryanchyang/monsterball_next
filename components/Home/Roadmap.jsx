@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { SiTarget } from 'react-icons/si';
 import monster1 from '@/images/home/roadmap_monster_01.png';
 import monster2 from '@/images/home/roadmap_monster_02.png';
-import monsterBg from '@/images/home/roadmap.png';
+import monsterBg from '@/images/home/roadmap_monster.png';
 const Roadmap = () => {
   return (
     <section id="roadmap" className="roadmap-area">
@@ -12,7 +12,7 @@ const Roadmap = () => {
       <div className="roadmap-monster02-img">
         <Image src={monster2} alt="roadmap-monster" />
       </div> */}
-      <h2 className="text-center t-96">Roadmap</h2>
+      <h2 className="text-center">Roadmap</h2>
       <div className="roadmap-monster-bg">
         <div>
           <Image

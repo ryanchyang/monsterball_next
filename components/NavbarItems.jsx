@@ -1,32 +1,31 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
-const NavbarItems = (props) => {
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+const NavbarItems = props => {
   const { pageType } = props;
-  console.log(pageType);
   return (
     <>
       <div className="navbar-pc">
         <ul className="w-100 d-flex justify-content-between">
           <li>
-            <Link href={"/#video"} passHref>
+            <Link href={'/'} passHref>
               {/* <span data-text="Home" className="navbar-item--active">
                 Home
               </span> */}
-              <svg viewBox="0 0 145 66">
-                {pageType === "index" && (
+              <svg viewBox="0 0 110 70">
+                {/* {pageType === 'index' && (
                   <rect
                     width="50"
                     height="20"
-                    style={{ fill: "rgb(0,0,0)" }}
+                    style={{ fill: 'rgb(0,0,0)' }}
                     x="40"
                     y="22"
                   />
-                )}
+                )} */}
                 <text
                   className={
-                    pageType === "index" ? "svgText--active" : "svgText"
+                    pageType === 'index' ? 'svgText--active' : 'svgText'
                   }
-                  x="10"
+                  x="3"
                   y="45"
                 >
                   Home
@@ -35,23 +34,23 @@ const NavbarItems = (props) => {
             </Link>
           </li>
           <li>
-            <Link href={"/play"}>
+            <Link href={'/play'}>
               {/* <span data-text="Play Now" className="navbar-item--active">
                 Play Now
               </span> */}
-              <svg viewBox="0 0 230 66">
-                {pageType === "play" && (
+              <svg viewBox="0 0 180 70">
+                {/* {pageType === 'play' && (
                   <rect
                     width="50"
                     height="20"
-                    style={{ fill: "rgb(0,0,0)" }}
+                    style={{ fill: 'rgb(0,0,0)' }}
                     x="120"
                     y="22"
                   />
-                )}
+                )} */}
                 <text
                   className={
-                    pageType === "play" ? "svgText--active" : "svgText"
+                    pageType === 'play' ? 'svgText--active' : 'svgText'
                   }
                   x="10"
                   y="45"
@@ -62,12 +61,12 @@ const NavbarItems = (props) => {
             </Link>
           </li>
           <li>
-            <Link href={"/market/market_place"}>
+            <Link href={'/market/market_place'}>
               {/* <span>MarketPlace</span> */}
-              <svg viewBox="0 0 295 66">
+              <svg viewBox="0 0 220 70">
                 <text
                   className={
-                    pageType === "market" ? "svgText--active" : "svgText"
+                    pageType === 'market' ? 'svgText--active' : 'svgText'
                   }
                   x="10"
                   y="45"
@@ -79,11 +78,11 @@ const NavbarItems = (props) => {
           </li>
           <li>
             <svg
-              viewBox="0 0 240 66"
+              viewBox="0 0 180 70"
               onClick={() =>
                 window.open(
-                  "https://monsterfootball-1.gitbook.io/untitled/",
-                  "_blank"
+                  'https://monsterfootball-1.gitbook.io/untitled/',
+                  '_blank'
                 )
               }
             >
@@ -93,20 +92,20 @@ const NavbarItems = (props) => {
             </svg>
           </li>
           <li>
-            <Link href={"/shop"}>
-              <svg viewBox="0 0 140 66">
-                {pageType === "shop" && (
+            <Link href={'/shop'}>
+              <svg viewBox="0 0 100 70">
+                {/* {pageType === 'shop' && (
                   <rect
                     width="50"
                     height="20"
-                    style={{ fill: "rgb(0,0,0)" }}
+                    style={{ fill: 'rgb(0,0,0)' }}
                     x="40"
                     y="22"
                   />
-                )}
+                )} */}
                 <text
                   className={
-                    pageType === "shop" ? "svgText--active" : "svgText"
+                    pageType === 'shop' ? 'svgText--active' : 'svgText'
                   }
                   x="10"
                   y="45"

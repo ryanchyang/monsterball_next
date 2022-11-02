@@ -1,9 +1,9 @@
-import Image from "next/image";
-import MonsterCard1 from "@/images/home/home_banner_01.png";
-import { AiOutlineTwitter } from "react-icons/ai";
-import { FaTelegramPlane, FaDiscord } from "react-icons/fa";
-import { motion as m } from "framer-motion";
-import { flipCardVariants } from "utils/constants/framerConstant";
+import Image from 'next/image';
+import MonsterCard1 from '@/images/home/home_banner_01.png';
+import { AiOutlineTwitter } from 'react-icons/ai';
+import { FaTelegramPlane, FaDiscord } from 'react-icons/fa';
+import { motion as m } from 'framer-motion';
+import { flipCardVariants } from 'utils/constants/framerConstant';
 
 const WhatsnewCard = () => {
   return (
@@ -18,8 +18,8 @@ const WhatsnewCard = () => {
       </div>
       <div className="whatsnew-card-text">
         <h3 className="mt-3">ANNOUNCEMENTS</h3>
-        <p className="text-white t-24">New monsters are coming !!!</p>
-        <p className="text-white t-24">Apr 11 - 3</p>
+        <p className="text-white">New monsters are coming !!!</p>
+        <p className="text-white">Apr 11 - 3</p>
       </div>
       <div>
         <FaDiscord className="text-dark t-24 my-3 mx-3 ms-0" />

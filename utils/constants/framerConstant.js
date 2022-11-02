@@ -55,7 +55,7 @@ export const flipVariants = {
 };
 
 export const flipCardVariants = {
-  hidden: { opacity: 0, rotateX: 80 },
+  hidden: { opacity: 0, rotateX: 90 },
   visible: {
     opacity: 1,
     rotateX: 0,

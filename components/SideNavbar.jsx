@@ -5,9 +5,19 @@ import {
   sideNavbarVariants,
   maskVariants,
 } from 'utils/constants/framerConstant';
+import NavbarRightMb from './NavbarRightMb';
 
 const SideNavbar = props => {
-  const { setSidebarShow } = props;
+  const {
+    setSidebarShow,
+    isConnected,
+    bindWalletStatus,
+    userInfo,
+    session,
+    setConnectModalShow,
+    address,
+    signIn,
+  } = props;
 
   const router = useRouter();
   return (
@@ -27,15 +37,39 @@ const SideNavbar = props => {
         animate="visible"
         exit="exit"
       >
-        <ul className="sidebar-list w-100 d-flex flex-column justify-content-between t-16 font-BoldenVan">
+        <ul className="sidebar-list">
           <li>
-            <span
-              onClick={() => {
-                setSidebarShow(false);
-              }}
-            >
-              Gamplay
-            </span>
+            <Link href={'/'}>
+              <span
+                onClick={() => {
+                  setSidebarShow(false);
+                }}
+              >
+                Home
+              </span>
+            </Link>
+          </li>
+          <li>
+            <Link href={'/play'}>
+              <span
+                onClick={() => {
+                  setSidebarShow(false);
+                }}
+              >
+                Play Now
+              </span>
+            </Link>
+          </li>
+          <li>
+            <Link href={'/market/market_place'}>
+              <span
+                onClick={() => {
+                  setSidebarShow(false);
+                }}
+              >
+                MarketPlace
+              </span>
+            </Link>
           </li>
           <li>
             <span
@@ -47,58 +81,30 @@ const SideNavbar = props => {
                 );
               }}
             >
-              Paper
+              LitePaper
             </span>
           </li>
           <li>
-            <Link href="/#roadmap" scroll={false}>
+            <Link href={'/shop'}>
               <span
                 onClick={() => {
                   setSidebarShow(false);
                 }}
               >
-                Road map
+                Shop
               </span>
             </Link>
-          </li>
-          <li>
-            <Link href="/#nft_item" scroll={false}>
-              <span
-                onClick={() => {
-                  setSidebarShow(false);
-                }}
-              >
-                NFT item
-              </span>
-            </Link>
-          </li>
-          <li>
-            <span
-              onClick={() => {
-                setSidebarShow(false);
-                router.push('/market/market_place');
-              }}
-            >
-              Market
-            </span>
-          </li>
-          <li>
-            <Link href="/dapp/swap">
-              <span onClick={() => setSidebarShow(false)}>DApp</span>
-            </Link>
-          </li>
-          <li>
-            <Link href="/invite">
-              <span onClick={() => setSidebarShow(false)}>Invite</span>
-            </Link>
-          </li>
-          <li>
-            <span>Play</span>
-          </li>
-          <li>
-            <button className="sidebar-connect-btn">Connect wallet</button>
           </li>
         </ul>
+        <NavbarRightMb
+          isConnected={isConnected}
+          bindWalletStatus={bindWalletStatus}
+          userInfo={userInfo}
+          session={session}
+          setConnectModalShow={setConnectModalShow}
+          address={address}
+          signIn={signIn}
+        />
       </m.div>
     </>
   );

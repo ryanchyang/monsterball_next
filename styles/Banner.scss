@@ -3,25 +3,32 @@
 @import './globals.scss';
 
 .banner {
+  position: relative;
+  z-index: 3;
   background-color: black;
-  padding-top: 400px;
-  background-image: url('../public/assets/images/home/photo_2022-10-18_23-04-21.jpg');
+  background-image: url('../public/assets/images/home/display_video.png');
   background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+  background-size: auto 102%;
+  background-position: left top;
   width: 100%;
-  height: 80vh;
+  height: 90vh;
+  padding-top: 100px;
+  box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.35);
   @include md {
+    padding: 200px 10% 4% 10%;
     background-color: transparent;
-    background-image: url('../public/assets/images/home/index_bg.png');
-    background-size: cover;
-    height: 55vw;
+    background-image: url('../public/assets/images/home/display_video.png');
+    background-size: auto 102%;
+    background-position: center top;
+    height: 100vh;
   }
   @include lg {
-    padding: 250px 10% 3% 10%;
-    background-size: 100% auto;
+    padding: 10% 10% 4% 10%;
+  }
+
+  @include xxl {
+    background-position: center;
     background-size: cover;
-    height: 46vw;
   }
   h2:first-child {
     @include lg {
@@ -32,20 +39,27 @@
     font-family: 'mirza';
     line-height: 1;
     svg {
-      width: 100%;
+      width: 300px;
       font-size: 70px;
       font-weight: bold;
-      height: 84px;
-      fill: $primary;
+      height: 50px;
+      fill: $primary_orange;
+      @include md {
+        width: 100%;
+        height: 84px;
+      }
     }
     .svgText {
       &--active {
         position: relative;
-        fill: $primary;
+        fill: $primary_orange;
         stroke: white;
-        stroke-width: 19px;
+        stroke-width: 10px;
         stroke-linejoin: round;
         paint-order: stroke;
+        @include md {
+          stroke-width: 19px;
+        }
       }
     }
   }
@@ -53,9 +67,17 @@
     font-family: 'mirza';
     text-align: center;
     color: $white;
-    font-size: 4rem;
-    margin-top: 100px;
+    font-size: 2.4rem;
+    margin-top: 30px;
     line-height: 1;
+    font-size: 1.8rem;
+    @include md {
+      font-size: 3.6rem;
+    }
+    @include xl {
+      margin-top: 100px;
+      font-size: 4rem;
+    }
   }
   .banner-text-align {
     text-align: center;
@@ -67,8 +89,12 @@
     position: relative;
     background-color: transparent;
     border: none;
+    transform: scale(0.9);
     &:hover {
       filter: brightness(80%);
+    }
+    @include md {
+      transform: scale(1);
     }
   }
   .banner-btn-icon {
@@ -79,7 +105,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    left: -8px;
+    left: -7px;
     top: 0;
     span {
       padding-bottom: 5px;
@@ -87,17 +113,21 @@
       @include btnText($secondary-green);
     }
     .yellow-text {
-      @include btnText($secondary);
+      @include btnText($secondary_yellow);
     }
   }
   .social-links {
-    position: absolute;
+    width: fit-content;
+    position: relative;
     display: flex;
-    gap: 15px;
-    right: -100px;
-    bottom: 0;
+    gap: 30px;
     div {
       cursor: pointer;
+    }
+    @include lg {
+      position: absolute;
+      right: -95px;
+      bottom: 0;
     }
   }
 }
