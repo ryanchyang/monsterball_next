@@ -3,17 +3,25 @@
 @import './globals.scss';
 .team-area {
   position: relative;
-  top: -100px;
+  top: -90px;
   z-index: 1;
-  background: transparent url('../public/assets/images/home/team_bg.png')
+  padding-top: 60px;
+  padding-bottom: 60px;
+  background: transparent url('../public/assets/images/home/team_bg_mb.png')
     no-repeat;
   background-size: cover;
   background-position: top center;
+  @include md {
+    background: transparent url('../public/assets/images/home/team_bg.png')
+      no-repeat;
+    background-size: cover;
+    background-position: top center;
+    padding-bottom: 120px;
+  }
   @include lg {
     padding: 8% 3% 18%;
   }
   h2 {
-    font-size: 9.6rem;
     color: $white;
     @include lg {
       color: white;
@@ -21,31 +29,61 @@
     }
   }
   .team-title {
+    color: $secondary_yellow--light;
     z-index: 3;
-    position: relative;
-    margin-top: 10px;
-    margin-bottom: 50px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    &::before {
+      z-index: -1;
+      display: block;
+      position: absolute;
+      content: attr(data-text);
+      color: $white;
+      text-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
+      -webkit-text-stroke-width: 15px;
+      -webkit-text-stroke-color: $primary_brown;
+    }
   }
   .team-frame {
-    position: absolute;
-    width: fit-content;
-    top: 140px;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
+    position: relative;
+    display: flex;
+    top: 100px;
+    justify-content: center;
+    img {
+      margin: 0 auto;
+    }
+    @include sm {
+      padding-bottom: 60px;
+    }
   }
-  .team-card-block-pc {
-    margin-top: 0px;
+  .team-card-block {
+    margin-top: calc(-60% - 210px);
+    @include sm {
+      margin-top: -510px;
+    }
+    @include md {
+      margin-top: -35%;
+    }
+    @include lg {
+      margin-top: -31%;
+    }
+    @include xl {
+      margin-top: -35%;
+    }
+    @include xxl {
+      margin-top: -31%;
+    }
   }
 
-  .team-card-block {
-    @include lg {
-      display: none;
-    }
-    margin: 0 -40px;
-    background-color: #1e1e1e;
-  }
+  // .team-card-block {
+  //   @include lg {
+  //     display: none;
+  //   }
+  //   margin: 0 -40px;
+  //   // background-color: #1e1e1e;
+  // }
   .team-card-grid {
     display: none;
     @include lg {
@@ -54,12 +92,45 @@
       margin: 0 15vw;
     }
   }
+  .team-swiper {
+    width: 60vw;
+    height: 105vw;
+    @include sm {
+      width: 320px;
+      height: 450px;
+    }
+    @include md {
+      width: 60vw;
+      height: auto;
+    }
+    @include lg {
+      width: 70vw;
+    }
+  }
+
   .team-card {
-    padding: 30px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    h4 {
+      text-align: center;
+      font-size: 1.8rem;
+      @include lg {
+        font-size: 2.4rem;
+      }
+    }
+    p {
+      text-align: center;
+      font-size: 1.4rem;
+      @include lg {
+        font-size: 1.8rem;
+      }
+    }
+    @include md {
+      padding: 0px 30px;
+    }
     @include lg {
       padding: 0px;
     }

@@ -6,72 +6,129 @@
   overflow: hidden;
   scroll-behavior: smooth;
   position: relative;
-  background: $primary_orange url('../public/assets/images/home/Roadmap.png')
-    no-repeat;
+  background: $primary_orange
+    url('../public/assets/images/home/MB_mobile_roadmap.png') no-repeat;
   background-size: cover;
-  background-position: top center;
-
+  background-position: center bottom;
+  padding-right: 0;
+  padding-left: 0;
   h2 {
     color: $secondary_yellow--light;
   }
+  @include md {
+    background: $primary_orange url('../public/assets/images/home/Roadmap.png')
+      no-repeat;
+    background-size: cover;
+    background-position: top center;
+  }
 
   .roadmap-block {
-    & > div {
-      width: 20%;
-      max-width: 350px;
-      &:nth-child(1) {
-        color: $secondary-dark-green;
-        h2 {
-          color: $secondary-dark-green;
-        }
-      }
-      &:nth-child(2) {
-        color: $secondary-green;
-        h2 {
-          color: $secondary-green;
-        }
-      }
-      &:nth-child(3) {
-        color: $primary_brown--desaturate;
-        h2 {
-          color: $primary_brown--desaturate;
-        }
-      }
-      &:nth-child(4) {
-        color: $primary_brown;
-        h2 {
-          color: $primary_brown;
-        }
-      }
-    }
     position: absolute;
     width: 95%;
-    top: 53%;
+    top: 17%;
     left: 0;
     right: 0;
     margin-left: auto;
     margin-right: auto;
     z-index: 3;
     h2 {
-      font-size: 5.5rem;
+      font-size: 3rem;
     }
     p {
-      font-size: 2.4rem;
+      font-size: 1.2rem;
+    }
+    @include sm {
+      top: 12%;
+      h2 {
+        font-size: 5.5rem;
+      }
+      p {
+        font-size: 1.8rem;
+      }
+    }
+    @include md {
+      top: 48%;
+      h2 {
+        font-size: 3rem;
+      }
     }
     @include lg {
-      top: 50%;
+      top: 48%;
     }
     @include xl {
       width: 95%;
       top: 53%;
+      p {
+        font-size: 2.4rem;
+      }
+      h2 {
+        font-size: 5.5rem;
+      }
+    }
+    & > div {
+      margin-bottom: 18vw;
+      width: 100%;
+      @include sm {
+        margin-bottom: 24vw;
+      }
+      @include md {
+        width: 20%;
+        margin: 0 0 !important;
+        max-width: 350px;
+      }
+      @include xl {
+      }
+      &:nth-child(1) {
+        color: $secondary-dark-green;
+        margin-bottom: 9%;
+        @include sm {
+          margin-bottom: 11%;
+        }
+        h2 {
+          color: $secondary-dark-green;
+        }
+      }
+      &:nth-child(2) {
+        color: $secondary-green;
+        margin: 11% 0 13% 0;
+        @include sm {
+          margin: 11% 0;
+        }
+        h2 {
+          color: $secondary-green;
+        }
+      }
+      &:nth-child(3) {
+        color: $primary_brown--desaturate;
+        margin: 11% 0 11%;
+        @include sm {
+          margin: 13% 0;
+        }
+        h2 {
+          color: $primary_brown--desaturate;
+        }
+      }
+      &:nth-child(4) {
+        color: $primary_brown;
+        margin: 13% 0;
+        @include sm {
+          margin: 13% 0;
+        }
+        h2 {
+          color: $primary_brown;
+        }
+      }
     }
   }
 
   .roadmap-monster-bg {
     z-index: 1;
     position: relative;
-    transform: scale(1.01);
     margin-top: -30px;
+    transform: scale(1.01);
+  }
+  .roadmap-monster-bg-mb {
+    margin-top: 30px;
   }
 
   @include lg {

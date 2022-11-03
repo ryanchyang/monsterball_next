@@ -10,10 +10,10 @@ import 'swiper/css';
 const NftItem = () => {
   return (
     <section id="nft_item" className="nft-item-area">
-      <div className="nft-item-content d-flex flex-column align-items-center col-lg-8 mx-auto">
-        <h2 className="mb-4 text-center t-96 text-white">NFT Display</h2>
-        <h4 className="t-70 mb-5">BUY. SELL. COLLECT.</h4>
-        <p className="col-6">
+      <div className="nft-item-content d-flex flex-column align-items-center col col-lg-8 mx-auto">
+        <h2 className="mb-sm-4 mb-0 text-center text-white">NFT Display</h2>
+        <h4 className="mb-0 mb-sm-5">BUY. SELL. COLLECT.</h4>
+        <p className="col col-sm-9 col-xxl-6">
           The things you earn and buy in Monsterball are yours to own. {''}
           {`That's`} right - each Monster is an NFT which means that they hold
           value and can be sold and bought on our marketplace. Stay tuned for

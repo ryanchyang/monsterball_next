@@ -46,6 +46,11 @@
     @content;
   }
 }
+@mixin xxxl {
+  @media (min-width: 1760px) {
+    @content;
+  }
+}
 
 // Btn
 @mixin btn($color, $gradientBottom: #ff6b00, $gradientTop: #ffc700) {

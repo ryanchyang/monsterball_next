@@ -4,18 +4,35 @@
 
 .nft-item-area {
   z-index: 3;
-  margin-top: -200px;
+  margin-top: -150px;
   position: relative;
-  background: transparent url('../public/assets/images/home/NFT_Display_1.png')
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: transparent url('../public/assets/images/home/nft_display_2.png')
     no-repeat;
-  background-size: cover;
+  background-size: 110% auto;
   background-position: top center;
+  @include sm {
+    margin-top: -150px;
+  }
+  @include md {
+    margin-top: -180px;
+    padding-left: 0;
+    padding-right: 0;
+  }
   @include lg {
-    // background: url('../public/assets/images/home/bg_nft_item.png'),
-    //   linear-gradient(180deg, #1a515f 0, #228378);
+    margin-top: -150px;
+    background: transparent
+      url('../public/assets/images/home/NFT_Display_1.png') no-repeat;
+    background-size: 102% auto;
+    background-position: top center;
   }
   @include xl {
-    padding: 3%;
+    margin-top: -180px;
+  }
+  @include xxl {
+    margin-top: -240px;
   }
   // .nft-item-display {
   //   position: absolute;
@@ -25,7 +42,20 @@
   //   transform: scale(1.15) translate(-44%, 0);
   // }
   .nft-item-content {
-    margin-top: 150px;
+    margin-top: 15%;
+    @include lg {
+      margin-top: 80px;
+    }
+    @include xl {
+      margin-top: 150px;
+    }
+    @include xxl {
+      margin-bottom: 10%;
+    }
+    @include xxxl {
+      margin-top: 180px;
+      margin-bottom: 11%;
+    }
   }
 
   .nft-item-btn {
@@ -37,13 +67,19 @@
     color: white;
   }
   .nft-item-monster-block {
-    margin: 30px -40px;
+    margin: 80px -40px 0px -40px;
     // max-width: 140rem;
     max-width: 100vw;
     white-space: nowrap;
     overflow: hidden;
+    @include md {
+      margin: 30px 0px;
+    }
     @include xl {
-      margin: 280px -60px 80px;
+      margin: 30px 0px 60px 0px;
+    }
+    @include xxxl {
+      margin: 30px 0px 100px 0px;
     }
   }
   .nft-item-monster-list {
@@ -58,14 +94,16 @@
   }
 
   .nft-item-card {
-    width: 45vw;
-    height: 45vw;
-    margin: 0 15px;
+    width: 30vw;
+    height: 30vw;
+    margin: 0 10px;
     border-radius: 3vw;
-    border: 15px solid $secondary-dark-green;
+    border: 5px solid $secondary-dark-green;
     @include lg {
+      border: 15px solid $secondary-dark-green;
       width: 15vw;
       height: 15vw;
+      margin: 0 15px;
       border-radius: 2vw;
     }
     background-color: $black;
@@ -75,13 +113,13 @@
       height: 100%;
       img {
         transform: scale(1.05);
-        top: -150px !important;
+        top: -50% !important;
       }
       &.dark {
         img {
-          top: -180px !important;
+          top: -60% !important;
           @include xl {
-            top: -200px !important;
+            top: -65% !important;
           }
         }
       }
@@ -89,21 +127,27 @@
   }
 
   h2 {
-    font-size: 9.6rem;
     color: $white;
   }
   h4 {
+    font-size: 3rem;
     font-family: 'mirza';
-    font-size: 7rem;
     color: $secondary_yellow;
+    @include xl {
+      font-size: 7rem;
+    }
   }
   p {
     font-family: 'LufgaBold';
-    color: $font-primary;
+    color: $white;
     line-height: 1.5;
     text-align: center;
-    @include lg {
-      color: white;
+    font-size: 1.2rem;
+    @include sm {
+      font-size: 1.8rem;
+    }
+    @include md {
+      font-size: 2.4rem;
     }
   }
 }

@@ -22,9 +22,7 @@ const Guide = () => {
   return (
     <>
       <section id="roadmap" className="guide-area">
-        <h2 className="text-center t-96 text-white pb-5">
-          Gameplay Model & Guide
-        </h2>
+        <h2 className="text-center pb-5">Gameplay Model & Guide</h2>
         <div className="col-10 mx-auto mt-5">
           <Swiper
             // navigation={true}
@@ -46,8 +44,8 @@ const Guide = () => {
                   <div
                     className="video"
                     style={{
-                      width: '1319px',
-                      height: '758px',
+                      width: '95%',
+                      height: '40vw',
                       borderRadius: '30px',
                       backgroundColor: 'black',
                       margin: '0 auto',
@@ -71,8 +69,8 @@ const Guide = () => {
                       />
                     </video> */}
                     <iframe
-                      width="1319px"
-                      height="758px"
+                      width="100%"
+                      height="100%"
                       src="https://www.youtube.com/embed/Zsnt2Xm1NBo"
                       title="派大星反霸凌"
                       frameborder="0"

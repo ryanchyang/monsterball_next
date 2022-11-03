@@ -9,9 +9,11 @@
     url('../public/assets/images/home/Gameplay_Model_Guide.png') no-repeat;
   background-size: cover;
   background-position: top center;
-
+  padding: 5% 60px 15%;
   h2 {
     color: $secondary-dark-green;
+  }
+  @include md {
   }
   @include lg {
     padding: 5% 60px 10%;
@@ -41,10 +43,10 @@
       }
     }
     &.mybtn-prev {
-      left: 135px;
+      left: 5%;
     }
     &.mybtn-next {
-      right: 135px;
+      right: 5%;
     }
   }
 }
