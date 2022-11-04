@@ -3,13 +3,15 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { useRef, useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/navigation';
-// import { Navigation } from 'swiper';
+import { Pagination } from 'swiper';
 import arrowLeft from '@/images/home/btn_arrow_L_1.png';
 import arrowLeftHover from '@/images/home/btn_arrow_L_2.png';
 import arrowRight from '@/images/home/btn_arrow_R_1.png';
 import arrowRightHover from '@/images/home/btn_arrow_R_2.png';
+import useCurrentWidth from 'utils/hooks/useCurrentWidth';
 const Guide = () => {
   const [swiper, setSwiper] = useState(null);
+  const currentWidth = useCurrentWidth();
 
   const prevto = () => {
     swiper.slidePrev();
@@ -22,8 +24,10 @@ const Guide = () => {
   return (
     <>
       <section id="roadmap" className="guide-area">
-        <h2 className="text-center pb-5">Gameplay Model & Guide</h2>
-        <div className="col-10 mx-auto mt-5">
+        <h2 className="text-center pb-0 pb-md-3 pb-lg-5">
+          Gameplay Model & Guide
+        </h2>
+        <div className="col col-lg-10 mx-auto mt-5">
           <Swiper
             // navigation={true}
             // navigation={{
@@ -31,8 +35,9 @@ const Guide = () => {
             //   nextEl: navigationNextRef.current,
             // }}
             // modules={[Navigation]}
-
-            loop="true"
+            modules={[Pagination]}
+            pagination={true}
+            loop={true}
             onSwiper={s => {
               setSwiper(s);
             }}
@@ -45,7 +50,11 @@ const Guide = () => {
                     className="video"
                     style={{
                       width: '95%',
-                      height: '40vw',
+                      height: `${
+                        currentWidth > process.env.NEXT_PUBLIC_LG_WIDTH
+                          ? '40vw'
+                          : '60vw'
+                      }`,
                       borderRadius: '30px',
                       backgroundColor: 'black',
                       margin: '0 auto',
@@ -82,50 +91,55 @@ const Guide = () => {
               ))}
             </div>
           </Swiper>
-          <div onClick={prevto} className="swiper-btn mybtn-prev">
-            <div className="unhover">
-              <Image
-                src={arrowLeft}
-                alt="prev button"
-                width={62}
-                height={175}
-                quality={100}
-                priority
-              />
-            </div>
-            <div className="hover">
-              <Image
-                src={arrowLeftHover}
-                alt="prev button"
-                width={62}
-                height={175}
-                quality={100}
-                priority
-              />
-            </div>
-          </div>
-          <div onClick={nexto} className="swiper-btn mybtn-next">
-            <div className="unhover">
-              <Image
-                src={arrowRight}
-                alt="next button"
-                width={62}
-                height={175}
-                quality={100}
-                priority
-              />
-            </div>
-            <div className="hover">
-              <Image
-                src={arrowRightHover}
-                alt="next button"
-                width={62}
-                height={175}
-                quality={100}
-                priority
-              />
-            </div>
-          </div>
+          {currentWidth > process.env.NEXT_PUBLIC_LG_WIDTH ? (
+            <>
+              <div onClick={prevto} className="swiper-btn mybtn-prev">
+                <div className="unhover">
+                  <Image
+                    src={arrowLeft}
+                    alt="prev button"
+                    width={62}
+                    height={175}
+                    quality={100}
+                    priority
+                  />
+                </div>
+                <div className="hover">
+                  <Image
+                    src={arrowLeftHover}
+                    alt="prev button"
+                    width={62}
+                    height={175}
+                    quality={100}
+                    priority
+                  />
+                </div>
+              </div>
+              <div onClick={nexto} className="swiper-btn mybtn-next">
+                <div className="unhover">
+                  <Image
+                    src={arrowRight}
+                    alt="next button"
+                    width={62}
+                    height={175}
+                    quality={100}
+                    priority
+                  />
+                </div>
+                <div className="hover">
+                  <Image
+                    src={arrowRightHover}
+                    alt="next button"
+                    width={62}
+                    height={175}
+                    quality={100}
+                    priority
+                  />
+                </div>
+              </div>
+            </>
+          ) : null}
+          <div class="swiper-pagination"></div>
         </div>
       </section>
     </>

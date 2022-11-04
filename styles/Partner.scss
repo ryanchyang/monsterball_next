@@ -13,25 +13,54 @@
     padding: 0% 3%;
   }
   h2 {
-    color: $secondary-dark-green;
+    font-family: 'mirza';
+    line-height: 1;
+    margin-top: 30px;
     margin-bottom: 5%;
+    svg {
+      width: 100%;
+      font-size: 96px;
+      font-weight: bold;
+      fill: $white;
+      @include md {
+        margin-top: 2%;
+        width: 50%;
+        font-size: 96px;
+      }
+    }
+    .svgText {
+      &--active {
+        position: relative;
+        fill: $white;
+        stroke: $primary_orange;
+        stroke-width: 15px;
+        stroke-linejoin: round;
+        paint-order: stroke;
+        @include md {
+          stroke-width: 19px;
+        }
+      }
+    }
   }
   .partner-grid {
     display: grid;
+    margin-bottom: 50px;
     // grid-template-columns: 0.33fr 0.33fr 0.33fr;
-    grid-template-columns: repeat(5, 1fr);
-    margin-bottom: 121px;
-    @include lg {
-      // width: 75%;
-      // margin: 0 auto;
-      // grid-template-columns: 0.25fr 0.25fr 0.25fr 0.25fr;
+    grid-template-columns: repeat(2, 1fr);
+    @include md {
+      grid-template-columns: repeat(3, 1fr);
+      margin-bottom: 5%;
+    }
+    @include xl {
+      grid-template-columns: repeat(5, 1fr);
+      margin-bottom: 5%;
     }
   }
   .partner-img {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 3vw;
+    padding: 4vw;
     width: 100%;
     height: auto;
     overflow: hidden;
@@ -44,8 +73,9 @@
       object-fit: cover;
     }
     &.pic13 {
+      transform: scale(0.9);
       img {
-        width: 70%;
+        width: 50%;
         max-width: 100px;
         object-fit: cover;
       }

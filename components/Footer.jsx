@@ -8,17 +8,16 @@ const Footer = () => {
   return (
     <footer className={'my-footer'}>
       <div className="d-flex flex-column justify-content-center align-items-center">
-        <h2 className="t-96">Follow Us</h2>
+        <h2>Follow Us</h2>
         <form className="mb-4 mb-lg-0 d-flex flex-column flex-lg-row">
-          {/* <input
-            className="email-input mb-3 me-lg-4"
+          <input
+            className="email-input mb-4 me-lg-5"
             type="text"
             placeholder="Email"
-          /> */}
-
-          {/* <button className="footer-subscribe-btn" data-text="Subscribe">
+          />
+          <button className="footer-subscribe-btn" data-text="Subscribe">
             <span>Subscribe</span>
-          </button> */}
+          </button>
         </form>
         {/* <div className="d-flex align-items-center text-primary">
           <RiDiscordLine className="t-24 my-3 mx-3" />

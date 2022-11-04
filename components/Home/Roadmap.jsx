@@ -17,65 +17,76 @@ const Roadmap = () => {
         <Image src={monster2} alt="roadmap-monster" />
       </div> */}
       <h2 className="text-center">Roadmap</h2>
-      {currentWidth > process.env.NEXT_PUBLIC_MD_WIDTH ? (
-        <div className="roadmap-monster-bg">
-          <div>
-            <Image
-              src={monsterBg}
-              alt="monster background"
-              layout="responsive"
-              quality={100}
-              priority
-            />
-          </div>
-        </div>
-      ) : (
-        <div className="roadmap-monster-bg-mb">
-          <div>
-            <Image
-              src={monsterBgMb}
-              alt="monster background"
-              layout="responsive"
-              quality={100}
-              priority
-            />
-          </div>
-        </div>
-      )}
+      <div className="position-relative">
+        <>
+          {currentWidth > process.env.NEXT_PUBLIC_MD_WIDTH ? (
+            <div className="roadmap-monster-bg">
+              <div>
+                <Image
+                  src={monsterBg}
+                  alt="monster background"
+                  layout="responsive"
+                  quality={100}
+                  priority
+                />
+              </div>
+            </div>
+          ) : (
+            <div className="roadmap-monster-bg-mb">
+              <div>
+                <Image
+                  src={monsterBgMb}
+                  alt="monster background"
+                  layout="responsive"
+                  quality={100}
+                  priority
+                />
+              </div>
+            </div>
+          )}
+        </>
 
-      <div className="roadmap-block d-flex flex-column flex-md-row justify-content-md-between">
-        <div className="text-center">
-          <h2 className="mb-3 mb-lg-5">2022 Q1</h2>
-          <p>
-            Game design <br />
-            Economic model <br />
-            Main gameplay determined <br />
-            Art style determined <br />
-          </p>
-        </div>
-        <div className="text-center">
-          <h2 className="mb-3 mb-lg-5">2022 Q3</h2>
-          <p>
-            White Paper <br />
-            Alpha test <br />
-            Official Website <br />
-          </p>
-        </div>
-        <div className="text-center">
-          <h2 className="mb-3 mb-lg-5">2022 Q4</h2>
-          <p>Project Launch</p>
-        </div>
-        <div className="text-center">
-          <h2 className="mb-3 mb-lg-5">2023 Q1</h2>
-          <p>
-            Hatch <br />
-            Daily rewards <br />
-            World Map <br />
-          </p>
-        </div>
+        <div className="roadmap-block d-flex flex-column flex-md-row justify-content-md-between">
+          <div className="text-center">
+            <div className="text-wrapper">
+              <h2 className="mb-3 mb-lg-5">2022 Q1</h2>
+              <p>
+                Game design <br />
+                Economic model <br />
+                Main gameplay determined <br />
+                Art style determined <br />
+              </p>
+            </div>
+          </div>
+          <div className="text-center">
+            <div className="text-wrapper">
+              <h2 className="mb-3 mb-lg-5">2022 Q3</h2>
+              <p>
+                White Paper <br />
+                Alpha test <br />
+                Official Website <br />
+              </p>
+            </div>
+          </div>
+          <div className="text-center">
+            <div className="text-wrapper">
+              <h2 className="mb-3 mb-lg-5">2022 Q4</h2>
+              <p>Project Launch</p>
+            </div>
+          </div>
+          <div className="text-center">
+            <div className="text-wrapper">
+              <h2 className="mb-3 mb-lg-5">2023 Q1</h2>
+              <p>
+                Hatch <br />
+                Daily rewards <br />
+                World Map <br />
+              </p>
+            </div>
+          </div>
 
-        {/* Q4/2021 */}
-        {/* <div className="roadmap-text-block">
+          {/* Q4/2021 */}
+          {/* <div className="roadmap-text-block">
           <div className="mt-5">
             <div className="roadmap-target-icon">
               <SiTarget />
@@ -101,8 +112,8 @@ const Roadmap = () => {
             </p>
           </div>
         </div> */}
-        {/* Q1/2022 */}
-        {/* <div className="roadmap-text-block">
+          {/* Q1/2022 */}
+          {/* <div className="roadmap-text-block">
           <h4 className="mt-lg-5">
             <div className="roadmap-target-icon">
               <SiTarget />
@@ -119,8 +130,8 @@ const Roadmap = () => {
             </p>
           </div>
         </div> */}
-        {/* Q2/2022 */}
-        {/* <div className="roadmap-text-block">
+          {/* Q2/2022 */}
+          {/* <div className="roadmap-text-block">
           <h4 className="mt-lg-5">
             <div className="roadmap-target-icon">
               <SiTarget />
@@ -137,8 +148,8 @@ const Roadmap = () => {
             </p>
           </div>
         </div> */}
-        {/* Q3/2022 */}
-        {/* <div className="roadmap-text-block">
+          {/* Q3/2022 */}
+          {/* <div className="roadmap-text-block">
           <h4 className="mt-lg-5">
             <div className="roadmap-target-icon">
               <SiTarget />
@@ -155,8 +166,8 @@ const Roadmap = () => {
             </p>
           </div>
         </div> */}
-        {/* Q4/2022 */}
-        {/* <div className="roadmap-text-block">
+          {/* Q4/2022 */}
+          {/* <div className="roadmap-text-block">
           <h4 className="mt-lg-5">
             <div className="roadmap-target-icon">
               <SiTarget />
@@ -173,6 +184,7 @@ const Roadmap = () => {
             </p>
           </div>
         </div> */}
+        </div>
       </div>
     </section>
   );

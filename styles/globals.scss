@@ -338,6 +338,15 @@ p {
     transform: translate3d(-1200px, 0, 0); /*位移值= img的width * img數量*/
   }
 }
+
+@keyframes infiniteSlideMb {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-150vw, 0, 0); /*位移值= img的width * img數量*/
+  }
+}
 @keyframes scaleup {
   0% {
     transform: translate(0, 52px) scale(0);

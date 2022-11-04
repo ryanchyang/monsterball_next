@@ -34,7 +34,13 @@ const Partner = () => {
 
   return (
     <section className="partner-area">
-      <h2 className="text-center">Investors and Partner</h2>
+      <h2 className="text-center">
+        <svg viewBox="0 0 900 115">
+          <text className={'svgText--active'} x="10" y="70">
+            Investors and Partner
+          </text>
+        </svg>
+      </h2>
       <div className="partner-grid">
         {Array.from({ length: 14 }).map((_, i) => (
           <div key={i} className={`partner-img pic${i}`}>

@@ -9,11 +9,15 @@
     url('../public/assets/images/home/Gameplay_Model_Guide.png') no-repeat;
   background-size: cover;
   background-position: top center;
-  padding: 5% 60px 15%;
+  padding: 5% 0 35%;
   h2 {
-    color: $secondary-dark-green;
+    font-size: 4rem;
+    @include lg {
+      font-size: 9.6rem;
+    }
   }
   @include md {
+    padding: 5% 0 15%;
   }
   @include lg {
     padding: 5% 60px 10%;
@@ -22,6 +26,10 @@
     iframe {
       margin-top: 0px;
     }
+  }
+  .guide-swiper {
+    // margin-bottom: -30px;
+    padding-bottom: 30px;
   }
   .swiper-btn {
     cursor: pointer;
@@ -47,6 +55,19 @@
     }
     &.mybtn-next {
       right: 5%;
+    }
+  }
+  .swiper-pagination {
+    position: absolute;
+    bottom: 0px !important;
+    .swiper-pagination-bullet {
+      @include xl {
+        width: 10px;
+        height: 10px;
+      }
+    }
+    .swiper-pagination-bullet-active {
+      background-color: $primary_brown;
     }
   }
 }

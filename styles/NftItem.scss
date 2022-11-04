@@ -3,6 +3,7 @@
 @import './globals.scss';
 
 .nft-item-area {
+  padding-top: 0;
   z-index: 3;
   margin-top: -150px;
   position: relative;
@@ -25,7 +26,7 @@
     margin-top: -150px;
     background: transparent
       url('../public/assets/images/home/NFT_Display_1.png') no-repeat;
-    background-size: 102% auto;
+    background-size: 105% 100%;
     background-position: top center;
   }
   @include xl {
@@ -42,7 +43,7 @@
   //   transform: scale(1.15) translate(-44%, 0);
   // }
   .nft-item-content {
-    margin-top: 15%;
+    margin-top: 24%;
     @include lg {
       margin-top: 80px;
     }
@@ -86,7 +87,10 @@
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    animation: infiniteSlide 30s linear 0s infinite;
+    animation: infiniteSlideMb 30s linear 0s infinite;
+    @include lg {
+      animation: infiniteSlide 30s linear 0s infinite;
+    }
     li {
       flex: 0 0 auto;
       display: block;
