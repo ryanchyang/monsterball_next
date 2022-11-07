@@ -1,18 +1,18 @@
-@use './_variables' as *;
-@use './mixin' as *;
-@import './globals.scss';
+@use "./_variables" as *;
+@use "./mixin" as *;
+@import "./globals.scss";
 .team-area {
   position: relative;
   top: -90px;
   z-index: 1;
   padding-top: 60px;
   padding-bottom: 60px;
-  background: transparent url('../public/assets/images/home/team_bg_mb.png')
+  background: transparent url("../public/assets/images/home/team_bg_mb.png")
     no-repeat;
   background-size: cover;
   background-position: top center;
   @include md {
-    background: transparent url('../public/assets/images/home/team_bg.png')
+    background: transparent url("../public/assets/images/home/team_bg.png")
       no-repeat;
     background-size: cover;
     background-position: top center;
@@ -55,7 +55,7 @@
       margin: 0 auto;
     }
     @include sm {
-      padding-bottom: 60px;
+      // padding-bottom: 60px;
     }
   }
   .team-card-block {
@@ -71,9 +71,9 @@
     // @include md {
     //   margin-top: -35%;
     // }
-    // @include lg {
-    //   margin-top: -31%;
-    // }
+    @include md {
+      max-width: 100%;
+    }
     // @include xl {
     //   margin-top: -35%;
     // }
@@ -90,12 +90,14 @@
   //   // background-color: #1e1e1e;
   // }
   .team-card-grid {
-    display: none;
-    @include lg {
-      display: grid;
-      grid-template-columns: 0.25fr 0.25fr 0.25fr 0.25fr;
-      margin: 0 15vw;
-    }
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 0.5fr 0.5fr;
   }
   .team-swiper {
     position: absolute;
@@ -106,6 +108,9 @@
     left: 0;
     right: 0;
     margin: auto;
+    padding-bottom: 15px;
+    display: flex;
+    align-items: center;
 
     // @include sm {
     //   width: 320px;
@@ -115,17 +120,20 @@
     //   width: 60vw;
     //   height: auto;
     // }
-    // @include lg {
-    //   width: 70vw;
-    // }
+    @include lg {
+      height: 76%;
+    }
+    @include xl {
+      height: 75%;
+    }
   }
 
   .team-card {
-    padding: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 0 10px;
     h4 {
       text-align: center;
       font-size: 1.8rem;
@@ -140,11 +148,20 @@
         font-size: 1.8rem;
       }
     }
+    @include sm {
+      padding: 10px;
+    }
     @include md {
+      flex-direction: row;
       padding: 0px 30px;
     }
     @include lg {
-      padding: 0px;
+      flex-direction: column;
+      padding: 10px;
+    }
+    @include xl {
+      flex-direction: column;
+      padding: 30px;
     }
   }
   .team-member-img {
@@ -159,7 +176,7 @@
     cursor: pointer;
     position: absolute;
     top: 50%;
-    transform: translate(0, -30%);
+    transform: translate(0, -50%);
     .hover {
       display: none;
     }
@@ -175,15 +192,21 @@
       }
     }
     &.mybtn-prev {
-      left: -45px;
+      left: 0%;
     }
     &.mybtn-next {
-      right: -45px;
+      right: 0%;
     }
   }
   .swiper-pagination {
     position: absolute;
     bottom: 0px !important;
+    @include md {
+      bottom: 18px !important;
+    }
+    @include xl {
+      bottom: 25px !important;
+    }
     .swiper-pagination-bullet {
       @include xl {
         width: 10px;

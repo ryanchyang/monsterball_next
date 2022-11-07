@@ -1,6 +1,6 @@
-@use './_variables' as *;
-@use './mixin' as *;
-@import './globals.scss';
+@use "./_variables" as *;
+@use "./mixin" as *;
+@import "./globals.scss";
 
 .monster-modal {
   .modal-content {
@@ -15,9 +15,11 @@
   .monster-modal-header {
     border-radius: 20px 20px 0 0;
     padding: 20px;
-    background-color: #dedede;
-    font-family: 'BoldenVan';
-    font-size: 2.4rem;
+    // background-color: #dedede;
+    background-color: $primary_brown--desaturate;
+    color: $primary_brown;
+    font-family: "mirza";
+    font-size: 4rem;
     box-shadow: 1px -5px 5px -2px rgba(212, 212, 212, 0.27) inset;
     -webkit-box-shadow: 1px -5px 5px -2px rgba(212, 212, 212, 0.27) inset;
     -moz-box-shadow: 1px -5px 5px -2px rgba(212, 212, 212, 0.27) inset;
@@ -25,7 +27,7 @@
 
   .monster-modal-body {
     padding: 20px;
-    font-family: 'LufgaBold';
+    font-family: "LufgaBold";
     font-size: 1.6rem;
     p {
       font-size: 1.6rem;
@@ -51,8 +53,8 @@
     border-radius: 20px 20px 0 0;
     padding: 10px;
     background-color: #dedede;
-    font-family: 'BoldenVan';
-    font-size: 1.6rem;
+    font-family: "mirza";
+    font-size: 2rem;
     box-shadow: 1px -5px 5px -2px rgba(212, 212, 212, 0.27) inset;
     -webkit-box-shadow: 1px -5px 5px -2px rgba(212, 212, 212, 0.27) inset;
     -moz-box-shadow: 1px -5px 5px -2px rgba(212, 212, 212, 0.27) inset;
@@ -60,7 +62,7 @@
 
   .monster-toast-body {
     padding: 10px;
-    font-family: 'LufgaBold';
+    font-family: "LufgaBold";
     font-size: 1.4rem;
     p {
       font-size: 1.4rem;

@@ -1,11 +1,11 @@
-import Image from 'next/image';
-import Spinner from 'components/Spinner';
-import metamaskLogo from '@/images/metamask.png';
-import walletconnectLogo from '@/images/walletconnect.png';
-import { shortenAddress } from 'utils/helpers/shortenAddress';
-import { BsLink45Deg } from 'react-icons/bs';
+import Image from "next/image";
+import Spinner from "components/Spinner";
+import metamaskLogo from "@/images/metamask.png";
+import walletconnectLogo from "@/images/walletconnect.png";
+import { shortenAddress } from "utils/helpers/shortenAddress";
+import { BsLink45Deg } from "react-icons/bs";
 
-const ConnectModal = props => {
+const ConnectModal = (props) => {
   const {
     metamaskConnector,
     walletconnectConnector,
@@ -25,7 +25,7 @@ const ConnectModal = props => {
         Please finish wallet setting to unlocked more operation authority.
       </p>
       <button
-        className="connect-wallet-metamask-btn mb-3"
+        className="connect-wallet-metamask-btn mb-4"
         onClick={() => connect({ connector: metamaskConnector })}
         disabled={!metamaskConnector.ready || connectIsLoading || isConnected}
       >
@@ -63,11 +63,11 @@ const ConnectModal = props => {
               <Spinner />
             </div>
           ) : (
-            'Bind wallet'
+            "Bind wallet"
           )}
         </button>
       ) : (
-        ''
+        ""
       )}
       {isConnected && (
         <button className="disconnect-wallet-btn" onClick={disconnect}>

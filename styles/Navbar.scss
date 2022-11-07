@@ -1,6 +1,6 @@
-@use './_variables' as *;
-@use './mixin' as *;
-@import './globals.scss';
+@use "./_variables" as *;
+@use "./mixin" as *;
+@import "./globals.scss";
 
 .my-navbar {
   position: fixed;
@@ -34,7 +34,7 @@
   width: 100%;
   display: none;
   color: $secondary_brown;
-  font-family: 'mirza';
+  font-family: "mirza";
   @include lg {
     display: block;
     li {
@@ -236,9 +236,10 @@
 
 .connect-wallet-metamask-btn {
   position: relative;
-  @include btn(rgb(244, 244, 244));
-  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
-    0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+  @include btn(rgb(244, 244, 244), rgb(235, 235, 235), rgb(235, 235, 235));
+  // box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+  //   0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+  padding: 8px 15px 8px 15px;
   width: 100%;
   height: auto;
   div {
@@ -253,7 +254,7 @@
 
 .connected-wallet-btn {
   @include btn($bluegreen-button);
-  font-family: 'LufgaBold';
+  font-family: "LufgaBold";
 }
 
 .disconnect-wallet-btn {
@@ -269,7 +270,7 @@
 .bind-wallet-btn {
   @include btn($bluegreen-button);
   width: 60%;
-  font-family: 'LufgaBold';
+  font-family: "LufgaBold";
   position: relative;
   text-align: center;
   .spinner-container {
@@ -316,7 +317,7 @@
 }
 .signout-btn {
   @include btn($bluegreen-button);
-  font-family: 'LufgaBold';
+  font-family: "LufgaBold";
 }
 
 .profile {
@@ -333,7 +334,7 @@
 .system-mfb-count {
   position: relative;
   input {
-    font-family: 'LufgaBold';
+    font-family: "LufgaBold";
     padding: 5px 5px 5px 35px;
     font-size: 20px;
     color: black;
