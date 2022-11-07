@@ -16,9 +16,11 @@ const MyModal = props => {
         className="monster-modal-header"
         closeButton={props.close ?? true}
       >
-        {props.title}
+        <h3>{props.title}</h3>
       </Modal.Header>
-      <Modal.Body className="monster-modal-body">{props.content}</Modal.Body>
+      <Modal.Body className="monster-modal-body">
+        <p>{props.content}</p>
+      </Modal.Body>
     </Modal>
   );
 };

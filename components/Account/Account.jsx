@@ -53,18 +53,11 @@ const Account = () => {
       revalidateOnReconnect: false,
     }
   );
-
   /* client fetching end */
 
   return (
     <section className={`${styles.section}`}>
       <div className={styles.tab}>
-        <button
-          className="signout-btn m-auto"
-          onClick={() => signOut({ callbackUrl: `${routeConfig.FRONT_END}` })}
-        >
-          Sign out
-        </button>
         <ul className="d-flex justify-content-center">
           <li
             className={tabType === 'nft' ? styles.active : ''}

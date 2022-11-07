@@ -121,7 +121,7 @@ const Navbar = () => {
     } // mount時不會refetch
   );
   const { data: userInfo, mutate: userInfoMutate } = useSWR(
-    !address || !session ? null : '/api/user/userInfo',
+    !session ? null : '/api/user/userInfo',
     () => getUserInfo(session.token),
     {
       revalidateIfStale: false,

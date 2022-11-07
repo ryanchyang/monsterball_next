@@ -6,6 +6,8 @@ import {
   maskVariants,
 } from 'utils/constants/framerConstant';
 import NavbarRightMb from './NavbarRightMb';
+import { signOut } from 'next-auth/react';
+import routeConfig from 'routeConfig';
 
 const SideNavbar = props => {
   const {
@@ -18,7 +20,6 @@ const SideNavbar = props => {
     address,
     signIn,
   } = props;
-
   const router = useRouter();
   return (
     <>
@@ -37,65 +38,6 @@ const SideNavbar = props => {
         animate="visible"
         exit="exit"
       >
-        <ul className="sidebar-list">
-          <li>
-            <Link href={'/'}>
-              <span
-                onClick={() => {
-                  setSidebarShow(false);
-                }}
-              >
-                Home
-              </span>
-            </Link>
-          </li>
-          <li>
-            <Link href={'/play'}>
-              <span
-                onClick={() => {
-                  setSidebarShow(false);
-                }}
-              >
-                Play Now
-              </span>
-            </Link>
-          </li>
-          <li>
-            <Link href={'/market/market_place'}>
-              <span
-                onClick={() => {
-                  setSidebarShow(false);
-                }}
-              >
-                MarketPlace
-              </span>
-            </Link>
-          </li>
-          <li>
-            <span
-              onClick={() => {
-                setSidebarShow(false);
-                window.open(
-                  'https://monsterfootball-1.gitbook.io/untitled/',
-                  '_blank'
-                );
-              }}
-            >
-              LitePaper
-            </span>
-          </li>
-          <li>
-            <Link href={'/shop'}>
-              <span
-                onClick={() => {
-                  setSidebarShow(false);
-                }}
-              >
-                Shop
-              </span>
-            </Link>
-          </li>
-        </ul>
         <NavbarRightMb
           isConnected={isConnected}
           bindWalletStatus={bindWalletStatus}
@@ -105,6 +47,92 @@ const SideNavbar = props => {
           address={address}
           signIn={signIn}
         />
+        <div className="side-navbar-list-wrapper d-flex flex-column justify-content-between">
+          <ul className="sidebar-list">
+            {session && (
+              <li>
+                <Link href={'/account'}>
+                  <span
+                    onClick={() => {
+                      setSidebarShow(false);
+                    }}
+                  >
+                    Account
+                  </span>
+                </Link>
+              </li>
+            )}
+            <li>
+              <Link href={'/'}>
+                <span
+                  onClick={() => {
+                    setSidebarShow(false);
+                  }}
+                >
+                  Home
+                </span>
+              </Link>
+            </li>
+            <li>
+              <Link href={'/play'}>
+                <span
+                  onClick={() => {
+                    setSidebarShow(false);
+                  }}
+                >
+                  Play Now
+                </span>
+              </Link>
+            </li>
+            <li>
+              <Link href={'/market/market_place'}>
+                <span
+                  onClick={() => {
+                    setSidebarShow(false);
+                  }}
+                >
+                  MarketPlace
+                </span>
+              </Link>
+            </li>
+            <li>
+              <span
+                onClick={() => {
+                  setSidebarShow(false);
+                  window.open(
+                    'https://monsterfootball-1.gitbook.io/untitled/',
+                    '_blank'
+                  );
+                }}
+              >
+                LitePaper
+              </span>
+            </li>
+            <li>
+              <Link href={'/shop'}>
+                <span
+                  onClick={() => {
+                    setSidebarShow(false);
+                  }}
+                >
+                  Shop
+                </span>
+              </Link>
+            </li>
+          </ul>
+          {session && (
+            <div className="d-flex justify-content-center">
+              <button
+                className="signout-btn"
+                onClick={() =>
+                  signOut({ callbackUrl: `${routeConfig.FRONT_END}` })
+                }
+              >
+                <span data-text="Sign out">Sign out</span>
+              </button>
+            </div>
+          )}
+        </div>
       </m.div>
     </>
   );

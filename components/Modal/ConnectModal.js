@@ -1,11 +1,11 @@
-import Image from "next/image";
-import Spinner from "components/Spinner";
-import metamaskLogo from "@/images/metamask.png";
-import walletconnectLogo from "@/images/walletconnect.png";
-import { shortenAddress } from "utils/helpers/shortenAddress";
-import { BsLink45Deg } from "react-icons/bs";
+import Image from 'next/image';
+import Spinner from 'components/Spinner';
+import metamaskLogo from '@/images/metamask.png';
+import walletconnectLogo from '@/images/walletconnect.png';
+import { shortenAddress } from 'utils/helpers/shortenAddress';
+import { BsLink45Deg } from 'react-icons/bs';
 
-const ConnectModal = (props) => {
+const ConnectModal = props => {
   const {
     metamaskConnector,
     walletconnectConnector,
@@ -52,7 +52,9 @@ const ConnectModal = (props) => {
       {/* wallet address */}
       {address && (
         <div className="address-modal-btn mt-5 mb-4 cursor-pointer">
-          {shortenAddress(address)}
+          <span data-text={shortenAddress(address)}>
+            {shortenAddress(address)}
+          </span>
         </div>
       )}
       {/* bind wallet btn */}
@@ -63,15 +65,17 @@ const ConnectModal = (props) => {
               <Spinner />
             </div>
           ) : (
-            "Bind wallet"
+            'Bind wallet'
           )}
         </button>
       ) : (
-        ""
+        ''
       )}
       {isConnected && (
         <button className="disconnect-wallet-btn" onClick={disconnect}>
-          <span>{`Disconnect from ${activeConnector?.name}`}</span>
+          <span
+            data-text={`Disconnect from ${activeConnector?.name}`}
+          >{`Disconnect from ${activeConnector?.name}`}</span>
         </button>
       )}
     </div>

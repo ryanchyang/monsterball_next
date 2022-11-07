@@ -7,7 +7,7 @@ import { AiOutlineHeart } from 'react-icons/ai';
 
 const MyNft = props => {
   const { myMonster } = props;
-
+  console.log(myMonster);
   const [tabType, setTabType] = useState('system');
   const [data, setData] = useState(dataPanel[0]);
   const [visible, setVisible] = useState(15);
@@ -48,10 +48,6 @@ const MyNft = props => {
                   layout={'responsive'}
                   objectFit={'cover'}
                 />
-
-                <div className="featured-countdown">
-                  <span className="slogan"></span>
-                </div>
               </div>
               <div className="card-title mb-3">
                 <h5>

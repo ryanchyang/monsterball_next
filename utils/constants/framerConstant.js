@@ -19,6 +19,23 @@ export const fadeInFromLeft = {
   },
 };
 
+export const moveDown = {
+  hidden: {
+    opacity: 0,
+    y: '-30px',
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { type: 'easeInOut', duration: 0.5 },
+  },
+  exit: {
+    y: '-30px',
+    opacity: 0,
+    transition: { ease: 'easeInOut' },
+  },
+};
+
 export const sideNavbarVariants = {
   hidden: {
     x: '-80vw',

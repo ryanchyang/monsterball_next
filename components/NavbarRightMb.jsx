@@ -18,24 +18,19 @@ const NavbarRightMb = props => {
   } = props;
   return (
     <>
-      <div className="d-flex flex-column d-block d-lg-none justify-content-center align-items-center">
+      <div className="d-flex flex-column-reverse d-block d-lg-none justify-content-center align-items-center">
         {/* MFB count */}
         {isConnected && bindWalletStatus && (
-          <div className="d-flex me-4">
-            <div className="system-mfb-count me-3">
-              <div style={{ position: 'absolute', top: '9px', left: '5px' }}>
+          <div className="d-flex justify-content-between mfb-buy-mb-wrapper">
+            <div className="system-mfb-count me-3 flex-nowrap">
+              <div style={{ position: 'absolute', top: '12px', left: '10px' }}>
                 <Image src={mfbImg} alt="mfb coin" width={20} height={20} />
               </div>
-              <input type="text" disabled value={userInfo?.mfb} />
-              <BsPlusLg
-                style={{
-                  fontSize: '20px',
-                  color: 'white',
-                  paddingBottom: '5px',
-                  marginLeft: '3px',
-                }}
-              />
+              <input type="text" readOnly value={userInfo?.mfb} />
             </div>
+            <button className="mfb-buy-mb-btn">
+              <span data-text="+">+</span>
+            </button>
           </div>
         )}
         {/* wallet btn */}
@@ -43,7 +38,7 @@ const NavbarRightMb = props => {
           <>
             {!isConnected ? (
               <div
-                className="navbar-wallet cursor-pointer me-4 position-relative"
+                className="navbar-wallet cursor-pointer me-0 me-lg-4 position-relative"
                 onClick={() => {
                   setConnectModalShow(true);
                 }}
@@ -62,12 +57,14 @@ const NavbarRightMb = props => {
                 {/* {error && <div>{error.message}</div>} */}
               </div>
             ) : (
-              <div className="position-relative">
+              <div className="position-relative mb-4">
                 <button
-                  className="connected-wallet-btn me-4"
+                  className="connected-wallet-btn"
                   onClick={() => setConnectModalShow(true)}
                 >
-                  {shortenAddress(address)}
+                  <span data-text={shortenAddress(address)}>
+                    {shortenAddress(address)}
+                  </span>
                 </button>
                 {!bindWalletStatus && (
                   <div className="link-icon">
@@ -84,7 +81,7 @@ const NavbarRightMb = props => {
           </>
         )}
         {/* google login */}
-        <div className="d-flex">
+        <div className="d-flex mt-5 mt-lg-0">
           {!session ? (
             <button
               className="signin-btn"
@@ -93,15 +90,18 @@ const NavbarRightMb = props => {
               <span data-text="Sign in">Sign in</span>
             </button>
           ) : (
-            <div className="profile cursor-pointer ">
-              <Link href="/account">
-                <Image
-                  src={session.user.image}
-                  alt="profile image"
-                  width={50}
-                  height={50}
-                />
-              </Link>
+            <div className="d-flex flex-column align-items-center mb-5">
+              <div className="profile cursor-pointer mb-4">
+                <Link href="/account">
+                  <Image
+                    src={session.user.image}
+                    alt="profile image"
+                    width={50}
+                    height={50}
+                  />
+                </Link>
+              </div>
+              <span className="t-16">{userInfo?.name}</span>
             </div>
           )}
         </div>

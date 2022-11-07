@@ -1,6 +1,6 @@
-@use "./_variables" as *;
-@use "./mixin" as *;
-@import "./globals.scss";
+@use './_variables' as *;
+@use './mixin' as *;
+@import './globals.scss';
 
 .my-navbar {
   position: fixed;
@@ -34,7 +34,7 @@
   width: 100%;
   display: none;
   color: $secondary_brown;
-  font-family: "mirza";
+  font-family: 'mirza';
   @include lg {
     display: block;
     li {
@@ -149,6 +149,7 @@
 
 .navbar-logo-mb {
   display: block;
+  cursor: pointer;
   img {
     width: 100%;
   }
@@ -158,7 +159,7 @@
 }
 .navbar-logo-pc {
   display: none;
-
+  cursor: pointer;
   img {
     width: 100%;
   }
@@ -182,7 +183,7 @@
 }
 .navbar-wallet {
   padding-top: 10px;
-  display: none;
+  display: block;
   width: 4rem;
   height: auto;
   img {
@@ -253,26 +254,60 @@
 }
 
 .connected-wallet-btn {
-  @include btn($bluegreen-button);
-  font-family: "LufgaBold";
+  @include btn($primary_orange, #ff6b00, #ffc700);
+  width: 100%;
+  &:hover {
+    &::after {
+      background-color: $primary_orange--desaturate;
+    }
+  }
+  span {
+    @include btnText($primary_brown);
+  }
 }
 
 .disconnect-wallet-btn {
-  @include btn($dark-bluegreen-button);
-  width: 60%;
+  @include btn($secondary_brown, #9f7241, #d8ad57);
+  width: 100%;
+  font-size: 2rem;
+  line-height: 2.4rem;
+  @include sm {
+    width: 60%;
+  }
+  &:hover {
+    &::after {
+      background-color: $primary_orange--desaturate;
+    }
+  }
+  span {
+    @include btnText($primary_brown);
+  }
 }
 
 .address-modal-btn {
-  @include btn($bluegreen-button);
-  width: 60%;
+  @include btn($primary_orange, #ff6b00, #ffc700);
+  width: 100%;
+  @include sm {
+    width: 60%;
+  }
+  &:hover {
+    &::after {
+      background-color: $primary_orange--desaturate;
+    }
+  }
+  span {
+    @include btnText($primary_brown);
+  }
 }
 
 .bind-wallet-btn {
-  @include btn($bluegreen-button);
-  width: 60%;
-  font-family: "LufgaBold";
+  @include btn($primary_orange, #ff6b00, #ffc700);
+  width: 100%;
   position: relative;
   text-align: center;
+  @include sm {
+    width: 60%;
+  }
   .spinner-container {
     top: -10px;
     left: 0;
@@ -286,8 +321,10 @@
 .switch-network-btn {
   position: relative;
   @include btn($bluegreen-button);
-  width: 60%;
-
+  width: 100%;
+  @include sm {
+    width: 60%;
+  }
   .spinner-container {
     top: -10px;
     right: 0px;
@@ -316,8 +353,17 @@
   }
 }
 .signout-btn {
-  @include btn($bluegreen-button);
-  font-family: "LufgaBold";
+  @include btn($secondary_brown, #9f7241, #d8ad57);
+  width: 223px;
+
+  &:hover {
+    &::after {
+      background-color: $primary_orange--desaturate;
+    }
+  }
+  span {
+    @include btnText($primary_brown);
+  }
 }
 
 .profile {
@@ -332,16 +378,84 @@
 }
 
 .system-mfb-count {
+  display: flex;
+  align-items: center;
   position: relative;
+  cursor: pointer;
   input {
-    font-family: "LufgaBold";
-    padding: 5px 5px 5px 35px;
-    font-size: 20px;
-    color: black;
-    width: 100px;
-    height: 40px;
-    border-radius: 15px;
-    background-color: white;
+    @include input(100%, 45px, $black, $white);
+    padding: 5px 15px 9px 35px !important;
+    font-size: 2rem !important;
+    text-align: right;
+  }
+  .buy {
+    position: absolute;
+    display: none;
+    font-size: 3rem;
+    font-weight: bolder;
+    color: $primary_orange;
+    right: 50%;
+    transform: translateX(50%);
+    padding: 1px;
+    z-index: 3;
+  }
+
+  @include lg {
+    &:hover {
+      &::after {
+        position: absolute;
+        display: block;
+        content: '';
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        border-radius: 50px;
+        z-index: 1;
+      }
+      .buy {
+        display: block;
+      }
+    }
+    input {
+      width: 120px;
+    }
+  }
+}
+
+.mfb-buy-mb-wrapper {
+  width: 223px;
+}
+
+.mfb-buy-mb-btn {
+  @include btn($primary_orange, #ff6b00, #ffc700);
+  width: 54px;
+  min-width: 0px;
+  &:hover {
+    &::after {
+      background-color: $primary_orange--desaturate;
+    }
+  }
+  span {
+    @include btnText($primary_brown);
+  }
+}
+
+.dropdown-account {
+  padding: 15px;
+  padding-top: 80px;
+  width: 140px;
+  font-family: 'mirza';
+  position: absolute;
+  top: 0;
+  left: -80px;
+  color: $white;
+  font-size: 2.4rem;
+  text-align: end;
+  > div {
+    &:hover {
+      cursor: pointer;
+      color: $primary_orange;
+    }
   }
 }
 

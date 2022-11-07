@@ -3,13 +3,13 @@
 
 .section {
   min-height: 100vh;
-  padding-top: 250px;
+  padding-top: 150px;
   background-color: #295c5c;
   @include xl {
     background: url('../public/assets/images/home/home_collection_bk.png')
       no-repeat;
     background-size: 100% 100%;
-    padding-top: 250px;
+    padding-top: 150px;
   }
 }
 
